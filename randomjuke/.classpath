@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/onebeartoe-io"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/onebeartoe-core"/>
+	<classpathentry kind="lib" path="/Users/lando/owner/Projects/Developer-Tools/Java-APIs/onebeartoe-core/lib/jmf.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/onebeartoe-gui"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/onebeartoe-net"/>
+	<classpathentry kind="output" path="target/classes"/>
+</classpath>

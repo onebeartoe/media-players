@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+ 			"http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+
+<!--	<import resource="application-context-bicho.xml" />-->
+	
+	
+<!--
+	
+	<bean id="marshmellowPop" class="javax.swing.JLabel">
+            <constructor-arg type="java.lang.String" index="0"><value>255</value></constructor-arg>
+		<property name="text">
+			<value>Marshmellow Pop!</value>		
+		</property>
+	</bean>
+	
+	
+	<bean id="marshmellowPopEast" class="javax.swing.JLabel">
+            <constructor-arg type="java.lang.String" index="0"><value>255</value></constructor-arg>
+		<property name="text">
+			<value>Marshmellow Pop East!</value>		
+		</property>
+	</bean>
+	
+	<bean id="applicationBorderColor" class="java.awt.Color" >-->
+<!--		<constructor-arg index="0"><value>255</value></constructor-arg>-->
+<!--		<constructor-arg index="1"><value>0</value></constructor-arg>-->
+<!--		<constructor-arg index="2"><value>255</value></constructor-arg>-->
+<!--	</bean>-->
+
+
+</beans>
