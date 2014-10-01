@@ -3,11 +3,11 @@
     
     <modelVersion>4.0.0</modelVersion>
 
-    <!--parent>
+    <parent>
         <groupId>org.onebeartoe.media.players.parent</groupId>
 	<artifactId>media-players-parent</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-    </parent-->
+    </parent>
 
     <groupId>org.onebeartoe</groupId>
     <artifactId>randomjuke</artifactId>
@@ -15,7 +15,7 @@
   
     <packaging>jar</packaging>
 
-    <name>onebeartoe-randomjuke-betoland</name>
+    <name>onebeartoe-randomjuke</name>
     
     <url>http://maven.apache.org</url>
 
@@ -40,6 +40,7 @@
             <groupId>javax.media</groupId>
             <artifactId>jmf</artifactId>
             <version>2.1.1e</version>
+            <scope>provided</scope>
         </dependency>
         
         <dependency>

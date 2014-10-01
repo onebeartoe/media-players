@@ -12,7 +12,8 @@
 	<name>onebeartoe-media-players-parent</name>
 
 	<modules>
-		<module>sound-recorder</module>
+            <module>randomjuke</module>
+            <module>sound-recorder</module>
 	</modules>
 
  <build>
