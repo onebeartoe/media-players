@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="1.7.0_65" class="java.beans.XMLDecoder">
+ <object class="java.util.HashMap">
+  <void method="put">
+   <string>file:/home/roberto/Workspace/music/music/The Cure - Boys Don&apos;t Cry.mp3</string>
+   <object class="java.util.Date">
+    <long>1412359444601</long>
+   </object>
+  </void>
+  <void method="put">
+   <string>file:/home/roberto/Workspace/music/music/The Cure - Friday I&apos;m In Love.mp3</string>
+   <object class="java.util.Date">
+    <long>1412358030689</long>
+   </object>
+  </void>
+  <void method="put">
+   <string>file:/home/roberto/Workspace/music/music/Shredding Hydrogen copy.mp3</string>
+   <object class="java.util.Date">
+    <long>1412358018145</long>
+   </object>
+  </void>
+ </object>
+</java>

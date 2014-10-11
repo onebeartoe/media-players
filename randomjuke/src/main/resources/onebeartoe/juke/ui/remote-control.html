@@ -27,6 +27,7 @@
     </head>
 
     <body>
+        <script type="text/javascript" src="server-calls.js"></script>
 		
 	<div style="display: block; 										  				 
              text-align: center;											  
@@ -64,30 +65,55 @@
 
 	<br class="clearingBreak"/>
 	
-	<div class ="sideBySide" >
-	
-        <div class="sideBySideLeft" style="margin-top: 0px;">
-            <form method="POST" action="?action=volume-down">
-                <center>
-                    <input type="submit" value="-" style="width: 70%; height: 2em; font-size: 3em;">
-                </center>	
-                <br/><br/>
-            </form>
+	<div class ="sideBySide" >	
+            <div class="sideBySideLeft" style="margin-top: 0px;">
+                <form method="POST" action="?action=volume-down">
+                    <center>
+                        <input type="submit" value="-" style="width: 70%; height: 2em; font-size: 3em;">
+                    </center>	
+                    <br/><br/>
+                </form>
+            </div>
+
+            <div class="sideBySideRight" style="width: 50%;">																				  
+                <form method="POST" action="?action=volume-up">
+                    <center>
+                        <input type="submit" value="+" style="width: 70%; height: 2em; font-size: 3em;">
+                    </center>	
+                    <br/><br/>
+                </form>												                                	
+            </div>
         </div>
-        
-        <div class="sideBySideRight" style="width: 50%;">																				  
-            <form method="POST" action="?action=volume-up">
-                <center>
-                    <input type="submit" value="+" style="width: 70%; height: 2em; font-size: 3em;">
-                </center>	
-                <br/><br/>
-            </form>												                                	
-        </div>
-        
-    </div>
 
 	<br class="clearingBreak"/>
 
+        <hr/>
+        
+        <br/>
+        
+        <center >
+            <span style="font-size:1.875em;">
+                Sound Meter Mode:
+            </span>
+            
+            <select name="sound-meter-mode" 
+                    onchange="soundMeterModeChanged(this.value);"
+                    style="width: 50%; height: 2em; font-size: 3em;">
+                <option value="off">Off</option>
+                <option value="blob">Blob</option>
+                <option value="bottom-up">Bottom Up</option>
+                <option value="circle">Circle</option>
+                <option value="rectangle">Rectangle</option>                            
+                <option value="horizontal-mirroring">Horizontal Mirroring</option>
+                <option value="color-mapping">Color Mapping</option>
+                
+            </select>
+        </center>
+
+        <br/>
+        
+        <hr/>
+        
 	<br/>
 
 	<a href="http://www.onebeartoe.com" 

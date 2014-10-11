@@ -61,6 +61,7 @@ import org.onebeartoe.application.ui.LookAndFeelButton;
 import org.onebeartoe.application.ui.SwingServices;
 import org.onebeartoe.io.ObjectRetriever;
 import org.onebeartoe.io.ObjectSaver;
+import org.onebeartoe.juke.sound.meter.SoundMeterModes;
 import org.onebeartoe.multimedia.juke.JukeConfig;
 import org.onebeartoe.multimedia.juke.SongList;
 import org.onebeartoe.multimedia.juke.gui.SwingSongListPathPanel;
@@ -74,6 +75,11 @@ import org.onebeartoe.multimedia.juke.songs.SongListManager;
 import org.onebeartoe.network.ThreadedServer;
 import org.onebeartoe.pixel.PixelEnvironment;
 import org.onebeartoe.pixel.hardware.Pixel;
+import org.onebeartoe.pixel.sound.meter.AllOffSoundMeter;
+import org.onebeartoe.pixel.sound.meter.BlobSoundMeter;
+import org.onebeartoe.pixel.sound.meter.ButtonUpSoundMeter;
+import org.onebeartoe.pixel.sound.meter.CircleSoundMeter;
+import org.onebeartoe.pixel.sound.meter.RectangularSoundMeter;
 import org.onebeartoe.pixel.sound.meter.SoundMeter;
 import org.onebeartoe.pixel.sound.meter.SoundReading;
 
@@ -144,6 +150,8 @@ public class RandomJuke
 
     private static int offscreenImageHeight;
     
+    private static int offscreenImageWidth;
+    
     private static Pixel pixel;
     
     private static JFrame guiWindow;
@@ -154,7 +162,7 @@ public class RandomJuke
     
     private static int SAMPLE_BUFFER_SIZE = 50;
     
-    private static SoundMeter soundMeter;
+    public static SoundMeter soundMeter;
     
     private static Random random;
             
@@ -306,6 +314,38 @@ public class RandomJuke
         for (String url : songListUrls)
         {
             addSongListUrl(url);
+        }
+    }
+    
+    public void setSoundMeter(SoundMeterModes meterMode)
+    {
+        switch(meterMode)
+        {
+            case BLOB:
+            {
+                soundMeter = new BlobSoundMeter(offscreenImageWidth, offscreenImageHeight);
+                break;
+            }
+            case BOTTOM_UP:
+            {
+                soundMeter = new ButtonUpSoundMeter(offscreenImageWidth, offscreenImageHeight);
+                break;
+            }
+            case CIRCLE:
+            {
+                soundMeter = new CircleSoundMeter(offscreenImageWidth, offscreenImageHeight);
+                break;
+            }
+            case RECTANGLE:
+            {
+                soundMeter = new RectangularSoundMeter(offscreenImageWidth, offscreenImageHeight);
+                break;
+            }
+            default:
+            {
+                // off
+                soundMeter = new AllOffSoundMeter(offscreenImageWidth, offscreenImageHeight);
+            }
         }
     }
     
@@ -714,7 +754,7 @@ public class RandomJuke
                         }
                         else
                         {
-                            System.out.println("DISPLAYING SOUND DATA");
+//                            System.out.println("DISPLAYING SOUND DATA");
                             List<SoundReading> values = new ArrayList();
                             values.addAll(microphoneValues);
                             soundMeter.displaySoundData(pixel, values);
@@ -722,7 +762,8 @@ public class RandomJuke
                     }
                 };
                         
-                long refreshRate = 300;
+                long refreshRate = 1;
+//                long refreshRate = 300;
                 timer.schedule(task, now, refreshRate);
                 System.out.println("SCHEDULED DISPLAY TASK");
                 
@@ -786,6 +827,7 @@ System.out.println("CALLING GO");
                     ioiO = ioio_;
                     pixelEnvironment = new PixelEnvironment(1);
                     offscreenImageHeight = pixelEnvironment.KIND.height * 2;
+                    offscreenImageWidth = pixelEnvironment.KIND.width * 2;
                     RgbLedMatrix ledMatrix = ioio_.openRgbLedMatrix(pixelEnvironment.KIND);                    
                     pixel = new Pixel(pixelEnvironment.KIND);
                     pixel.matrix = ledMatrix;
@@ -793,9 +835,7 @@ System.out.println("CALLING GO");
                     microphoneSensor = Pixel.getAnalogInput1();
                     microphoneSensor.setBuffer(SAMPLE_BUFFER_SIZE);
   
-                    int w = pixelEnvironment.KIND.width * 2;
-                    int h = pixelEnvironment.KIND.height * 2;
-                    soundMeter = new SoundMeter(w, h);
+                    soundMeter = new AllOffSoundMeter(offscreenImageWidth, offscreenImageHeight);
                             
                     System.out.println("Found PIXEL: " + pixel.matrix + "\n");                     
                 }
@@ -805,18 +845,13 @@ System.out.println("CALLING GO");
                         InterruptedException 
                 {
                     float p = microphoneSensor.readBuffered();
-//p = random.nextFloat();
                     
 //                    System.out.println("proximity sensor: " + p);
 
                     float ratio = offscreenImageHeight * p;
                     int height = (int) ratio;
 
-                    int r = random.nextInt(256);
-                    int g = random.nextInt(256);
-                    int b = random.nextInt(256);
-                    int alpha = random.nextInt(256);
-                    Color c = new Color(r, g, b, alpha);
+                    Color c = ButtonUpSoundMeter.randomcolor();
                     
                     SoundReading reading = new SoundReading();
                     reading.height = height;
@@ -829,7 +864,7 @@ System.out.println("CALLING GO");
                         microphoneValues.remove(0);
                     }
                     
-                    System.out.print(".");
+//                    System.out.print(".");
                 }
             };
                     
