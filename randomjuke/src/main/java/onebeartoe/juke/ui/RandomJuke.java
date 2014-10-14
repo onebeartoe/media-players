@@ -761,8 +761,9 @@ public class RandomJuke
                     }
                 };
                         
-                long refreshRate = 1;
-//                long refreshRate = 300;
+                // this is how often the image will be sent to the Pixel
+//                long refreshRate = 1;
+                long refreshRate = 200;
                 timer.schedule(task, now, refreshRate);
                 System.out.println("SCHEDULED DISPLAY TASK");
                 
@@ -824,7 +825,11 @@ System.out.println("CALLING GO");
                         InterruptedException 
                 {
                     ioiO = ioio_;
-                    pixelEnvironment = new PixelEnvironment(1);
+                    
+                    // 1: 32x16 from Sparkfun
+                    // 3: 32x32 from Adafruit (original one)
+                    pixelEnvironment = new PixelEnvironment(3);
+                    
                     offscreenImageHeight = pixelEnvironment.KIND.height * 2;
                     offscreenImageWidth = pixelEnvironment.KIND.width * 2;
                     RgbLedMatrix ledMatrix = ioio_.openRgbLedMatrix(pixelEnvironment.KIND);                    
