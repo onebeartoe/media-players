@@ -552,7 +552,6 @@ public class RandomJuke
         try
         {
             pixelIntegration = new PixelIntegration();
-//            pixelIntegration.go(args);
         } 
         catch (Exception ex)
         {
@@ -835,7 +834,9 @@ System.out.println("CALLING GO");
                     microphoneSensor = Pixel.getAnalogInput1();
                     microphoneSensor.setBuffer(SAMPLE_BUFFER_SIZE);
   
+                    // start off with this sound meter mode
                     soundMeter = new AllOffSoundMeter(offscreenImageWidth, offscreenImageHeight);
+                    soundMeter = new RectangularSoundMeter(offscreenImageWidth, offscreenImageHeight);
                             
                     System.out.println("Found PIXEL: " + pixel.matrix + "\n");                     
                 }
@@ -845,8 +846,6 @@ System.out.println("CALLING GO");
                         InterruptedException 
                 {
                     float p = microphoneSensor.readBuffered();
-                    
-//                    System.out.println("proximity sensor: " + p);
 
                     float ratio = offscreenImageHeight * p;
                     int height = (int) ratio;
