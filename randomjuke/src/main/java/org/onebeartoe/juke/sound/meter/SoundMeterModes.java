@@ -10,6 +10,7 @@ public enum SoundMeterModes
     BOTTOM_UP,
     CIRCLE,
     RECTANGLE,
+    GROWING_TEXT,
 //    HORIZONTAL_MIRRORING,
 //    COLOR_MAPPING,
     OFF;
