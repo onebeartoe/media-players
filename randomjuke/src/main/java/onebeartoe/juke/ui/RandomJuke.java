@@ -77,7 +77,7 @@ import org.onebeartoe.pixel.PixelEnvironment;
 import org.onebeartoe.pixel.hardware.Pixel;
 import org.onebeartoe.pixel.sound.meter.AllOffSoundMeter;
 import org.onebeartoe.pixel.sound.meter.BlobSoundMeter;
-import org.onebeartoe.pixel.sound.meter.ButtonUpSoundMeter;
+import org.onebeartoe.pixel.sound.meter.BottomUpSoundMeter;
 import org.onebeartoe.pixel.sound.meter.CircleSoundMeter;
 import org.onebeartoe.pixel.sound.meter.RectangularSoundMeter;
 import org.onebeartoe.pixel.sound.meter.SoundMeter;
@@ -329,7 +329,7 @@ public class RandomJuke
             }
             case BOTTOM_UP:
             {
-                soundMeter = new ButtonUpSoundMeter(offscreenImageWidth, offscreenImageHeight);
+                soundMeter = new BottomUpSoundMeter(offscreenImageWidth, offscreenImageHeight);
                 break;
             }
             case CIRCLE:
@@ -861,7 +861,7 @@ System.out.println("CALLING GO");
                     float ratio = offscreenImageHeight * p;
                     int height = (int) ratio;
 
-                    Color c = ButtonUpSoundMeter.randomcolor();
+                    Color c = BottomUpSoundMeter.randomcolor();
                     
                     SoundReading reading = new SoundReading();
                     reading.height = height;
