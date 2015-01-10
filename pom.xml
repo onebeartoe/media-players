@@ -14,6 +14,7 @@
 	<modules>
             <module>randomjuke</module>
             <module>sound-recorder</module>
+	 <module>sound-visualizer</module>
 	</modules>
 
  <build>
