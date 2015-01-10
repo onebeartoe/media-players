@@ -1,0 +1,12 @@
+case $1 in
+start)
+        java -cp /home/pi/randomjuke/jmf.jar:/home/pi/randomjuke/randomjuke-1.0-SNAPSHOT-jar-with-dependencies.jar onebeartoe.juke.ui.RandomJuke
+        ;;
+stop)
+        
+        ;;
+restart)
+        
+        ;;
+esac
+exit 0
