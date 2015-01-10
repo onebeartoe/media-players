@@ -484,12 +484,13 @@ public class RandomJuke
             }
         }        
     }
-    
+
     /**
      * main program to call the JFrame to the screen
      */
     public static void main(String args[])
     {
+        System.out.println("it begins");
         songListManager = new NetworkAndFilesystemSearchingSongManager();
         ((NetworkAndFilesystemSearchingSongManager) songListManager).setNetworkSongManager(new JavaxNetworkSearchingSongManager());
         final String configurationFilename = "RandomJukeConfig.xml";
@@ -554,7 +555,6 @@ public class RandomJuke
 
         loadSongLists();
         
-        
         try
         {
             pixelIntegration = new PixelIntegration();
@@ -564,7 +564,7 @@ public class RandomJuke
             Logger.getLogger(RandomJuke.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
     public void pausePlayer()
     {
         if (player != null)
@@ -834,12 +834,20 @@ System.out.println("CALLING GO");
                     
                     // 1: 32x16 from Sparkfun
                     // 3: 32x32 from Adafruit (original one)
-                    pixelEnvironment = new PixelEnvironment(1);
+/*
+                    case 1:
+                        KIND = ioio.lib.api.RgbLedMatrix.Matrix.ADAFRUIT_32x16;
+
+                    case 3:
+                        KIND = ioio.lib.api.RgbLedMatrix.Matrix.SEEEDSTUDIO_32x32; //the current version of PIXEL 32x32                    
+*/
+                    int pixleType = 1;
+                    pixelEnvironment = new PixelEnvironment(pixleType);
                     
                     offscreenImageHeight = pixelEnvironment.KIND.height * 2;
                     offscreenImageWidth = pixelEnvironment.KIND.width * 2;
                     RgbLedMatrix ledMatrix = ioio_.openRgbLedMatrix(pixelEnvironment.KIND);                    
-                    pixel = new Pixel(pixelEnvironment.KIND);
+                    pixel = new Pixel(pixelEnvironment.KIND, pixelEnvironment.currentResolution);
                     pixel.matrix = ledMatrix;
                     pixel.ioiO = ioio_;
                     microphoneSensor = Pixel.getAnalogInput1();
