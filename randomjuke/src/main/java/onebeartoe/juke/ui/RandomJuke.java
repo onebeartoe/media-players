@@ -82,6 +82,7 @@ import org.onebeartoe.pixel.sound.meter.CircleSoundMeter;
 import org.onebeartoe.pixel.sound.meter.RectangularSoundMeter;
 import org.onebeartoe.pixel.sound.meter.SoundMeter;
 import org.onebeartoe.pixel.sound.meter.SoundReading;
+import org.onebeartoe.pixel.sound.meter.WaveSoundMeter;
 
 public class RandomJuke
 {
@@ -339,6 +340,11 @@ public class RandomJuke
             case RECTANGLE:
             {
                 soundMeter = new RectangularSoundMeter(offscreenImageWidth, offscreenImageHeight);
+                break;
+            }
+            case WAVE_GRAPH:
+            {
+                soundMeter = new WaveSoundMeter(offscreenImageWidth, offscreenImageHeight);
                 break;
             }
             default:
@@ -828,7 +834,7 @@ System.out.println("CALLING GO");
                     
                     // 1: 32x16 from Sparkfun
                     // 3: 32x32 from Adafruit (original one)
-                    pixelEnvironment = new PixelEnvironment(3);
+                    pixelEnvironment = new PixelEnvironment(1);
                     
                     offscreenImageHeight = pixelEnvironment.KIND.height * 2;
                     offscreenImageWidth = pixelEnvironment.KIND.width * 2;
