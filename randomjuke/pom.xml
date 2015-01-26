@@ -25,13 +25,13 @@
 
     <repositories>
 	<repository>
-		<id>oss-snapshots-repo</id>
-		<name>Sonatype OSS Maven Repository</name>
-		<url>https://repository-onebeartoe.forge.cloudbees.com/snapshot/</url>
-		<snapshots>
-			<enabled>true</enabled>
-			<updatePolicy>always</updatePolicy>
-		</snapshots>
+            <id>oss-snapshots-repo</id>
+            <name>Sonatype OSS Maven Repository</name>
+            <url>https://repository-onebeartoe.forge.cloudbees.com/snapshot/</url>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
 	</repository>
     </repositories>
 
@@ -79,7 +79,13 @@
             <artifactId>onebeartoe-system</artifactId>  
             <version>1.0-SNAPSHOT</version>        
         </dependency>
-        
+
+        <dependency>
+            <groupId>org.onebeartoe.media.players.randomjuke</groupId>
+            <artifactId>randomjuke-networking</artifactId>
+            <version>0.1-SNAPSHOT</version>
+        </dependency>        
+                        
         <dependency>
             <groupId>org.onebeartoe.pixel</groupId>  
             <artifactId>commons</artifactId>  
