@@ -52,7 +52,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import onebeartoe.juke.network.PixelClient;
+import org.onebeartoe.pixel.PixelClient;
 
 import onebeartoe.juke.network.RandomJukeServerConnection;
 import onebeartoe.juke.ui.eck.KaleidaAnimate;
@@ -75,7 +75,7 @@ import org.onebeartoe.multimedia.juke.services.SongsPlayedService;
 import org.onebeartoe.multimedia.juke.songs.JavaxNetworkSearchingSongManager;
 import org.onebeartoe.multimedia.juke.songs.NetworkAndFilesystemSearchingSongManager;
 import org.onebeartoe.multimedia.juke.songs.SongListManager;
-import org.onebeartoe.network.ThreadedServer;
+import onebeartoe.juke.network.ThreadedServer;
 import org.onebeartoe.pixel.PixelEnvironment;
 import org.onebeartoe.pixel.hardware.Pixel;
 import org.onebeartoe.pixel.sound.meter.AllOffSoundMeter;

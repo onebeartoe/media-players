@@ -1,7 +1,7 @@
 
 package org.onebeartoe.sound.visualizer;
 
-import org.onebeartoe.network.ServerConnection;
+import onebeartoe.juke.network.ServerConnection;
 
 /**
  * @author Roberto Marquez
