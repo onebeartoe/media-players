@@ -4,7 +4,6 @@ package onebeartoe.juke.network;
 import javax.swing.JButton;
 
 import org.onebeartoe.multimedia.juke.services.CurrentSongService;
-import org.onebeartoe.network.ServerConnection;
 
 /**
  * This is a huge hack.  It comes from a CS networking course I took at UTSA.
