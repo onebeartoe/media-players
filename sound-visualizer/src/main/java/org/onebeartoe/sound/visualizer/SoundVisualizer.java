@@ -39,18 +39,11 @@ import org.onebeartoe.pixel.sound.meter.SoundMeter;
 import org.onebeartoe.pixel.sound.meter.SoundReading;
 import org.onebeartoe.pixel.sound.meter.WaveSoundMeter;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.GridLayout;
-import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -63,11 +56,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
+
 import org.onebeartoe.pixel.PixelClient;
 import onebeartoe.juke.network.ServerConnection;
 import org.onebeartoe.pixel.sound.meter.SoundMeterModes;
@@ -96,7 +85,7 @@ public class SoundVisualizer extends PixelClient
 
     private static SwingSongListPathPanel songListPathPanel;
 
-    private JPanel settingPanel;
+//    private JPanel settingPanel;
 
     private static GraphicalUserInterfaceServices uiService;
 
@@ -104,28 +93,28 @@ public class SoundVisualizer extends PixelClient
 
     private static URL currentSong;
 
-    private JButton pathOptionsButton;
+//    private JButton pathOptionsButton;
 
     private LookAndFeelButton lookButton;
 
-    private static JButton nextSongButton;
+//    private static JButton nextSongButton;
 
-    private JPanel ControlPanel;
+//    private JPanel ControlPanel;
 
     // the current song playing
-    private static JLabel currentSongLabel;
+//    private static JLabel currentSongLabel;
 
     private static int duplicateThreshold;
 
     private ThreadedServer nextSongServer;
 
-    private JLabel ipLabel;
+//    private JLabel ipLabel;
 
-    private JPanel mediaPanel;
+//    private JPanel mediaPanel;
 
     private Component mediaControls;
 
-    private JPanel bottomPanel;
+//    private JPanel bottomPanel;
 
     private Container c;
     
@@ -143,7 +132,7 @@ public class SoundVisualizer extends PixelClient
     
     private static Pixel pixel;
     
-    private static JFrame guiWindow;
+//    private static JFrame guiWindow;
     
     private static AnalogInput microphoneSensor;
     
@@ -313,103 +302,100 @@ public class SoundVisualizer extends PixelClient
     
     private void setupSwingUi()
     {
-        guiWindow = new JFrame("onebeartoe RandomJuke 3.3 - You Know It Edition");
+  //      guiWindow = new JFrame("onebeartoe RandomJuke 3.3 - You Know It Edition");
         songListPathPanel = new SwingSongListPathPanel();
 
-        lookButton = new LookAndFeelButton("Change", guiWindow);
+//        lookButton = new LookAndFeelButton("Change", guiWindow);
         String title = "Look and Feel";
         Color color = Color.BLUE;
-        JPanel lookPanel = new JPanel();
-        lookPanel.add(lookButton);
-        lookPanel.setBorder(GUITools.factoryLineBorder(title, color));
+//        JPanel lookPanel = new JPanel();
+//        lookPanel.add(lookButton);
+//        lookPanel.setBorder(GUITools.factoryLineBorder(title, color));
 
-        ipLabel = new JLabel();
+//        ipLabel = new JLabel();
         title = "Remote Control URL:";
-        JPanel ipPanel = new JPanel();
-        ipPanel.add(ipLabel);
-        JButton ipButton = new JButton("View");
-        ipButton.addActionListener(new ActionListener()
-        {
-            @Override
-            public void actionPerformed(ActionEvent ae)
-            {
-                String url = nextSongServer.ip;
-                uiService.viewBrowser(url);
-            }
-        });
-        ipPanel.add(ipLabel);
-        ipPanel.add(ipButton);
-        ipPanel.setBorder(GUITools.factoryLineBorder(title, color));
+//        JPanel ipPanel = new JPanel();
+//        ipPanel.add(ipLabel);
+//        JButton ipButton = new JButton("View");
+//        ipButton.addActionListener(new ActionListener()
+//        {
+//            @Override
+//            public void actionPerformed(ActionEvent ae)
+//            {
+//                String url = nextSongServer.ip;
+//                uiService.viewBrowser(url);
+//            }
+//        });
+//        ipPanel.add(ipLabel);
+//        ipPanel.add(ipButton);
+//        ipPanel.setBorder(GUITools.factoryLineBorder(title, color));
 
-        pathOptionsButton = new JButton("Change");
+//        pathOptionsButton = new JButton("Change");
         ChangePathButtonHandler changeSongListUrlsListeners = new ChangePathButtonHandler();
-        pathOptionsButton.addActionListener(changeSongListUrlsListeners);
+//        pathOptionsButton.addActionListener(changeSongListUrlsListeners);
         title = "Song Paths";
-        JPanel pathOptionsPanel = new JPanel();
-        pathOptionsPanel.add(pathOptionsButton);
-        pathOptionsPanel.setBorder(GUITools.factoryLineBorder(title, color));
+//        JPanel pathOptionsPanel = new JPanel();
+//        pathOptionsPanel.add(pathOptionsButton);
+//        pathOptionsPanel.setBorder(GUITools.factoryLineBorder(title, color));
 
-        settingPanel = new JPanel();
-        settingPanel.setLayout(new GridLayout(3, 1));
-        settingPanel.add(pathOptionsPanel);
-        settingPanel.add(ipPanel);
-        settingPanel.add(lookPanel);
+//        settingPanel = new JPanel();
+//        settingPanel.setLayout(new GridLayout(3, 1));
+//        settingPanel.add(pathOptionsPanel);
+//        settingPanel.add(ipPanel);
+//        settingPanel.add(lookPanel);
 
-//        nextSongButton = new JButton("Next Song");
-
-
-        JButton settingsButton = new JButton("Settings");
-        settingsButton.addActionListener(new SettingsButtonHandler());
+//        JButton settingsButton = new JButton("Settings");
+//        settingsButton.addActionListener(new SettingsButtonHandler());
 
         // Setup the Control Panel.
-        ControlPanel = new JPanel();
-        ControlPanel.setLayout(new GridLayout(1, 10));
-        ControlPanel.add(nextSongButton);
-        ControlPanel.add(settingsButton);
+//        ControlPanel = new JPanel();
+//        ControlPanel.setLayout(new GridLayout(1, 10));
+//        ControlPanel.add(nextSongButton);
+//        ControlPanel.add(settingsButton);
 
         // set up the visal panel
 //        visual = new KaleidaAnimate();
 //        visual.init();
 
         // bottom panel
-        currentSongLabel = new JLabel();
-        currentSongLabel.setFont(new Font("TimesRoman", Font.PLAIN, 15));
+//        currentSongLabel = new JLabel();
+//        currentSongLabel.setFont(new Font("TimesRoman", Font.PLAIN, 15));
 
-        mediaPanel = new JPanel();
+//        mediaPanel = new JPanel();
 
-        bottomPanel = new JPanel();
-        LayoutManager bottomPanelLayout = new BorderLayout();
-        bottomPanel.setLayout(bottomPanelLayout);
-        bottomPanel.add(mediaPanel);
-        bottomPanel.add(currentSongLabel, BorderLayout.NORTH);
+//        bottomPanel = new JPanel();
+//        LayoutManager bottomPanelLayout = new BorderLayout();
+//        bottomPanel.setLayout(bottomPanelLayout);
+//        bottomPanel.add(mediaPanel);
+//        bottomPanel.add(currentSongLabel, BorderLayout.NORTH);
 
         // place the comonents onto JFrame
-        c = guiWindow.getContentPane();
-        c.add(ControlPanel, BorderLayout.NORTH);
+//        c = guiWindow.getContentPane();
+//        c.add(ControlPanel, BorderLayout.NORTH);
 //        c.add(visual, BorderLayout.CENTER);
-        c.add(bottomPanel, BorderLayout.SOUTH);
+//        c.add(bottomPanel, BorderLayout.SOUTH);
 
-        guiWindow.addWindowListener(
-            new WindowAdapter()
-            {
-                public void windowClosing(WindowEvent e)
-                {
-                    try
-                    {
-                        songsPlayedService.storeSongsPlayed();
-                    } catch (Exception e1)
-                    {
-                        e1.printStackTrace();
-                    }
-
-                    System.exit(0);
-                }
-            }
-        );
+//        guiWindow.addWindowListener(
+//            new WindowAdapter()
+//            {
+//                public void windowClosing(WindowEvent e)
+//                {
+//                    try
+//                    {
+//                        songsPlayedService.storeSongsPlayed();
+//                    } catch (Exception e1)
+//                    {
+//                        e1.printStackTrace();
+//                    }
+//
+//                    System.exit(0);
+//                }
+//            }
+//        );
         
-        guiWindow.setLocation(320, 105);
-        guiWindow.setSize(475, 375);
-        guiWindow.setVisible(true);
+//        guiWindow.setLocation(320, 105);
+//        guiWindow.setSize(475, 375);
+//        guiWindow.setVisible(true);
     }            
 
     private static void loadSongLists()
@@ -451,16 +437,16 @@ public class SoundVisualizer extends PixelClient
         // start off with a blank config
         configuration = new JukeConfig();
         
-        nextSongButton = new JButton("Next Song");
-        nextSongButton.addActionListener(
-            new ActionListener()
-            {
-                public void actionPerformed(ActionEvent e)
-                {
-                    playNextSong();
-                }
-            }
-        );
+//        nextSongButton = new JButton("Next Song");
+//        nextSongButton.addActionListener(
+//            new ActionListener()
+//            {
+//                public void actionPerformed(ActionEvent e)
+//                {
+//                    playNextSong();
+//                }
+//            }
+//        );
                 
         mode = ApplicationMode.COMMAND_LINE;
 
@@ -514,17 +500,17 @@ public class SoundVisualizer extends PixelClient
     {
         if (mediaControls != null)
         {
-            mediaPanel.remove(mediaControls);
+//            mediaPanel.remove(mediaControls);
         }
 
-        int width = guiWindow.getWidth();
+//        int width = guiWindow.getWidth();
         int height = mediaControls.getHeight();
-        mediaControls.setPreferredSize(new Dimension(width, height));
+//        mediaControls.setPreferredSize(new Dimension(width, height));
         mediaControls.doLayout();
-        mediaPanel.add(mediaControls, BorderLayout.CENTER);
-        mediaPanel.revalidate();
-        mediaPanel.doLayout();
-        bottomPanel.doLayout();
+//        mediaPanel.add(mediaControls, BorderLayout.CENTER);
+//        mediaPanel.revalidate();
+//        mediaPanel.doLayout();
+//        bottomPanel.doLayout();
         c.doLayout();
     }
 
@@ -636,7 +622,7 @@ public class SoundVisualizer extends PixelClient
         if(mode == ApplicationMode.GUI)
         {
             // update the JLabel that shows the name of the current song.
-            currentSongLabel.setText(label);
+//            currentSongLabel.setText(label);
         }
     }
 
@@ -645,9 +631,9 @@ public class SoundVisualizer extends PixelClient
 
         public void actionPerformed(ActionEvent e)
         {
-            int result = JOptionPane.showConfirmDialog(guiWindow, songListPathPanel);
+//            int result = JOptionPane.showConfirmDialog(guiWindow, songListPathPanel);
 
-            if (result == JOptionPane.OK_OPTION)
+//            if (result == JOptionPane.OK_OPTION)
             {
                 List<String> songListUrls = songListPathPanel.getSongListPaths();
 
@@ -813,9 +799,9 @@ System.out.println("CALLING GO");
         public void actionPerformed(ActionEvent e)
         {
             String ipLabelText = "http://" + nextSongServer.ip + ":" + nextSongServer.port;
-            ipLabel.setText(ipLabelText);
+//            ipLabel.setText(ipLabelText);
 
-            JOptionPane.showMessageDialog(guiWindow, settingPanel);
+//            JOptionPane.showMessageDialog(guiWindow, settingPanel);
         }
     }    
 }
