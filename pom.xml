@@ -14,8 +14,9 @@
 	<modules>
             <module>randomjuke</module>
             <module>sound-recorder</module>
-	 <module>sound-visualizer</module>
-	 <module>randomjuke-networking</module>
+            <module>sound-visualizer</module>
+            <module>randomjuke-networking</module>
+            <module>pi-ezo</module>
 	</modules>
 
     <repositories>
