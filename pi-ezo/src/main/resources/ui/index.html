@@ -14,16 +14,16 @@
         <title>onebeartoe Pixel Web Application</title>
     </head>
 
-    <body onload="loadImageResources(); changeScrollingText('Hello, Pixel World');">
+    <body onload="loadSongList();">
         
-        <script type="text/javascript" src="pixel.js"></script>
+        <script type="text/javascript" src="piezo.js"></script>
         
 	<div style="display: block; 										  				 
              text-align: center;											  
              font-size:1.875em; 
              margin-bottom: 1%;">
 				 
-            <h3>Pixel Web Controls</h3>
+            <h3>Piezo Web Controls</h3>
 	</div>
 											 
 	<br/>
@@ -37,8 +37,11 @@
                 Mode:
             </span>
             
-            <select name="mode" 
+            <select id="songList"
+                    name="mode" 
                     onchange="modeChanged(this.value);"
+                    size="6"
+                    multiple
                     style="width: 50%; height: 2em; font-size: 3em;">
                 
                 <option value="animations">Animations</option>

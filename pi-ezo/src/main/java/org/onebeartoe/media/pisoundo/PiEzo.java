@@ -18,12 +18,14 @@ public class PiEzo
     private HttpServer server;
     
     public PiEzo() throws IOException
-    {
-        InetSocketAddress anyhost = new InetSocketAddress(2110);        
-        server = HttpServer.create(anyhost, 0);
-        
+    {        
         HttpHandler userInterfaceHttpHander = new ClasspathResourceHttpHandler();
+        HttpHandler songsHttpHandler = new SongListHttpHander();
+        
+        InetSocketAddress anyhost = new InetSocketAddress(2110);        
+        server = HttpServer.create(anyhost, 0);        
         server.createContext("/", userInterfaceHttpHander);
+        server.createContext("/ui/songs", songsHttpHandler);
     }
     
     public static void main(String[] args) throws InterruptedException, IOException
