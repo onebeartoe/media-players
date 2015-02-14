@@ -2,6 +2,8 @@
 function loadSongList()
 {
     var url = "/songs";
+
+    var elementName = "songList";
     
     logEvent("loading " + elementName + "...");
     
@@ -12,27 +14,24 @@ function loadSongList()
         {
             var list = xmlhttp.responseText;
             
-            var names = list.split("-+-");
-            
-            var html = "";
-            
-            for(var n in names)
-            {
-                var name = names[n].trim();
+            var songList = list.split("-+-");
 
-                html += name + "<br>";
+            for(var n in songList)
+            {
+                var songEntry = songList[n].trim();
+
+                var songData = songEntry.split(":");
+                
+                var index = songData[0];
+                var title = songData[1];
+
+                var x = document.getElementById(elementName);
+                var option = document.createElement("option");
+                option.value = index;
+                option.text = title;
+                x.add(option);
             }
 
-            var e = document.getElementById(elementName);
-            e.innerHTML = html;
-            
-            var elementName = "songList";
-            var x = document.getElementById(elementName);
-            var option = document.createElement("option");
-            option.text = "Kiwi";
-            option.value = "wacawacawaca";
-            x.add(option);
-            
             logEvent("done loading " + elementName);
         }
     };

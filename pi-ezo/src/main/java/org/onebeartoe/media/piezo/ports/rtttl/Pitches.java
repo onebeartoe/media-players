@@ -5,7 +5,7 @@ package org.onebeartoe.media.piezo.ports.rtttl;
  * @author Roberto Marquez
  */
 // TODO: Rename this to Pitches
-public class Notes 
+public class Pitches 
 {
     public static int NOTE_B0 = 31;
     public static int NOTE_C1  =33;

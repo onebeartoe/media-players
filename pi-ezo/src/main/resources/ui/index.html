@@ -11,7 +11,7 @@
 
         <link rel="stylesheet" type="text/css" href="images.css" />
         
-        <title>onebeartoe Pixel Web Application</title>
+        <title>onebeartoe Piezo Web Application</title>
     </head>
 
     <body onload="loadSongList();">
@@ -32,11 +32,7 @@
         
         <br/>
         
-        <center >
-            <span style="font-size:1.875em;">
-                Mode:
-            </span>
-            
+        <center >            
             <select id="songList"
                     name="mode" 
                     onchange="modeChanged(this.value);"
@@ -49,49 +45,6 @@
                 <option value="text" selected>Scrolling Text</option>
             </select>
         </center>
-
-        <div id="stillPanel">
-            <br/>
-        
-            <hr/>
-
-            <h3>Still Images</h3>
-
-            <div id="still">
-
-            </div>
-
-            <br/>
-        </div>
-        
-        <div id="animationsPanel">
-            <hr/>
-
-            <h3>Animations</h3>
-
-            <div id="animations" >
-
-            </div>
-        </div>
-
-        <div id="scrollingTextPanel">
-            <hr/>
-
-            <h3>Scrolling Text</h3>
-
-            
-            <input type="text" onchange="changeScrollingText(this.value);"/>
-            
-            <br/>
-            
-            <label for="points">Speed:</label>
-            <input type="range" onmouseup="changeScrollingTextSpeed(this.value);" name="points" min="100" max="600">
-                
-            <br/>
-            
-            <label for="color">Color:</label>
-            <input type="color" name="color" onchange="changeScrollingTextColor(this.value);">
-        </div>        
         
         <hr/>
         
@@ -107,13 +60,12 @@
         
 	<br/>
 
-	<a href="http://www.onebeartoe.com" 
-            style="display: block; 										  											 
-            text-align: center;											  
+	<a href="http://electronics.onebeartoe.org/"
+            style="display: block;
+            text-align: center;
             font-size:1.875em; ">
-            brought to you by onebeartoe.com
+            brought to you by electronics.onebeartoe.org
 	</a>
-											 
     </body>
 
 </html>

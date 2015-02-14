@@ -3,6 +3,8 @@ package org.onebeartoe.media;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.onebeartoe.media.piezo.ports.rtttl.BuiltInSongs;
+import org.onebeartoe.media.piezo.ports.rtttl.RtttlSong;
 import org.onebeartoe.network.ListHttpHandler;
 
 /**
@@ -10,16 +12,27 @@ import org.onebeartoe.network.ListHttpHandler;
  */
 public class SongListHttpHander extends ListHttpHandler
 {
+    private BuiltInSongs songService;
+    
+    public SongListHttpHander()
+    {
+        songService = new BuiltInSongs();
+    }
+            
     @Override
     protected List<String> getList()
     {
-        List<String> songs = new ArrayList();
+        List<String> songList = new ArrayList();
         
-        songs.add("song 1");
-        songs.add("song b");
-        songs.add("song 9");
-        songs.add("song TTTT");
+        List<RtttlSong> songs = songService.getSongs();
         
-        return songs;
+        int i = 0;
+        for(RtttlSong song : songs)
+        {
+            String entry = i + ":" + song.getTitle();
+            songList.add(entry);
+        }
+        
+        return songList;
     }
 }
