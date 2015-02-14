@@ -1,5 +1,5 @@
 
-package org.onebeartoe.media.pisoundo;
+package org.onebeartoe.media;
 
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
@@ -25,7 +25,7 @@ public class PiEzo
         InetSocketAddress anyhost = new InetSocketAddress(2110);        
         server = HttpServer.create(anyhost, 0);        
         server.createContext("/", userInterfaceHttpHander);
-        server.createContext("/ui/songs", songsHttpHandler);
+        server.createContext("/songs", songsHttpHandler);
     }
     
     public static void main(String[] args) throws InterruptedException, IOException

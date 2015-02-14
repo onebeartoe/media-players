@@ -1,11 +1,8 @@
 
 function loadSongList()
 {
-    var url = "songs";
+    var url = "/songs";
     
-    var elementName = "songList";
-elementName = "logs";
-
     logEvent("loading " + elementName + "...");
     
     var xmlhttp = new XMLHttpRequest();
@@ -29,9 +26,16 @@ elementName = "logs";
             var e = document.getElementById(elementName);
             e.innerHTML = html;
             
+            var elementName = "songList";
+            var x = document.getElementById(elementName);
+            var option = document.createElement("option");
+            option.text = "Kiwi";
+            option.value = "wacawacawaca";
+            x.add(option);
+            
             logEvent("done loading " + elementName);
         }
-    }
+    };
     
     xmlhttp.open("POST", url, true);
     xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");

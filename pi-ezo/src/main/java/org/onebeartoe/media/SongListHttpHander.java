@@ -1,5 +1,5 @@
 
-package org.onebeartoe.media.pisoundo;
+package org.onebeartoe.media;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +18,7 @@ public class SongListHttpHander extends ListHttpHandler
         songs.add("song 1");
         songs.add("song b");
         songs.add("song 9");
-        songs.add("song T");
+        songs.add("song TTTT");
         
         return songs;
     }

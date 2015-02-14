@@ -2,20 +2,18 @@
 package org.onebeartoe.media.piezo.ports.therandombit;
 
 import com.pi4j.wiringpi.Gpio;
-import static com.pi4j.wiringpi.Gpio.HIGH;
-import static com.pi4j.wiringpi.Gpio.LOW;
 import static com.pi4j.wiringpi.Gpio.delay;
 import static com.pi4j.wiringpi.Gpio.delayMicroseconds;
-import static com.pi4j.wiringpi.Gpio.digitalWrite;
 import com.pi4j.wiringpi.SoftTone;
-import org.onebeartoe.media.piezo.ports.rtttl.RingToneTextTransferLanguage;
 import static org.onebeartoe.media.piezo.ports.softtone.SoftTonePort.PIEZO_PIN;
 
 /**
+ * No dice on this one.  The port I implemented does not sound like what Becky 
+ * Stern has going on with the Gemma
  * This class is a direct port from Arduino C to Java from the program listing
  * found here:
  *
- 
+ * !!!! PLACE THE LINK TO THE ADAFRUIT TUTORIAL !!!!
  *
  * The Arduino C code has been commented out just below the Java equivalent.
  *

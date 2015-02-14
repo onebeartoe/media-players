@@ -6,7 +6,10 @@ import com.pi4j.wiringpi.SoftTone;
 
 /**
  * This class is a direct port from C to Java of the program listing found here:
+ * 
  *      http://computers.tutsplus.com/articles/creating-a-speaker-for-your-raspberry-pi-using-a-piezo-element--mac-59336
+ * 
+ * This seemed to work, but only had a few other song examples.  See the RTTTL implementation.
  * 
  * The C code has been commented out just below the Java equivalent.
  * @author Roberto Marquez
