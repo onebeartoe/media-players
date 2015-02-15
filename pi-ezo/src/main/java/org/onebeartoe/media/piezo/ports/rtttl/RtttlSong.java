@@ -8,6 +8,8 @@ package org.onebeartoe.media.piezo.ports.rtttl;
  */
 public class RtttlSong
 {
+    public static final int TITLE_LENGTH_MAX = 12;
+
    private String data;
    
    public RtttlSong(String data)
