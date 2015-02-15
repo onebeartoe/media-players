@@ -170,6 +170,8 @@ public class SoundVisualizer extends PixelClient
                         
                 // this is how often the image will be sent to the Pixel
                 long refreshRate = 200;
+                refreshRate = 1;
+                
                 timer.schedule(task, now, refreshRate);
                 System.out.println("SCHEDULED DISPLAY TASK");
                 
