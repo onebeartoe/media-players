@@ -9,7 +9,9 @@
 	<artifactId>media-players-parent</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
     </parent>
-    
+
+    <name>onebeartoe-media-players-pi-ezo</name>
+        
     <groupId>org.onebeartoe.media.pisoundo</groupId>
     <artifactId>pisoundo</artifactId>
     <version>0.0.1-SNAPSHOT</version>
@@ -22,7 +24,7 @@
         <maven.compiler.target>1.7</maven.compiler.target>
     </properties>
     
-  <repositories>
+    <repositories>
 	<repository>
 		<id>oss-snapshots-repo</id>
 		<name>Sonatype OSS Maven Repository</name>
@@ -32,7 +34,7 @@
 			<updatePolicy>always</updatePolicy>
 		</snapshots>
 	</repository>
-  </repositories>    
+    </repositories>    
     
     <dependencies>
         <dependency>
@@ -47,6 +49,7 @@
             <artifactId>network</artifactId>
             <version>1.0-SNAPSHOT</version>            
         </dependency>
+        
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -81,5 +84,4 @@
 	    </plugin>
         </plugins>
     </build>
-    <name>onebeartoe-media-players-pi-ezo</name>
 </project>
