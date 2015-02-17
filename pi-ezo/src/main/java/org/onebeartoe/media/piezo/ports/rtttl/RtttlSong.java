@@ -10,19 +10,29 @@ public class RtttlSong
 {
     public static final int TITLE_LENGTH_MAX = 12;
 
-   private String data;
+    private String data;
+
+    public RtttlSong(String data)
+    {
+        this.data = data;
+    }
+        
+    public String getData()
+    {
+        return data;
+    }
    
-   public RtttlSong(String data)
-   {
-       this.data = data;
-   }
-   
-   public String getTitle()
-   {
+    public String getTitle()
+    {
        int i = data.indexOf(":");
        
        String title = data.substring(0, i);
        
        return title;
-   }
+    }
+    
+    public void setData(String data)
+    {
+        this.data = data;
+    }
 }

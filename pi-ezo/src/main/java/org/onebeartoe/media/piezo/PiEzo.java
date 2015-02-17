@@ -1,5 +1,5 @@
 
-package org.onebeartoe.media;
+package org.onebeartoe.media.piezo;
 
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
@@ -21,10 +21,12 @@ public class PiEzo
     {        
         HttpHandler userInterfaceHttpHander = new ClasspathResourceHttpHandler();
         HttpHandler songsHttpHandler = new SongListHttpHander();
+        HttpHandler playSongHttpHandler = new PlaySongHttpHandler();
         
         InetSocketAddress anyhost = new InetSocketAddress(2110);        
         server = HttpServer.create(anyhost, 0);        
         server.createContext("/", userInterfaceHttpHander);
+        server.createContext("/play/", playSongHttpHandler);
         server.createContext("/songs", songsHttpHandler);
     }
     

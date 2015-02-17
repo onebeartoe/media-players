@@ -40,9 +40,10 @@ public class BuiltInSongs
     {
         songsList = new ArrayList();
         
-        for(String s : songData)
+        for(String data : songData)
         {
-            RtttlSong song = new RtttlSong(s);
+            RtttlSong song = new RtttlSong(data);
+            
             songsList.add(song);
         }
     }
