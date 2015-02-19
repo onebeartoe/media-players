@@ -39,7 +39,7 @@ public class PlaySongHttpHandler extends TextHttpHandler
             rtttlService.playSong(id);
             response += "okay";
         } 
-        catch (InterruptedException ex)
+        catch (Exception ex)
         {
             response += "not okay";
             logger.log(Level.SEVERE, ex.getMessage(), ex);

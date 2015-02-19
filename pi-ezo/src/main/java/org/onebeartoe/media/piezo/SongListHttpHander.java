@@ -31,6 +31,8 @@ public class SongListHttpHander extends ListHttpHandler
         {
             String entry = i + ":" + song.getTitle();
             songList.add(entry);
+            
+            i++;
         }
         
         return songList;
