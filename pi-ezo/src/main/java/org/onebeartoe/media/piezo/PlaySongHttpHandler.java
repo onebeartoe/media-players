@@ -14,13 +14,15 @@ import org.onebeartoe.network.TextHttpHandler;
  */
 public class PlaySongHttpHandler extends TextHttpHandler
 {
-    private RtttlService rtttlService = new RtttlService();
+    private RtttlService rtttlService;// = new RtttlService();
     
     private Logger logger;
     
     public PlaySongHttpHandler()
     {
         logger = Logger.getLogger(getClass().getName());
+        
+//        rtttlService = new RtttlService();
     }
 
     @Override
@@ -36,8 +38,15 @@ public class PlaySongHttpHandler extends TextHttpHandler
         String response = "play song " + id + ": ";
         try
         {
-            rtttlService.playSong(id);
-            response += "okay";
+            if(rtttlService == null)
+            {
+                System.out.println("rtttlService is null.  Is it instanciated in the constuctor?");
+            }
+            else
+            {
+                rtttlService.playSong(id);
+                response += "okay";                
+            }
         } 
         catch (Exception ex)
         {

@@ -25,6 +25,7 @@ function loadSongList()
                 var index = songData[0];
                 var title = songData[1];
 
+//TODO: rename x to selectElement
                 var x = document.getElementById(elementName);
                 var option = document.createElement("option");
                 option.value = index;
