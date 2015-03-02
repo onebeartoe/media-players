@@ -1,6 +1,8 @@
 
 package org.onebeartoe.media.piezo;
 
+import com.pi4j.system.NetworkInfo;
+import com.pi4j.system.SystemInfo;
 import com.sun.net.httpserver.HttpExchange;
 import java.net.URI;
 import java.util.logging.Level;
@@ -21,8 +23,31 @@ public class PlaySongHttpHandler extends TextHttpHandler
     public PlaySongHttpHandler()
     {
         logger = Logger.getLogger(getClass().getName());
+        try 
+        {
+            System.out.println("Hostname          :  " + NetworkInfo.getHostname());
+            
+            for (String ipAddress : NetworkInfo.getIPAddresses())
+            {
+                System.out.println("IP Addresses      :  " + ipAddress);
+            }
+        } 
+        catch (Exception ex) 
+        {
+            Logger.getLogger(PlaySongHttpHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
-//        rtttlService = new RtttlService();
+        String osName = SystemInfo.getOsName();
+        System.out.println("OS Name           :  " + osName);
+        if(osName.contains("Mac") ||
+                osName.contains("Windows"))
+        {
+            System.out.println("The application is NOT running on Raspberry Pi.");
+        }
+        else
+        {
+            rtttlService = new RtttlService();
+        }
     }
 
     @Override
