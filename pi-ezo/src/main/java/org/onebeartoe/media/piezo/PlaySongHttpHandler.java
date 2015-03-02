@@ -16,7 +16,7 @@ import org.onebeartoe.network.TextHttpHandler;
  */
 public class PlaySongHttpHandler extends TextHttpHandler
 {
-    private RtttlService rtttlService;// = new RtttlService();
+    protected RtttlService rtttlService;
     
     private Logger logger;
     

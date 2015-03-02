@@ -4,45 +4,67 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
     <head>
-		
         <meta name="keywords" content="">
 	
         <meta name="description" content="">
 
-        <link rel="stylesheet" type="text/css" href="images.css" />
+        <link rel="stylesheet" type="text/css" href="layout.css" />
+        <link rel="stylesheet" type="text/css" href="style.css" />
         
         <title>onebeartoe Piezo Web Application</title>
     </head>
 
-    <body onload="loadSongList();">
+    <body onload="loadSongList();
+                  showBuiltInControls();">
         
         <script type="text/javascript" src="piezo.js"></script>
         
-	<div style="display: block; 										  				 
-             text-align: center;											  
-             font-size:1.875em; 
-             margin-bottom: 1%;">
-				 
+        <div class="modeNavigation">
+            <a href="#" onclick="showBuiltInControls();">
+                Built-In
+            </a>
+            | 
+            <a href="#" onclick="showOnTheFlyControls();">
+                On-the-Fly
+            </a>
+        </div>
+        
+	<div class="title">	 
             <h3>Piezo Web Controls</h3>
 	</div>
         
-        <center >            
-            <select id="songList"
-                    name="mode" 
-                    onchange="playSong(this.value);"
-                    size="10"
-                    style="width: 50%; font-size: 3em;">
-            </select>
-        </center>
+        <div id="songListControls">
+            <center >            
+                <select id="songList"
+                        name="modeeeeeee" 
+                        onchange="playSong(this.value);"
+                        size="10"
+                        class="songList">
+                </select>
+            </center>
+        </div>    
+        
+        <div id="onTheFlyControls" class="onTheFlyControls">
+            <textarea id="rtttlData"
+                      class="rtttlData"
+                      rows="4" cols="50"></textarea>
+            
+            <input type="button" 
+                   value="Play"
+                   onclick="playRtttl(rtttlData.value);"
+                   class="rtttlData"/>
+        </div>
         
         <hr/>
         
-        <h3>Logs</h3>
+        <div class="logs">
+            <h3>Logs</h3>
         
-        <div id="logs" class="logs" style="">
+            <div id="logs" >
 
+            </div>
         </div>
-        
+
         <br/>
 
         <hr/>
@@ -50,10 +72,10 @@
 	<br/>
 
 	<a href="http://electronics.onebeartoe.org/"
-            style="display: block;
-            text-align: center;
-            font-size:1.875em; ">
-            brought to you by electronics.onebeartoe.org
+           class="broughtToYouBy"
+            style=" ">
+!!!!!FIX THIS!!!!!            
+            brought to you by Adafruit with development by electronics.onebeartoe.org
 	</a>
     </body>
 

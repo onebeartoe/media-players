@@ -1,4 +1,10 @@
 
+function hideElement(id)
+{
+    var element = document.getElementById(id);
+    element.style.display = 'none';
+}
+
 function loadSongList()
 {
     var url = "/songs";
@@ -60,6 +66,21 @@ function logServerResponse(xmlhttp)
     }
 }
 
+function playRtttl(rtttlData)
+{
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange=function()
+    {
+        logServerResponse(xmlhttp);
+    };
+    
+    var url = "/rtttl" + "?" + rtttlData;
+    
+    xmlhttp.open("POST", url, true);
+    xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+    xmlhttp.send("&p=3");    
+}
+
 function playSong(id)
 {
     var xmlhttp = new XMLHttpRequest();
@@ -73,4 +94,24 @@ function playSong(id)
     xmlhttp.open("POST", url, true);
     xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
     xmlhttp.send("&p=3");
+}
+
+function showBuiltInControls()
+{
+    hideElement('onTheFlyControls');
+    
+    showElement('songListControls');
+}
+
+function showOnTheFlyControls()
+{
+    hideElement('songListControls');
+    
+    showElement('onTheFlyControls');
+}
+
+function showElement(id)
+{
+    var element = document.getElementById(id);
+    element.style.display = 'block';
 }

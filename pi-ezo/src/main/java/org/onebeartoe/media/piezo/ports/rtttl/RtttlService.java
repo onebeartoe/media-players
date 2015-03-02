@@ -18,8 +18,6 @@ public class RtttlService
    public RtttlService()
    {
        Gpio.wiringPiSetup();
- 
-//       SoftTone.softToneCreate(PIEZO_PIN);
    }
    
    public void playSong(int id) throws InterruptedException
@@ -28,22 +26,29 @@ public class RtttlService
        
        RtttlSong song = songs.get(id);
        
-       RingToneTextTransferLanguage app = new RingToneTextTransferLanguage();
+       
        String data = song.getData();
   
+       playSong(data);
+   }
+   
+   public void playSong(String rtttl)
+   {
        SoftTone.softToneCreate(PIEZO_PIN);
+       
+       RingToneTextTransferLanguage app = new RingToneTextTransferLanguage();
        
        try
        {
-           app.play_rtttl(data);
+           app.play_rtttl(rtttl);
        }
        catch(Exception e)
        {
-          e.printStackTrace();
+           e.printStackTrace();
        }
        finally
        {
-               SoftTone.softToneStop(PIEZO_PIN);
-        }
+           SoftTone.softToneStop(PIEZO_PIN);
+       }
    }
 }

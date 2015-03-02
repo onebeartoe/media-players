@@ -1,0 +1,54 @@
+
+body
+{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.broughtToYouBy
+{
+    display: block;
+    text-align: center;
+    font-size:1.875em;
+}
+
+.logs
+{
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+}
+
+.modeNavigation
+{
+        text-align: right;
+        float: right;
+}
+
+.rtttlData
+{
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+}
+
+.onTheFlyControls
+{
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+}
+
+.songList
+{
+    width: 50%; 
+    font-size: 3em;
+}
+
+.title
+{
+    display: block; 										  				 
+    text-align: center;											  
+    font-size:1.875em; 
+    margin-bottom: 1%;
+}
