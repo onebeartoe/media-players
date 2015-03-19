@@ -74,7 +74,7 @@ function playRtttl(rtttlData)
         logServerResponse(xmlhttp);
     };
     
-    var url = "/rtttl" + "?" + rtttlData;
+    var url = "/rtttl" + "?" + encodeURIComponent(rtttlData);
     
     xmlhttp.open("POST", url, true);
     xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
