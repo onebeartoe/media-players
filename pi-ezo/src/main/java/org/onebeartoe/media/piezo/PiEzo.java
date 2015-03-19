@@ -9,6 +9,7 @@ import java.net.InetSocketAddress;
 import org.onebeartoe.network.ClasspathResourceHttpHandler;
 import org.onebeartoe.network.TextHttpHandler;
 
+//TODO: rename this class to PiEzoWebApp
 /**
  * This class starts an HTTP server, listens for requests to manage playing 
  * the piezo, and provides metadata about the application.
@@ -44,7 +45,6 @@ public class PiEzo
                     Thread.sleep(maxWaitTime + 1000);
                     
                     System.exit(0);
-                    
                 }
                 catch(Exception e)
                 {
