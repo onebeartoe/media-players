@@ -107,7 +107,7 @@ public class FxExperiencePlayer extends Application
     
     private Thread pixelInitializationThread;
 
-    private final int VU_COUNT = 5;
+    private final int VU_COUNT = 4;
     
     @Override
     public void start(final Stage primaryStage)

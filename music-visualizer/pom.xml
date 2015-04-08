@@ -10,7 +10,7 @@
     
     <packaging>jar</packaging>
 
-    <name>onebeartoe-fx-experieince-player</name>
+    <name>onebeartoe-media-players-fx-experieince-player</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
