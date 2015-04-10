@@ -6,8 +6,8 @@
     
     <parent>
         <groupId>org.onebeartoe.media.players.parent</groupId>
-	<artifactId>media-players-parent</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+		<artifactId>media-players-parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
     </parent>
 
     <name>onebeartoe-media-players-pi-ezo</name>

@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+    <head>
+        <meta name="keywords" content="">
+	
+        <meta name="description" content="">
+
+        <link rel="stylesheet" type="text/css" href="layout.css" />
+        <link rel="stylesheet" type="text/css" href="style.css" />
+        
+        <title>onebeartoe Emic2 Web Application</title>
+    </head>
+
+    <body onload="loadVoiceList();
+                  showFreeFromControls();">
+        
+        <script type="text/javascript" src="emic2.js"></script>
+        
+        <div class="modeNavigation">
+            <a href="#" onclick="showBuiltInControls();">
+                Demos
+            </a>
+            | 
+            <a href="#" onclick="showFreeFromControls();">
+                Free Form Text
+            </a>
+            |
+            <a href="#" onclick="showTimeControls();">
+                Time
+            </a>
+            |
+            <a href="#" onclick="showSettingsControls();">
+                Settings
+            </a>
+            |
+            <a href="#" onclick="stopPlayback();">
+                Stop Playback
+            </a>
+        </div>
+        
+	<div class="title">	 
+            <h3>Emic2 Web Controls</h3>
+	</div>
+        
+        <div id="demoMessageControls">
+            <center>
+                <h2>Demo Messages</h2>
+                
+                <select id="songList"
+                        onchange="demoMessage(this.value);"
+                        size="5"
+                        class="songList">
+                    <option value="0">Speaking</option>
+                    <option value="1">Singing (Daisy)</option>
+                    <option value="2">Spanish</option>
+                    <option value="3">AYBABTU</option>
+                    <option value="4">Play a game?</option>
+                </select>
+            </center>
+        </div>
+        
+        <div id="settingsControls">
+            <center >
+                <h2>Voice Settings</h2>
+                
+                <select id="voiceList"
+                        onchange="setVoice(this.value);"
+                        size="5"
+                        class="songList">
+                    <option value="0">Perfect Paul</option>
+                    <option value="1">Huge Harry</option>
+                    <option value="2">Beautiful Betty</option>
+                    <option value="3">Uppity Ursula</option>
+                    <option value="4">Doctor Dennis</option>
+                    <option value="5">Kit the Kid</option>
+                    <option value="6">Frail Frank</option>
+                    <option value="7">Rough Rita</option>
+                    <option value="8">Whispering Wendy</option> 
+                </select>
+            </center>
+        </div>        
+        
+        <div id="onTheFlyControls" class="onTheFlyControls">
+            <h2>Free Form Text</h2>
+            
+            <textarea id="rtttlData"
+                      class="rtttlData"
+                      rows="4" cols="50"></textarea>
+            
+            <input type="button" 
+                   value="Play"
+                   onclick="speak(rtttlData.value);"
+                   class="rtttlData"/>
+        </div>
+        
+        <hr/>
+        
+        <div class="logs">
+            <h3>Logs</h3>
+        
+            <div id="logs" >
+
+            </div>
+        </div>
+
+        <br/>
+
+        <hr/>
+        
+	<br/>
+        
+	<a href="http://electronics.onebeartoe.org/"
+           class="broughtToYouBy">
+            development by onebeartoe.org
+	</a>
+    </body>
+</html>

@@ -12,11 +12,12 @@
 	<name>onebeartoe-media-players-parent</name>
 
 	<modules>
+            <module>jukebox</module>
+            <module>pi-ezo</module>
             <module>randomjuke</module>
+            <module>randomjuke-networking</module>
             <module>sound-recorder</module>
             <module>sound-visualizer</module>
-            <module>randomjuke-networking</module>
-            <module>pi-ezo</module>
 	</modules>
 
     <repositories>
