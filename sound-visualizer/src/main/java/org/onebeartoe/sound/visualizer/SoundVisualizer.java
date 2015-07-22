@@ -241,7 +241,7 @@ public class SoundVisualizer extends PixelClient
                 {
                     ioiO = ioio_;
                     
-                    int pixleType = 1;
+                    int pixleType = 3;
                     pixelEnvironment = new PixelEnvironment(pixleType);
                     
                     offscreenImageHeight = pixelEnvironment.LED_MATRIX.height * 2;
