@@ -5,7 +5,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.LayoutManager;
@@ -18,41 +17,23 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 
-import javax.media.ControllerEvent;
-import javax.media.ControllerListener;
-import javax.media.EndOfMediaEvent;
-import javax.media.Manager;
-import javax.media.NoPlayerException;
-import javax.media.Player;
-import javax.media.PrefetchCompleteEvent;
-import javax.media.RealizeCompleteEvent;
-import javax.media.Time;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import com.sun.media.ui.MessageBox;
 import ioio.lib.api.AnalogInput;
 
 import ioio.lib.api.IOIO;
-import ioio.lib.api.RgbLedMatrix;
-import ioio.lib.api.exception.ConnectionLostException;
-import ioio.lib.util.BaseIOIOLooper;
-import ioio.lib.util.IOIOLooper;
-import ioio.lib.util.pc.IOIOConsoleApp;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.onebeartoe.pixel.PixelClient;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import onebeartoe.juke.network.JukeClient;
 
 import onebeartoe.juke.network.RandomJukeServerConnection;
 import onebeartoe.juke.ui.eck.KaleidaAnimate;
@@ -64,7 +45,6 @@ import org.onebeartoe.application.ui.LookAndFeelButton;
 import org.onebeartoe.application.ui.SwingServices;
 import org.onebeartoe.io.ObjectRetriever;
 import org.onebeartoe.io.ObjectSaver;
-import org.onebeartoe.pixel.sound.meter.SoundMeterModes;
 import org.onebeartoe.multimedia.juke.JukeConfig;
 import org.onebeartoe.multimedia.juke.SongList;
 import org.onebeartoe.multimedia.juke.gui.SwingSongListPathPanel;
@@ -76,18 +56,12 @@ import org.onebeartoe.multimedia.juke.songs.JavaxNetworkSearchingSongManager;
 import org.onebeartoe.multimedia.juke.songs.NetworkAndFilesystemSearchingSongManager;
 import org.onebeartoe.multimedia.juke.songs.SongListManager;
 import onebeartoe.juke.network.ThreadedServer;
+import static org.onebeartoe.pixel.PixelClient.currentSongTitle;
 import org.onebeartoe.pixel.PixelEnvironment;
 import org.onebeartoe.pixel.hardware.Pixel;
-import org.onebeartoe.pixel.sound.meter.AllOffSoundMeter;
-import org.onebeartoe.pixel.sound.meter.BlobSoundMeter;
-import org.onebeartoe.pixel.sound.meter.BottomUpSoundMeter;
-import org.onebeartoe.pixel.sound.meter.CircleSoundMeter;
-import org.onebeartoe.pixel.sound.meter.RectangularSoundMeter;
-import org.onebeartoe.pixel.sound.meter.SoundMeter;
 import org.onebeartoe.pixel.sound.meter.SoundReading;
-import org.onebeartoe.pixel.sound.meter.WaveSoundMeter;
 
-public class RandomJuke extends PixelClient
+public class RandomJuke extends JukeClient
 {
     private static final long serialVersionUID = 178947923L;
 
@@ -123,8 +97,6 @@ public class RandomJuke extends PixelClient
     // the current song playing
     private static JLabel currentSongLabel;
 
-    
-
     private static int duplicateThreshold;
 
     private ThreadedServer nextSongServer;
@@ -141,17 +113,13 @@ public class RandomJuke extends PixelClient
     
     private static ApplicationMode mode;
     
-    private static SongsControllerListener songListener;
+//    private static SongsControllerListener songListener;
     
-    private static PixelIntegration pixelIntegration;
+//    private static PixelIntegration pixelIntegration;
     
     private static IOIO ioiO;
 
     private static PixelEnvironment pixelEnvironment;
-
-    
-    
-    
     
     private static Pixel pixel;
     
@@ -163,8 +131,6 @@ public class RandomJuke extends PixelClient
     
     private static int SAMPLE_BUFFER_SIZE = 50;
     
-    
-    
     private static Random random;
             
     /**
@@ -172,7 +138,7 @@ public class RandomJuke extends PixelClient
      */
     public RandomJuke()
     {
-        songListener = new SongsControllerListener();
+//        songListener = new SongsControllerListener();
         
         songsPlayedService = new NoPersistenceSongsPlayedService();
 
@@ -258,13 +224,11 @@ public class RandomJuke extends PixelClient
         }        
     }   
 
-
-
     /**
      * These methods play the media. The ControllerUpdate() is listens for a
      * song to finish then plays the next song in Vector PlayList
      */
-    public static void playSong()
+    public void playSong()
     {
         String filename = currentSongTitle;
 
@@ -273,20 +237,62 @@ public class RandomJuke extends PixelClient
             System.out.println("\ncreating Player from URL with a uri value of:\n" + filename + "\n");
             URL url = new URL(filename);
 
-            // Create an instance of a player for this media url
+            // Create an instance of a mediaPlayer for this media url
+            
+            if (mediaPlayer != null)
+            {
+                mediaPlayer.stop();            
+            }
+            
+            String source = null;
             try
             {
-                player = null;
-                player = Manager.createPlayer(url);
+                source = url.toURI().toString();
+            }
+            catch (URISyntaxException ex)
+            {
+                Logger.getLogger(RandomJuke.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            final Media media = new Media(source);
+//            final Media media = new Media(playList.getSongs().get(songIndex).getValue());
+            mediaPlayer = new MediaPlayer(media);
+            mediaPlayer.setAutoPlay(true);
+            mediaPlayer.setOnError(new Runnable()
+            {
+                @Override
+                public void run()
+                {
+                    System.out.println("mediaPlayer.getError() = " + mediaPlayer.getError());
+                }
+            });
+            mediaPlayer.setOnEndOfMedia( new Runnable()
+            {
+
+                @Override
+                public void run()
+                {
+                    playNextSong();
+                }
+            });
+            mediaPlayer.setOnReady( new Runnable()
+            {
+
+                @Override
+                public void run()
+                {
+                    updateMediaControls();
+                }
+            });
+            
+            try
+            {
+//                mediaPlayer = null;
+//                mediaPlayer = Manager.createPlayer(url);
 
                 String uri = url.toString();
                 songsPlayedService.addPlayedSong(uri);
-            } 
-            catch (NoPlayerException e)
-            {
-                Fatal("Error: " + e);
-                e.printStackTrace();
-            } 
+            }
             catch (Exception e)
             {
                 e.printStackTrace();
@@ -299,12 +305,12 @@ public class RandomJuke extends PixelClient
             Fatal("Error:" + e);
         }
 
-        if (player != null)
-        {
-            ControllerListener listener = songListener;
-            player.addControllerListener(listener);
-            player.realize();
-        }
+//        if (mediaPlayer != null)
+//        {
+//            ControllerListener listener = songListener;
+//            mediaPlayer.addControllerListener(listener);
+//            mediaPlayer.realize();
+//        }
     }
 
     public void setSongListUrls(List<String> songListUrls)
@@ -317,8 +323,6 @@ public class RandomJuke extends PixelClient
             addSongListUrl(url);
         }
     }
-    
-
     
     private void setupSwingUi()
     {
@@ -363,9 +367,6 @@ public class RandomJuke extends PixelClient
         settingPanel.add(pathOptionsPanel);
         settingPanel.add(ipPanel);
         settingPanel.add(lookPanel);
-
-//        nextSongButton = new JButton("Next Song");
-
 
         JButton settingsButton = new JButton("Settings");
         settingsButton.addActionListener(new SettingsButtonHandler());
@@ -468,20 +469,7 @@ public class RandomJuke extends PixelClient
         configuration = new JukeConfig();
         
         nextSongButton = new JButton("Next Song");
-        nextSongButton.addActionListener(
-            new ActionListener()
-            {
-                public void actionPerformed(ActionEvent e)
-                {
-                    if (player != null)
-                    {
-                        player.stop();
-                        player.close();
-                    }
-                    playNextSong();
-                }
-            }
-        );
+
                 
         mode = ApplicationMode.COMMAND_LINE;
 //mode = ApplicationMode.GUI;        
@@ -496,6 +484,21 @@ public class RandomJuke extends PixelClient
         
         final RandomJuke app = new RandomJuke();
 
+        nextSongButton.addActionListener(
+            new ActionListener()
+            {
+                public void actionPerformed(ActionEvent e)
+                {
+                    if (mediaPlayer != null)
+                    {
+                        mediaPlayer.stop();
+                        mediaPlayer.dispose();
+                    }
+                    app.playNextSong();
+                }
+            }
+        );        
+        
         if (configurationFile.exists())
         {
             System.out.println(configurationFilename + " exists");
@@ -522,7 +525,8 @@ public class RandomJuke extends PixelClient
         
         try
         {
-            pixelIntegration = new PixelIntegration();
+// remove all pixel integration altogether for now            
+//            pixelIntegration = new PixelIntegration();
         } 
         catch (Exception ex)
         {
@@ -530,31 +534,32 @@ public class RandomJuke extends PixelClient
         }
     }
     
-
-    
     private void updateMediaControls()
     {
-        if (mediaControls != null)
-        {
-            mediaPanel.remove(mediaControls);
-        }
-
-        mediaControls = player.getControlPanelComponent();
-        int width = guiWindow.getWidth();
-        int height = mediaControls.getHeight();
-        mediaControls.setPreferredSize(new Dimension(width, height));
-        mediaControls.doLayout();
-        mediaPanel.add(mediaControls, BorderLayout.CENTER);
-        mediaPanel.revalidate();
-        mediaPanel.doLayout();
-        bottomPanel.doLayout();
-        c.doLayout();
+// TODO: we need to re-implement this method once we have user interface for desktop apps
+        
+        
+//        if (mediaControls != null)
+//        {
+//            mediaPanel.remove(mediaControls);
+//        }
+//
+//        mediaControls = mediaPlayer.getControlPanelComponent();
+//        int width = guiWindow.getWidth();
+//        int height = mediaControls.getHeight();
+//        mediaControls.setPreferredSize(new Dimension(width, height));
+//        mediaControls.doLayout();
+//        mediaPanel.add(mediaControls, BorderLayout.CENTER);
+//        mediaPanel.revalidate();
+//        mediaPanel.doLayout();
+//        bottomPanel.doLayout();
+//        c.doLayout();
     }
 
     /**
      * this method will loop until it finds a song that has not played before
      */
-    public static void playNextSong()
+    public void playNextSong()
     {
         String[] songNames = null;
         int rs = -1;
@@ -665,7 +670,6 @@ public class RandomJuke extends PixelClient
 
     private class ChangePathButtonHandler implements ActionListener
     {
-
         public void actionPerformed(ActionEvent e)
         {
             int result = JOptionPane.showConfirmDialog(guiWindow, songListPathPanel);
@@ -683,7 +687,8 @@ public class RandomJuke extends PixelClient
     {
         if(mode == ApplicationMode.GUI)
         {
-            MessageBox mb = new MessageBox("JMF Error", s);
+            SwingServices ss = new SwingServices();
+            ss.infoMessage(s, "JMF Error");
         }
         else
         {
@@ -691,6 +696,7 @@ public class RandomJuke extends PixelClient
         }
     }
 
+/*    
     private static class PixelIntegration extends IOIOConsoleApp
     {
         public PixelIntegration()
@@ -717,7 +723,7 @@ public class RandomJuke extends PixelClient
                         }
                     }
                 };
-                        
+                   
                 // this is how often the image will be sent to the Pixel
 //                long refreshRate = 1;
                 long refreshRate = 200;
@@ -762,7 +768,6 @@ System.out.println("CALLING GO");
         {
             IOIOLooper looper = new BaseIOIOLooper() 
             {
-            
                 @Override
                 public void disconnected() 
                 {
@@ -785,13 +790,13 @@ System.out.println("CALLING GO");
                     
                     // 1: 32x16 from Sparkfun
                     // 3: 32x32 from Adafruit (original one)
-/*
-                    case 1:
-                        LED_MATRIX = ioio.lib.api.RgbLedMatrix.Matrix.ADAFRUIT_32x16;
 
-                    case 3:
-                        LED_MATRIX = ioio.lib.api.RgbLedMatrix.Matrix.SEEEDSTUDIO_32x32; //the current version of PIXEL 32x32                    
-*/
+//                    case 1:
+//                        LED_MATRIX = ioio.lib.api.RgbLedMatrix.Matrix.ADAFRUIT_32x16;
+//
+//                    case 3:
+//                        LED_MATRIX = ioio.lib.api.RgbLedMatrix.Matrix.SEEEDSTUDIO_32x32; //the current version of PIXEL 32x32                    
+
                     int pixleType = 1;
                     pixelEnvironment = new PixelEnvironment(pixleType);
                     
@@ -840,7 +845,10 @@ System.out.println("CALLING GO");
             return looper;
         }        
     }
-            
+
+*/    
+    
+    
     private class SettingsButtonHandler implements ActionListener
     {
         public void actionPerformed(ActionEvent e)
@@ -852,26 +860,23 @@ System.out.println("CALLING GO");
         }
     }
     
-    private class SongsControllerListener implements ControllerListener
-    {
-        @Override
-        public void controllerUpdate(ControllerEvent ce)
-        {
-            if (ce instanceof RealizeCompleteEvent)
-            {
-                player.prefetch();            
-                updateMediaControls();
-            } 
-            else if (ce instanceof PrefetchCompleteEvent)
-            {
-                player.setMediaTime(new Time(0));
-                player.start();
-            } 
-            else if (ce instanceof EndOfMediaEvent)
-            {
-                playNextSong();
-            }
-        }
-    }
-    
+//    private class SongsControllerListener implements ControllerListener
+//    {
+//        @Override
+//        public void controllerUpdate(ControllerEvent ce)
+//        {            
+//            if (ce instanceof RealizeCompleteEvent)
+//            {
+//                mediaPlayer.prefetch();            
+//                updateMediaControls();
+//            } 
+//            else if (ce instanceof PrefetchCompleteEvent)
+//            {
+//                mediaPlayer.setMediaTime(new Time(0));
+//                mediaPlayer.start();
+//            } 
+//            else if (ce instanceof EndOfMediaEvent)
+//            {
+//                playNextSong();
+//            }
 }

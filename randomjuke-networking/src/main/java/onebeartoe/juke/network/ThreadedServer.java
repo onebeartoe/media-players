@@ -10,7 +10,6 @@ import java.net.Socket;
 //TODO: rename thios to ThreadedJukeServer
 public class ThreadedServer extends Thread 
 {
-
 	private ServerSocket serverSocket;
 	
 	ServerConnection connection;	

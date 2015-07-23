@@ -32,7 +32,7 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import org.onebeartoe.pixel.PixelClient;
+import onebeartoe.juke.network.JukeClient;
 import onebeartoe.juke.network.ServerConnection;
 import org.onebeartoe.pixel.sound.meter.SoundMeterModes;
 import static org.onebeartoe.pixel.sound.meter.SoundMeterModes.BLOB;
@@ -44,7 +44,7 @@ import static org.onebeartoe.pixel.sound.meter.SoundMeterModes.WAVE_GRAPH;
 /**
  * @author Roberto Marquez
  */
-public class SoundVisualizer extends PixelClient 
+public class SoundVisualizer extends JukeClient 
 {
     private static final long serialVersionUID = 178947923L;
 

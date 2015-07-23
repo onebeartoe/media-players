@@ -45,25 +45,25 @@ public abstract class ServerConnection implements Runnable, Cloneable
 
     private String SERVER_VOLUME = "SERVER_VOLUME";
 
-    protected PixelClient app;
+    protected JukeClient app;
 
-    private String changeSoundMeterMode(String mode)
-    {
-        String modeChangeResult = "Mode request change for " + mode + " received.  ";
-        SoundMeterModes meterMode = null;
-        try
-        {
-            meterMode = SoundMeterModes.meterFor(mode);
-            app.setSoundMeter(meterMode);
-            modeChangeResult += "Mode changed to " + meterMode;
-        }
-        catch(Exception e)
-        {
-            modeChangeResult += "Mode NOT chagned to " + meterMode + " (" + mode + ")";
-        }
-        
-        return modeChangeResult;
-    }
+//    private String changeSoundMeterMode(String mode)
+//    {
+//        String modeChangeResult = "Mode request change for " + mode + " received.  ";
+//        SoundMeterModes meterMode = null;
+//        try
+//        {
+//            meterMode = SoundMeterModes.meterFor(mode);
+//            app.setSoundMeter(meterMode);
+//            modeChangeResult += "Mode changed to " + meterMode;
+//        }
+//        catch(Exception e)
+//        {
+//            modeChangeResult += "Mode NOT chagned to " + meterMode + " (" + mode + ")";
+//        }
+//        
+//        return modeChangeResult;
+//    }
     
 // TODO: test to see if the method can be removed    
     @Override
@@ -116,7 +116,7 @@ public abstract class ServerConnection implements Runnable, Cloneable
         sendHttpResponse(text, includeHeader);
     }
     
-    public void setApp(PixelClient app)
+    public void setApp(JukeClient app)
     {
         this.app = app;
     }
@@ -246,10 +246,10 @@ public abstract class ServerConnection implements Runnable, Cloneable
                                     System.out.println("after processing the DOWN request, current volume level is " + systemMediaControler.currentVolume());
                                 }
                             }
-                            else if( nameValues[0].equals("sound-meter-mode") )
+                            else
                             {
                                 sendPlainText = true;
-                                plainText = changeSoundMeterMode(nameValues[1]);
+                                plainText = "no action was given";
                             }
                         }
                     }
