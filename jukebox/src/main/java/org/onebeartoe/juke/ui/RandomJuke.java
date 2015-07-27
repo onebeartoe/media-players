@@ -1,5 +1,5 @@
 
-package onebeartoe.juke.ui;
+package org.onebeartoe.juke.ui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -23,9 +23,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import ioio.lib.api.AnalogInput;
-
-import ioio.lib.api.IOIO;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Random;
@@ -112,20 +109,12 @@ public class RandomJuke extends JukeClient
     private Container c;
     
     private static ApplicationMode mode;
-    
-//    private static SongsControllerListener songListener;
-    
-//    private static PixelIntegration pixelIntegration;
-    
-    private static IOIO ioiO;
 
     private static PixelEnvironment pixelEnvironment;
     
     private static Pixel pixel;
     
     private static JFrame guiWindow;
-    
-    private static AnalogInput microphoneSensor;
     
     private static volatile List<SoundReading> microphoneValues;
     
@@ -137,9 +126,7 @@ public class RandomJuke extends JukeClient
      * Setup the application.
      */
     public RandomJuke()
-    {
-//        songListener = new SongsControllerListener();
-        
+    {        
         songsPlayedService = new NoPersistenceSongsPlayedService();
 
         currentSongSerice = new RegularCurrentSongService();
@@ -255,7 +242,7 @@ public class RandomJuke extends JukeClient
             }
             
             final Media media = new Media(source);
-//            final Media media = new Media(playList.getSongs().get(songIndex).getValue());
+
             mediaPlayer = new MediaPlayer(media);
             mediaPlayer.setAutoPlay(true);
             mediaPlayer.setOnError(new Runnable()
@@ -287,9 +274,6 @@ public class RandomJuke extends JukeClient
             
             try
             {
-//                mediaPlayer = null;
-//                mediaPlayer = Manager.createPlayer(url);
-
                 String uri = url.toString();
                 songsPlayedService.addPlayedSong(uri);
             }
@@ -451,9 +435,6 @@ public class RandomJuke extends JukeClient
         }        
     }
 
-    /**
-     * main program to call the JFrame to the screen
-     */
     public static void main(String args[])
     {
         System.out.println("it begins");

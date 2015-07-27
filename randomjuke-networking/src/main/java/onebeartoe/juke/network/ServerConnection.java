@@ -265,6 +265,9 @@ public abstract class ServerConnection implements Runnable, Cloneable
                         boolean includeHeader = true;
 
                         String uiHtmlath = path + getControlsResourcePath();
+                        
+                        System.out.println("loading: " + uiHtmlath);
+                        
                         InputStream instream = getClass().getResourceAsStream(uiHtmlath);
                         String html = TextFileReader.readText(instream);
 
