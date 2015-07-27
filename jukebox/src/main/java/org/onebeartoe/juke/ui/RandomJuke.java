@@ -13,7 +13,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
-import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
@@ -24,8 +23,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import java.net.URISyntaxException;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.logging.Level;
@@ -689,159 +686,6 @@ public class RandomJuke extends JukeClient
             System.err.println(s);
         }
     }
-
-/*    
-    private static class PixelIntegration extends IOIOConsoleApp
-    {
-        public PixelIntegration()
-        {
-            try
-            {
-                Date now = new Date();
-                Timer timer = new Timer();
-                TimerTask task = new TimerTask()
-                {
-                    @Override
-                    public void run()
-                    {
-                        if(soundMeter == null)
-                        {
-                            System.out.println("sound meter called but not initialized");
-                        }
-                        else
-                        {
-//                            System.out.println("DISPLAYING SOUND DATA");
-                            List<SoundReading> values = new ArrayList();
-                            values.addAll(microphoneValues);
-                            soundMeter.displaySoundData(pixel, values);
-                        }
-                    }
-                };
-                   
-                // this is how often the image will be sent to the Pixel
-//                long refreshRate = 1;
-                long refreshRate = 200;
-                timer.schedule(task, now, refreshRate);
-                System.out.println("SCHEDULED DISPLAY TASK");
-                
-System.out.println("CALLING GO");
-                go(null);
-            } 
-            catch (Exception ex)
-            {
-                Logger.getLogger(RandomJuke.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        
-        @Override
-        protected void run(String[] args) throws IOException 
-        {
-            InputStreamReader isr = new InputStreamReader(System.in);
-            BufferedReader reader = new BufferedReader(isr);
-            boolean abort = false;
-            String line;
-            while (!abort && (line = reader.readLine()) != null) 
-            {
-                if (line.equals("t")) 
-                {
-                    //ledOn_ = !ledOn_;
-                } 
-                else if (line.equals("q")) {
-                    abort = true;
-                    System.exit(1);
-                } 
-                else 
-                {
-                    System.out.println("Unknown input. q=quit.");
-                }
-            }
-        }
-
-        @Override
-        public IOIOLooper createIOIOLooper(String connectionType, Object extra)
-        {
-            IOIOLooper looper = new BaseIOIOLooper() 
-            {
-                @Override
-                public void disconnected() 
-                {
-                    String message = "PIXEL was Disconnected";
-                    System.out.println(message);
-                }
-
-                @Override
-                public void incompatible() 
-                {
-                    String message = "Incompatible Firmware Detected";
-                    System.out.println(message);
-                }
-
-                @Override
-                protected void setup() throws ConnectionLostException,
-                        InterruptedException 
-                {
-                    ioiO = ioio_;
-                    
-                    // 1: 32x16 from Sparkfun
-                    // 3: 32x32 from Adafruit (original one)
-
-//                    case 1:
-//                        LED_MATRIX = ioio.lib.api.RgbLedMatrix.Matrix.ADAFRUIT_32x16;
-//
-//                    case 3:
-//                        LED_MATRIX = ioio.lib.api.RgbLedMatrix.Matrix.SEEEDSTUDIO_32x32; //the current version of PIXEL 32x32                    
-
-                    int pixleType = 1;
-                    pixelEnvironment = new PixelEnvironment(pixleType);
-                    
-                    offscreenImageHeight = pixelEnvironment.LED_MATRIX.height * 2;
-                    offscreenImageWidth = pixelEnvironment.LED_MATRIX.width * 2;
-                    RgbLedMatrix ledMatrix = ioio_.openRgbLedMatrix(pixelEnvironment.LED_MATRIX);                    
-                    pixel = new Pixel(pixelEnvironment.LED_MATRIX, pixelEnvironment.currentResolution);
-                    pixel.matrix = ledMatrix;
-                    pixel.ioiO = ioio_;
-                    microphoneSensor = Pixel.getAnalogInput1();
-                    microphoneSensor.setBuffer(SAMPLE_BUFFER_SIZE);
-  
-                    // start off with this sound meter mode
-                    soundMeter = new AllOffSoundMeter(offscreenImageWidth, offscreenImageHeight);
-                    soundMeter = new RectangularSoundMeter(offscreenImageWidth, offscreenImageHeight);
-                            
-                    System.out.println("Found PIXEL: " + pixel.matrix + "\n");                     
-                }
-
-                @Override
-                public void loop() throws ConnectionLostException,
-                        InterruptedException 
-                {
-                    float p = microphoneSensor.readBuffered();
-
-                    float ratio = offscreenImageHeight * p;
-                    int height = (int) ratio;
-
-                    Color c = BottomUpSoundMeter.randomcolor();
-                    
-                    SoundReading reading = new SoundReading();
-                    reading.height = height;
-                    reading.color = c;
-                    
-                    microphoneValues.add(reading);
-                    
-                    if(microphoneValues.size() > SAMPLE_BUFFER_SIZE)
-                    {
-                        microphoneValues.remove(0);
-                    }
-                    
-//                    System.out.print(".");
-                }
-            };
-                    
-            return looper;
-        }        
-    }
-
-*/    
-    
     
     private class SettingsButtonHandler implements ActionListener
     {
