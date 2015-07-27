@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
+import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
@@ -24,6 +25,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import java.net.URISyntaxException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.logging.Level;
@@ -121,12 +123,97 @@ public class RandomJuke extends JukeClient
     private static int SAMPLE_BUFFER_SIZE = 50;
     
     private static Random random;
+    
+    Random randomTitle;
             
     /**
      * Setup the application.
      */
-    public RandomJuke()
-    {        
+    public RandomJuke(String [] args)
+    {
+//---------------------- before contstructor
+        System.out.println("it begins");
+        songListManager = new NetworkAndFilesystemSearchingSongManager();
+        ((NetworkAndFilesystemSearchingSongManager) songListManager).setNetworkSongManager(new JavaxNetworkSearchingSongManager());
+        final String configurationFilename = "RandomJukeConfig.xml";
+
+        configurationFile = new File(configurationFilename);
+        System.out.println("loading configuration from: " + configurationFile.getAbsolutePath());
+        String err_msg = null;
+
+        // start off with a blank config
+        configuration = new JukeConfig();
+        
+        nextSongButton = new JButton("Next Song");
+
+                
+        mode = ApplicationMode.COMMAND_LINE;
+//mode = ApplicationMode.GUI;        
+        if(args.length > 0)
+        {
+            String arg = args[0];
+            if( arg.equals("--gui") )
+            {
+                mode = ApplicationMode.GUI;               
+            }
+        }        
+//---------------------- before contstructor (end)
+
+// consturctor call        
+        
+//---------------------- after constructor
+        nextSongButton.addActionListener(
+            new ActionListener()
+            {
+                public void actionPerformed(ActionEvent e)
+                {
+                    if (mediaPlayer != null)
+                    {
+                        mediaPlayer.stop();
+                        mediaPlayer.dispose();
+                    }
+                    playNextSong();
+                }
+            }
+        );        
+        
+        if (configurationFile.exists())
+        {
+            System.out.println(configurationFilename + " exists");
+            try
+            {
+                configuration = (JukeConfig) ObjectRetriever.decodeObject(configurationFile);
+            } 
+            catch (Exception e)
+            {
+                e.printStackTrace();
+                err_msg = "<html>Problem decoding the configuration object from the XML file.";
+                err_msg += "<br>Please choose a directory with songs on the next screen.";
+                badConfigFileRecover(err_msg);
+            }
+        } 
+        else
+        {
+            err_msg = "<html>No configuration file was found.";
+            err_msg += "<br>Please choose a directory with songs on the next screen.";
+            badConfigFileRecover(err_msg);
+        }
+
+        loadSongLists();
+        
+        try
+        {
+// remove all pixel integration altogether for now            
+//            pixelIntegration = new PixelIntegration();
+        } 
+        catch (Exception ex)
+        {
+            Logger.getLogger(RandomJuke.class.getName()).log(Level.SEVERE, null, ex);
+        }        
+//---------------------- after constructor (end)
+        
+        randomTitle = new Random();
+        
         songsPlayedService = new NoPersistenceSongsPlayedService();
 
         currentSongSerice = new RegularCurrentSongService();
@@ -221,7 +308,7 @@ public class RandomJuke extends JukeClient
 
         try
         {
-            System.out.println("\ncreating Player from URL with a uri value of:\n" + filename + "\n");
+//            System.out.println("\ncreating Player from URL with a uri value of:\n" + filename + "\n");
             URL url = new URL(filename);
 
             // Create an instance of a mediaPlayer for this media url
@@ -231,15 +318,13 @@ public class RandomJuke extends JukeClient
                 mediaPlayer.stop();            
             }
             
-            String source = null;
-            try
-            {
-                source = url.toURI().toString();
-            }
-            catch (URISyntaxException ex)
-            {
-                Logger.getLogger(RandomJuke.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            String source = url.toString();
+                                            
+            System.out.println("url: " + url.toString() );
+
+            source = source.replace(" ", "%20");
+
+            System.out.println("uri: " + source);                            
             
             final Media media = new Media(source);
 
@@ -435,84 +520,12 @@ public class RandomJuke extends JukeClient
         }        
     }
 
-    public static void main(String args[])
+    public static void main(String [] args)
     {
-        System.out.println("it begins");
-        songListManager = new NetworkAndFilesystemSearchingSongManager();
-        ((NetworkAndFilesystemSearchingSongManager) songListManager).setNetworkSongManager(new JavaxNetworkSearchingSongManager());
-        final String configurationFilename = "RandomJukeConfig.xml";
 
-        configurationFile = new File(configurationFilename);
-        System.out.println("loading configuration from: " + configurationFile.getAbsolutePath());
-        String err_msg = null;
-
-        // start off with a blank config
-        configuration = new JukeConfig();
         
-        nextSongButton = new JButton("Next Song");
-
-                
-        mode = ApplicationMode.COMMAND_LINE;
-//mode = ApplicationMode.GUI;        
-        if(args.length > 0)
-        {
-            String arg = args[0];
-            if( arg.equals("--gui") )
-            {
-                mode = ApplicationMode.GUI;               
-            }
-        }                
+        final RandomJuke app = new RandomJuke(args);
         
-        final RandomJuke app = new RandomJuke();
-
-        nextSongButton.addActionListener(
-            new ActionListener()
-            {
-                public void actionPerformed(ActionEvent e)
-                {
-                    if (mediaPlayer != null)
-                    {
-                        mediaPlayer.stop();
-                        mediaPlayer.dispose();
-                    }
-                    app.playNextSong();
-                }
-            }
-        );        
-        
-        if (configurationFile.exists())
-        {
-            System.out.println(configurationFilename + " exists");
-            try
-            {
-                configuration = (JukeConfig) ObjectRetriever.decodeObject(configurationFile);
-            } 
-            catch (Exception e)
-            {
-                e.printStackTrace();
-                err_msg = "<html>Problem decoding the configuration object from the XML file.";
-                err_msg += "<br>Please choose a directory with songs on the next screen.";
-                app.badConfigFileRecover(err_msg);
-            }
-        } 
-        else
-        {
-            err_msg = "<html>No configuration file was found.";
-            err_msg += "<br>Please choose a directory with songs on the next screen.";
-            app.badConfigFileRecover(err_msg);
-        }
-
-        loadSongLists();
-        
-        try
-        {
-// remove all pixel integration altogether for now            
-//            pixelIntegration = new PixelIntegration();
-        } 
-        catch (Exception ex)
-        {
-            Logger.getLogger(RandomJuke.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
     
     private void updateMediaControls()
@@ -569,7 +582,6 @@ public class RandomJuke extends JukeClient
                 SongList songList = songListManager.getSongListFor(artistName);
                 songNames = songList.getSongTitles();
 
-                Random randomTitle = new Random();
                 rs = randomTitle.nextInt(songNames.length - 1);
 
                 String songTitle = songNames[rs];
@@ -581,7 +593,8 @@ public class RandomJuke extends JukeClient
                 try
                 {
                     dupSong = songsPlayedService.hasBeenPlayed(currentSongTitle);
-                } catch (Exception e)
+                } 
+                catch (Exception e)
                 {
                     e.printStackTrace();
                     Fatal("Error:" + e);

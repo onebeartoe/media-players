@@ -21,7 +21,9 @@ public class MainApp extends Application
     public void start(Stage stage) throws Exception 
     {
         final String audio2 = "file:///C:/home/world/sounds/Field-cricket-species-Spanish.mp3";
-        final String audio1 = "file:///C:/home/world/sounds/Price-Is-Right-loser-sound.mp3";
+//        final String audio1 = "file:///C:/home/world/sounds/Price-Is-Right-loser-sound.mp3";
+        
+        final String audio1 = "file:///c:/home/world/music/Bartle-Beats-Frequency/bartlebeats-frequency-02-Carpeter.mp3";
         
         System.out.println("Input songs:\n" + audio1 + "\n" + audio2 + "\n");
      

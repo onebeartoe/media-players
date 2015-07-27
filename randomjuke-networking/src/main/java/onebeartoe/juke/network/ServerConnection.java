@@ -147,13 +147,13 @@ public abstract class ServerConnection implements Runnable, Cloneable
         {
             InetAddress inetAddress = client.getInetAddress();
             String clientAddress = inetAddress.toString();
-            System.out.println(clientAddress + " is connecting");
+//            System.out.println(clientAddress + " is connecting");
 
             BufferedReader in = new BufferedReader(new InputStreamReader(client.getInputStream(), "8859_1"));
 
             String request = in.readLine();
 
-            System.out.println("Request: " + request);
+//            System.out.println("Request: " + request);
             
             boolean quitRequested = false;
 
@@ -266,7 +266,7 @@ public abstract class ServerConnection implements Runnable, Cloneable
 
                         String uiHtmlath = path + getControlsResourcePath();
                         
-                        System.out.println("loading: " + uiHtmlath);
+//                        System.out.println("loading: " + uiHtmlath);
                         
                         InputStream instream = getClass().getResourceAsStream(uiHtmlath);
                         String html = TextFileReader.readText(instream);
@@ -285,7 +285,7 @@ public abstract class ServerConnection implements Runnable, Cloneable
                 }
             }
 
-            System.out.println("message sent for request: " + request);
+//            System.out.println("message sent for request: " + request);
         } 
         catch (IOException e)
         {
