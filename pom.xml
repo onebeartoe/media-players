@@ -18,7 +18,8 @@
             <module>randomjuke-networking</module>
             <module>sound-recorder</module>
             <module>sound-visualizer</module>
-	</modules>
+    <module>get-debug-working</module>
+  </modules>
 
     <repositories>
 	<repository>
