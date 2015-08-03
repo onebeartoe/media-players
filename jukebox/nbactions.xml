@@ -19,21 +19,21 @@
                 <packaging>jar</packaging>
             </packagings>
         </action>
+
+        
         <action>
             <actionName>debug</actionName>
-            <packagings>
-                <packaging>jar</packaging>
-            </packagings>
             <goals>
-                <goal>process-classes</goal>
+                <goal>clean</goal>
+                <goal>package</goal>
                 <goal>org.codehaus.mojo:exec-maven-plugin:1.2.1:exec</goal>
             </goals>
             <properties>
-                <exec.args>-Xdebug -Xrunjdwp:transport=dt_socket,server=n,address=${jpda.address} -classpath %classpath org.onebeartoe.juke.ui.JukeMain</exec.args>
-                <exec.executable>java</exec.executable>
+                <runfx.args>-Xdebug -Xrunjdwp:transport=dt_socket,server=n,address=${jpda.address} -jar "${project.build.directory}/${project.build.finalName}.jar"</runfx.args>
                 <jpda.listen>true</jpda.listen>
             </properties>
         </action>
+        
         <action>
             <actionName>profile</actionName>
             <packagings>

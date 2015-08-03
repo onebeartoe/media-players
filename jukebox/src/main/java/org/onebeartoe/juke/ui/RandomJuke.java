@@ -563,7 +563,7 @@ public class RandomJuke extends JukeClient
 
             // get random into the artist list
             int artistNamesLimit = songListManager.getSongListTitles().size();
-            Random random = new Random();
+            Random random = new Random();            
             int ra = random.nextInt(artistNamesLimit);
 
             if (ra < 0)
