@@ -166,7 +166,7 @@ public class RandomJuke extends JukeClient
                 {
                     if (mediaPlayer != null)
                     {
-                        mediaPlayer.stop();
+//                        mediaPlayer.stop();
                         mediaPlayer.dispose();
                     }
                     playNextSong();
@@ -579,7 +579,18 @@ public class RandomJuke extends JukeClient
                 SongList songList = songListManager.getSongListFor(artistName);
                 songNames = songList.getSongTitles();
 
-                rs = randomTitle.nextInt(songNames.length - 1);
+                int i;
+                
+                if(songNames.length == 1)
+                {
+                    i = 1;
+                }
+                else
+                {
+                    i = songNames.length - 1;
+                }
+                
+                rs = randomTitle.nextInt(i);
 
                 String songTitle = songNames[rs];
 
