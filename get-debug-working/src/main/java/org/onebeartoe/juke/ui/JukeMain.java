@@ -11,7 +11,7 @@ public class JukeMain extends Application
     public void start(Stage stage) throws Exception 
     {
         String [] args = {};
-        RandomJuke juke = new RandomJuke(args);
+        RandomJukeClient juke = new RandomJukeClient(args);
     }
 
     /**

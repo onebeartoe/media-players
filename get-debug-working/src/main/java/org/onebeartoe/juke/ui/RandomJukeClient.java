@@ -57,7 +57,7 @@ import org.onebeartoe.pixel.PixelEnvironment;
 import org.onebeartoe.pixel.hardware.Pixel;
 import org.onebeartoe.pixel.sound.meter.SoundReading;
 
-public class RandomJuke extends JukeClient
+public class RandomJukeClient extends JukeClient
 {
     private static final long serialVersionUID = 178947923L;
 
@@ -126,7 +126,7 @@ public class RandomJuke extends JukeClient
     /**
      * Setup the application.
      */
-    public RandomJuke(String [] args)
+    public RandomJukeClient(String [] args)
     {
 //---------------------- before contstructor
         System.out.println("it begins");
@@ -205,8 +205,9 @@ public class RandomJuke extends JukeClient
         } 
         catch (Exception ex)
         {
-            Logger.getLogger(RandomJuke.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RandomJukeClient.class.getName()).log(Level.SEVERE, null, ex);
         }        
+//---------------------- after constructor (end)        
 //---------------------- after constructor (end)
         
         randomTitle = new Random();
@@ -465,13 +466,12 @@ public class RandomJuke extends JukeClient
         c.add(visual, BorderLayout.CENTER);
         c.add(bottomPanel, BorderLayout.SOUTH);
 
-        guiWindow.addWindowListener(
-            new WindowAdapter()
+        guiWindow.addWindowListener(new WindowAdapter()
             {
                 public void windowClosing(WindowEvent e)
                 {
-                    Object o = RandomJuke.configuration;
-                    File outfile = RandomJuke.configurationFile;
+                    Object o = RandomJukeClient.configuration;
+                    File outfile = RandomJukeClient.configurationFile;
                     boolean saved = ObjectSaver.encodeObject(o, outfile);
                     System.out.println("configuration saved: " + saved);
 
@@ -521,7 +521,7 @@ public class RandomJuke extends JukeClient
     {
 
         
-        final RandomJuke app = new RandomJuke(args);
+        final RandomJukeClient app = new RandomJukeClient(args);
         
     }
     
