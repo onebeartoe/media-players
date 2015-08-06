@@ -5,7 +5,7 @@ import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.stage.Stage;
 
-public class JukeMain extends Application 
+public class JukeClientMain extends Application 
 {
     @Override
     public void start(Stage stage) throws Exception 
