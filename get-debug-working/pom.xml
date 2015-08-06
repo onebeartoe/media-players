@@ -12,11 +12,11 @@
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>onebeartoe-media-players-debug-working</name>
+    <name>onebeartoe-media-players-jukebox-client</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <mainClass>org.onebeartoe.juke.ui.JukeMain</mainClass>
+        <mainClass>org.onebeartoe.juke.ui.RandomJukeClient</mainClass>
     </properties>
 
     <organization>

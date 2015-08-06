@@ -34,7 +34,7 @@ import onebeartoe.juke.network.JukeClient;
 import onebeartoe.juke.network.RandomJukeServerConnection;
 import onebeartoe.juke.ui.eck.KaleidaAnimate;
 
-import org.onebeartoe.application.ApplicationMode;
+//import org.onebeartoe.application.ApplicationMode;
 import org.onebeartoe.application.ui.GUITools;
 import org.onebeartoe.application.ui.GraphicalUserInterfaceServices;
 import org.onebeartoe.application.ui.LookAndFeelButton;
@@ -107,7 +107,7 @@ public class RandomJukeClient extends JukeClient
 
     private Container c;
     
-    private static ApplicationMode mode;
+//    private static ApplicationMode mode;
 
     private static PixelEnvironment pixelEnvironment;
     
@@ -144,16 +144,17 @@ public class RandomJukeClient extends JukeClient
         nextSongButton = new JButton("Next Song");
 
                 
-        mode = ApplicationMode.COMMAND_LINE;
+//        mode = ApplicationMode.COMMAND_LINE;
 //mode = ApplicationMode.GUI;        
-        if(args.length > 0)
-        {
-            String arg = args[0];
-            if( arg.equals("--gui") )
-            {
-                mode = ApplicationMode.GUI;               
-            }
-        }        
+//        if(args.length > 0)
+//        {
+//            String arg = args[0];
+//            if( arg.equals("--gui") )
+//            {
+//                mode = ApplicationMode.GUI;               
+//            }
+//        }        
+        
 //---------------------- before contstructor (end)
 
 // consturctor call        
@@ -233,21 +234,7 @@ public class RandomJukeClient extends JukeClient
             e2.printStackTrace();
         }
 
-        switch(mode)
-        {
-            case GUI:
-            {
-                setupSwingUi();
-                break;
-            }
-            default:
-            {
-                // command line
-                String message = "To start the application with a GUI, pass '--gui'" +
-                                 " as an arguement to the command.";
-                System.out.println(message);
-            }
-        }
+        setupSwingUi();
 
         RandomJukeServerConnection randomJukeServerConnection = new RandomJukeServerConnection();
         randomJukeServerConnection.setNextSongButton(nextSongButton);
@@ -282,18 +269,19 @@ public class RandomJukeClient extends JukeClient
 
     private void badConfigFileRecover(String err_msg)
     {
-        if(mode == ApplicationMode.GUI)
-        {
-            GUITools.infoMessage(err_msg);
-            System.out.println(err_msg);
-            File file = GUITools.selectDirectory("Choose a directory containing song/audio files:");
-            String url = "file:" + file.toString();
-            addSongListUrl(url);
-        }
-        else
-        {
-            System.err.println("We need a way to specify an initial directory for headless mode");
-        }        
+// TODO: dont deltet this, just yet        
+//        if(mode == ApplicationMode.GUI)
+//        {
+//            GUITools.infoMessage(err_msg);
+//            System.out.println(err_msg);
+//            File file = GUITools.selectDirectory("Choose a directory containing song/audio files:");
+//            String url = "file:" + file.toString();
+//            addSongListUrl(url);
+//        }
+//        else
+//        {
+//            System.err.println("We need a way to specify an initial directory for headless mode");
+//        }        
     }   
 
     /**
@@ -505,7 +493,7 @@ public class RandomJukeClient extends JukeClient
             {
                 url = new URL(uri);
                 songListManager.discoverSongLists(url);
-                if(mode == ApplicationMode.GUI)
+//                if(mode == ApplicationMode.GUI)
                 {
                     songListPathPanel.addSongListPath(url.toString());   
                 }
@@ -652,7 +640,7 @@ public class RandomJukeClient extends JukeClient
             label = "";
         }
 
-        if(mode == ApplicationMode.GUI)
+//        if(mode == ApplicationMode.GUI)
         {
             // update the JLabel that shows the name of the current song.
             currentSongLabel.setText(label);
@@ -676,12 +664,12 @@ public class RandomJukeClient extends JukeClient
     
     private static void Fatal(String s)
     {
-        if(mode == ApplicationMode.GUI)
+//        if(mode == ApplicationMode.GUI)
         {
             SwingServices ss = new SwingServices();
             ss.infoMessage(s, "JMF Error");
         }
-        else
+//        else
         {
             System.err.println(s);
         }
