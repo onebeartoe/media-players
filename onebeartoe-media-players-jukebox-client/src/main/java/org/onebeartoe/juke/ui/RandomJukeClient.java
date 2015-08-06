@@ -48,10 +48,10 @@ import org.onebeartoe.multimedia.juke.songs.JavaxNetworkSearchingSongManager;
 import org.onebeartoe.multimedia.juke.songs.NetworkAndFilesystemSearchingSongManager;
 import org.onebeartoe.multimedia.juke.songs.SongListManager;
 import onebeartoe.juke.network.ThreadedServer;
-import static org.onebeartoe.pixel.PixelClient.currentSongTitle;
-import org.onebeartoe.pixel.PixelEnvironment;
-import org.onebeartoe.pixel.hardware.Pixel;
-import org.onebeartoe.pixel.sound.meter.SoundReading;
+//import static org.onebeartoe.pixel.PixelClient.currentSongTitle;
+//import org.onebeartoe.pixel.PixelEnvironment;
+//import org.onebeartoe.pixel.hardware.Pixel;
+//import org.onebeartoe.pixel.sound.meter.SoundReading;
 
 public class RandomJukeClient
 {
@@ -105,13 +105,13 @@ public class RandomJukeClient
     
 //    private static ApplicationMode mode;
 
-    private static PixelEnvironment pixelEnvironment;
-    
-    private static Pixel pixel;
+//    private static PixelEnvironment pixelEnvironment;
+//    
+//    private static Pixel pixel;
     
     private static JFrame guiWindow;
     
-    private static volatile List<SoundReading> microphoneValues;
+//    private static volatile List<SoundReading> microphoneValues;
     
     private static int SAMPLE_BUFFER_SIZE = 50;
     
@@ -219,7 +219,7 @@ public class RandomJukeClient
           
         random = new Random();
         
-        microphoneValues = new ArrayList();
+  //      microphoneValues = new ArrayList();
 
         try
         {
@@ -286,12 +286,12 @@ public class RandomJukeClient
      */
     public void playSong()
     {
-        String filename = currentSongTitle;
+//        String filename = currentSongTitle;
 
-        try
+//        try
         {
 //            System.out.println("\ncreating Player from URL with a uri value of:\n" + filename + "\n");
-            URL url = new URL(filename);
+//            URL url = new URL(filename);
 
             // Create an instance of a mediaPlayer for this media url
             
@@ -300,13 +300,13 @@ public class RandomJukeClient
 //                mediaPlayer.stop();            
 //            }
             
-            String source = url.toString();
+  //          String source = url.toString();
                                             
-            System.out.println("url: " + url.toString() );
+    //        System.out.println("url: " + url.toString() );
 
-            source = source.replace(" ", "%20");
+      //      source = source.replace(" ", "%20");
 
-            System.out.println("uri: " + source);                            
+        //    System.out.println("uri: " + source);                            
             
 
 
@@ -341,8 +341,8 @@ public class RandomJukeClient
             
             try
             {
-                String uri = url.toString();
-                songsPlayedService.addPlayedSong(uri);
+          //      String uri = url.toString();
+            //    songsPlayedService.addPlayedSong(uri);
             }
             catch (Exception e)
             {
@@ -351,9 +351,9 @@ public class RandomJukeClient
                 Fatal("Error: " + e);
             }
         } 
-        catch (MalformedURLException e)
+//        catch (MalformedURLException e)
         {
-            Fatal("Error:" + e);
+  //          Fatal("Error:" + e);
         }
 
 //        if (mediaPlayer != null)
@@ -568,12 +568,12 @@ public class RandomJukeClient
                 String songTitle = songNames[rs];
 
                 currentSong = songList.getUrlFor(songTitle);
-                currentSongTitle = currentSong.toString();
+    //            currentSongTitle = currentSong.toString();
 
                 boolean dupSong = false;
                 try
                 {
-                    dupSong = songsPlayedService.hasBeenPlayed(currentSongTitle);
+      //              dupSong = songsPlayedService.hasBeenPlayed(currentSongTitle);
                 } 
                 catch (Exception e)
                 {
@@ -584,7 +584,7 @@ public class RandomJukeClient
                 if (dupSong && dupCount < duplicateThreshold)
                 {
                     loopingAgain = true;
-                    System.out.println("dup song: " + currentSongTitle);
+        //            System.out.println("dup song: " + currentSongTitle);
 
                     dupCount++;
                 } else
@@ -617,9 +617,9 @@ public class RandomJukeClient
             // take note of the song that has been taken out of the selection pool
             try
             {
-                currentSongSerice.next(currentSongTitle, "localhost");
-                currentSongSerice.setCurrentSong(currentSongTitle);
-                songsPlayedService.addPlayedSong(currentSongTitle);
+//                currentSongSerice.next(currentSongTitle, "localhost");
+//                currentSongSerice.setCurrentSong(currentSongTitle);
+//                songsPlayedService.addPlayedSong(currentSongTitle);
             } 
             catch (Exception e)
             {
