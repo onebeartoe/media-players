@@ -9,19 +9,15 @@ import java.awt.GridLayout;
 import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 
-//import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import java.util.ArrayList;
 import java.util.Random;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -35,7 +31,6 @@ import org.onebeartoe.application.ui.GraphicalUserInterfaceServices;
 import org.onebeartoe.application.ui.LookAndFeelButton;
 import org.onebeartoe.application.ui.SwingServices;
 import org.onebeartoe.io.ObjectRetriever;
-import org.onebeartoe.io.ObjectSaver;
 import org.onebeartoe.multimedia.juke.JukeConfig;
 import org.onebeartoe.multimedia.juke.SongList;
 import org.onebeartoe.multimedia.juke.gui.SwingSongListPathPanel;
@@ -47,10 +42,6 @@ import org.onebeartoe.multimedia.juke.songs.JavaxNetworkSearchingSongManager;
 import org.onebeartoe.multimedia.juke.songs.NetworkAndFilesystemSearchingSongManager;
 import org.onebeartoe.multimedia.juke.songs.SongListManager;
 import onebeartoe.juke.network.ThreadedServer;
-import static org.onebeartoe.pixel.PixelClient.currentSongTitle;
-import org.onebeartoe.pixel.PixelEnvironment;
-import org.onebeartoe.pixel.hardware.Pixel;
-import org.onebeartoe.pixel.sound.meter.SoundReading;
 
 public class RandomJuke extends JukeClient
 {
@@ -74,11 +65,7 @@ public class RandomJuke extends JukeClient
 
     private static URL currentSong;
 
-//    private JButton pathOptionsButton;
-
     private LookAndFeelButton lookButton;
-
-//    private static JButton nextSongButton;
 
     private JPanel ControlPanel;
 
@@ -93,34 +80,25 @@ public class RandomJuke extends JukeClient
 
     private JPanel mediaPanel;
 
-//    private Component mediaControls;
-
     private JPanel bottomPanel;
 
     private Container c;
     
     private static ApplicationMode mode;
-
-    private static PixelEnvironment pixelEnvironment;
-    
-    private static Pixel pixel;
-    
-//    private static JFrame guiWindow;
-    
-    private static volatile List<SoundReading> microphoneValues;
     
     private static int SAMPLE_BUFFER_SIZE = 50;
     
     private static Random random;
     
     Random randomTitle;
+    
+    public static String currentSongTitle;
             
     /**
      * Setup the application.
      */
     public RandomJuke(String [] args)
     {
-//---------------------- before contstructor
         System.out.println("it begins");
         songListManager = new NetworkAndFilesystemSearchingSongManager();
         ((NetworkAndFilesystemSearchingSongManager) songListManager).setNetworkSongManager(new JavaxNetworkSearchingSongManager());
@@ -132,9 +110,6 @@ public class RandomJuke extends JukeClient
 
         // start off with a blank config
         configuration = new JukeConfig();
-        
-  //      nextSongButton = new JButton("Next Song");
-
                 
         mode = ApplicationMode.COMMAND_LINE;
 
@@ -146,20 +121,6 @@ public class RandomJuke extends JukeClient
                 mode = ApplicationMode.GUI;               
             }
         }        
-//---------------------- before contstructor (end)
-
-// consturctor call        
-        
-//---------------------- after constructor
-//        nextSongButton.addActionListener(
-//            new ActionListener()
-//            {
-//                public void actionPerformed(ActionEvent e)
-//                {
-//                    playNextSong();
-//                }
-//            }
-//        );        
         
         if (configurationFile.exists())
         {
@@ -185,9 +146,6 @@ public class RandomJuke extends JukeClient
 
         loadSongLists();
         
-        
-//---------------------- after constructor (end)
-        
         randomTitle = new Random();
         
         songsPlayedService = new NoPersistenceSongsPlayedService();
@@ -199,8 +157,7 @@ public class RandomJuke extends JukeClient
         duplicateThreshold = 100;
           
         random = new Random();
-        
-        microphoneValues = new ArrayList();
+
 
         try
         {
@@ -228,7 +185,6 @@ public class RandomJuke extends JukeClient
         }
 
         RandomJukeServerConnection randomJukeServerConnection = new RandomJukeServerConnection();
-//        randomJukeServerConnection.setNextSongButton(nextSongButton);
         randomJukeServerConnection.setCurrentSongService(currentSongSerice);
         randomJukeServerConnection.setApp(this);
         nextSongServer = new ThreadedServer();
@@ -362,10 +318,8 @@ public class RandomJuke extends JukeClient
     
     private void setupSwingUi()
     {
-//        guiWindow = new JFrame("onebeartoe RandomJuke 3.3 - You Know It Edition");
         songListPathPanel = new SwingSongListPathPanel();
 
-//        lookButton = new LookAndFeelButton("Change", guiWindow);
         String title = "Look and Feel";
         Color color = Color.BLUE;
         JPanel lookPanel = new JPanel();
@@ -376,26 +330,12 @@ public class RandomJuke extends JukeClient
         title = "Remote Control URL:";
         JPanel ipPanel = new JPanel();
         ipPanel.add(ipLabel);
-//        JButton ipButton = new JButton("View");
-//        ipButton.addActionListener(new ActionListener()
-//        {
-//            @Override
-//            public void actionPerformed(ActionEvent ae)
-//            {
-//                String url = nextSongServer.ip;
-//                uiService.viewBrowser(url);
-//            }
-//        });
-//        ipPanel.add(ipLabel);
-//        ipPanel.add(ipButton);
-//        ipPanel.setBorder(GUITools.factoryLineBorder(title, color));
 
-//        pathOptionsButton = new JButton("Change");
         ChangePathButtonHandler changeSongListUrlsListeners = new ChangePathButtonHandler();
-//        pathOptionsButton.addActionListener(changeSongListUrlsListeners);
+
         title = "Song Paths";
         JPanel pathOptionsPanel = new JPanel();
-//        pathOptionsPanel.add(pathOptionsButton);
+
         pathOptionsPanel.setBorder(GUITools.factoryLineBorder(title, color));
 
         settingPanel = new JPanel();
@@ -404,14 +344,12 @@ public class RandomJuke extends JukeClient
         settingPanel.add(ipPanel);
         settingPanel.add(lookPanel);
 
-//        JButton settingsButton = new JButton("Settings");
-//        settingsButton.addActionListener(new SettingsButtonHandler());
+
 
         // Setup the Control Panel.
         ControlPanel = new JPanel();
         ControlPanel.setLayout(new GridLayout(1, 10));
-//        ControlPanel.add(nextSongButton);
-//        ControlPanel.add(settingsButton);
+
 
         // bottom panel
         currentSongLabel = new JLabel();
@@ -426,37 +364,8 @@ public class RandomJuke extends JukeClient
         bottomPanel.add(currentSongLabel, BorderLayout.NORTH);
 
         // place the comonents onto JFrame
-//        c = guiWindow.getContentPane();
         c.add(ControlPanel, BorderLayout.NORTH);
-
         c.add(bottomPanel, BorderLayout.SOUTH);
-
-//        guiWindow.addWindowListener(
-//            new WindowAdapter()
-//            {
-//                public void windowClosing(WindowEvent e)
-//                {
-//                    Object o = RandomJuke.configuration;
-//                    File outfile = RandomJuke.configurationFile;
-//                    boolean saved = ObjectSaver.encodeObject(o, outfile);
-//                    System.out.println("configuration saved: " + saved);
-//
-//                    try
-//                    {
-//                        songsPlayedService.storeSongsPlayed();
-//                    } catch (Exception e1)
-//                    {
-//                        e1.printStackTrace();
-//                    }
-//
-//                    System.exit(0);
-//                }
-//            }
-//        );
-//        
-//        guiWindow.setLocation(320, 105);
-//        guiWindow.setSize(475, 375);
-//        guiWindow.setVisible(true);
     }            
 
     private static void loadSongLists()
@@ -480,11 +389,6 @@ public class RandomJuke extends JukeClient
             }
         }        
     }
-
-//    public static void main(String [] args)
-//    {
-//        final RandomJuke app = new RandomJuke(args);
-//    }
 
     /**
      * this method will loop until it finds a song that has not played before
@@ -645,8 +549,6 @@ public class RandomJuke extends JukeClient
         {
             String ipLabelText = "http://" + nextSongServer.ip + ":" + nextSongServer.port;
             ipLabel.setText(ipLabelText);
-
-//            JOptionPane.showMessageDialog(guiWindow, settingPanel);
         }
     }
 }
