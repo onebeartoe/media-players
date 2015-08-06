@@ -19,11 +19,15 @@ public abstract class JukeClient
         }
     }
     
+    public abstract void playNextSong();
+    
     public void unpausePlayer()
     {
         if (mediaPlayer != null)
         {
             mediaPlayer.play();
         }
-    }    
+    }
+    
+    
 }

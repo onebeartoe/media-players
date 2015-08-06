@@ -3,7 +3,6 @@ package org.onebeartoe.juke.ui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Container;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -17,7 +16,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 
-import javax.swing.JButton;
+//import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -25,8 +24,6 @@ import javax.swing.JPanel;
 
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import onebeartoe.juke.network.JukeClient;
@@ -78,11 +75,11 @@ public class RandomJuke extends JukeClient
 
     private static URL currentSong;
 
-    private JButton pathOptionsButton;
+//    private JButton pathOptionsButton;
 
     private LookAndFeelButton lookButton;
 
-    private static JButton nextSongButton;
+//    private static JButton nextSongButton;
 
     private JPanel ControlPanel;
 
@@ -97,7 +94,7 @@ public class RandomJuke extends JukeClient
 
     private JPanel mediaPanel;
 
-    private Component mediaControls;
+//    private Component mediaControls;
 
     private JPanel bottomPanel;
 
@@ -137,11 +134,11 @@ public class RandomJuke extends JukeClient
         // start off with a blank config
         configuration = new JukeConfig();
         
-        nextSongButton = new JButton("Next Song");
+  //      nextSongButton = new JButton("Next Song");
 
                 
         mode = ApplicationMode.COMMAND_LINE;
-//mode = ApplicationMode.GUI;        
+
         if(args.length > 0)
         {
             String arg = args[0];
@@ -155,20 +152,15 @@ public class RandomJuke extends JukeClient
 // consturctor call        
         
 //---------------------- after constructor
-        nextSongButton.addActionListener(
-            new ActionListener()
-            {
-                public void actionPerformed(ActionEvent e)
-                {
-                    if (mediaPlayer != null)
-                    {
-//                        mediaPlayer.stop();
-                        mediaPlayer.dispose();
-                    }
-                    playNextSong();
-                }
-            }
-        );        
+//        nextSongButton.addActionListener(
+//            new ActionListener()
+//            {
+//                public void actionPerformed(ActionEvent e)
+//                {
+//                    playNextSong();
+//                }
+//            }
+//        );        
         
         if (configurationFile.exists())
         {
@@ -194,15 +186,7 @@ public class RandomJuke extends JukeClient
 
         loadSongLists();
         
-        try
-        {
-// remove all pixel integration altogether for now            
-//            pixelIntegration = new PixelIntegration();
-        } 
-        catch (Exception ex)
-        {
-            Logger.getLogger(RandomJuke.class.getName()).log(Level.SEVERE, null, ex);
-        }        
+        
 //---------------------- after constructor (end)
         
         randomTitle = new Random();
@@ -245,7 +229,7 @@ public class RandomJuke extends JukeClient
         }
 
         RandomJukeServerConnection randomJukeServerConnection = new RandomJukeServerConnection();
-        randomJukeServerConnection.setNextSongButton(nextSongButton);
+//        randomJukeServerConnection.setNextSongButton(nextSongButton);
         randomJukeServerConnection.setCurrentSongService(currentSongSerice);
         randomJukeServerConnection.setApp(this);
         nextSongServer = new ThreadedServer();
@@ -301,10 +285,7 @@ public class RandomJuke extends JukeClient
 
         try
         {
-//            System.out.println("\ncreating Player from URL with a uri value of:\n" + filename + "\n");
             URL url = new URL(filename);
-
-            // Create an instance of a mediaPlayer for this media url
             
             if (mediaPlayer != null)
             {
@@ -346,7 +327,7 @@ public class RandomJuke extends JukeClient
                 @Override
                 public void run()
                 {
-                    updateMediaControls();
+                    // do we need to update anything here?
                 }
             });
             
@@ -366,13 +347,6 @@ public class RandomJuke extends JukeClient
         {
             Fatal("Error:" + e);
         }
-
-//        if (mediaPlayer != null)
-//        {
-//            ControllerListener listener = songListener;
-//            mediaPlayer.addControllerListener(listener);
-//            mediaPlayer.realize();
-//        }
     }
 
     public void setSongListUrls(List<String> songListUrls)
@@ -402,26 +376,26 @@ public class RandomJuke extends JukeClient
         title = "Remote Control URL:";
         JPanel ipPanel = new JPanel();
         ipPanel.add(ipLabel);
-        JButton ipButton = new JButton("View");
-        ipButton.addActionListener(new ActionListener()
-        {
-            @Override
-            public void actionPerformed(ActionEvent ae)
-            {
-                String url = nextSongServer.ip;
-                uiService.viewBrowser(url);
-            }
-        });
-        ipPanel.add(ipLabel);
-        ipPanel.add(ipButton);
-        ipPanel.setBorder(GUITools.factoryLineBorder(title, color));
+//        JButton ipButton = new JButton("View");
+//        ipButton.addActionListener(new ActionListener()
+//        {
+//            @Override
+//            public void actionPerformed(ActionEvent ae)
+//            {
+//                String url = nextSongServer.ip;
+//                uiService.viewBrowser(url);
+//            }
+//        });
+//        ipPanel.add(ipLabel);
+//        ipPanel.add(ipButton);
+//        ipPanel.setBorder(GUITools.factoryLineBorder(title, color));
 
-        pathOptionsButton = new JButton("Change");
+//        pathOptionsButton = new JButton("Change");
         ChangePathButtonHandler changeSongListUrlsListeners = new ChangePathButtonHandler();
-        pathOptionsButton.addActionListener(changeSongListUrlsListeners);
+//        pathOptionsButton.addActionListener(changeSongListUrlsListeners);
         title = "Song Paths";
         JPanel pathOptionsPanel = new JPanel();
-        pathOptionsPanel.add(pathOptionsButton);
+//        pathOptionsPanel.add(pathOptionsButton);
         pathOptionsPanel.setBorder(GUITools.factoryLineBorder(title, color));
 
         settingPanel = new JPanel();
@@ -430,14 +404,14 @@ public class RandomJuke extends JukeClient
         settingPanel.add(ipPanel);
         settingPanel.add(lookPanel);
 
-        JButton settingsButton = new JButton("Settings");
-        settingsButton.addActionListener(new SettingsButtonHandler());
+//        JButton settingsButton = new JButton("Settings");
+//        settingsButton.addActionListener(new SettingsButtonHandler());
 
         // Setup the Control Panel.
         ControlPanel = new JPanel();
         ControlPanel.setLayout(new GridLayout(1, 10));
-        ControlPanel.add(nextSongButton);
-        ControlPanel.add(settingsButton);
+//        ControlPanel.add(nextSongButton);
+//        ControlPanel.add(settingsButton);
 
         // bottom panel
         currentSongLabel = new JLabel();
@@ -507,41 +481,21 @@ public class RandomJuke extends JukeClient
         }        
     }
 
-    public static void main(String [] args)
-    {
-
-        
-        final RandomJuke app = new RandomJuke(args);
-        
-    }
-    
-    private void updateMediaControls()
-    {
-// TODO: we need to re-implement this method once we have user interface for desktop apps
-        
-        
-//        if (mediaControls != null)
-//        {
-//            mediaPanel.remove(mediaControls);
-//        }
-//
-//        mediaControls = mediaPlayer.getControlPanelComponent();
-//        int width = guiWindow.getWidth();
-//        int height = mediaControls.getHeight();
-//        mediaControls.setPreferredSize(new Dimension(width, height));
-//        mediaControls.doLayout();
-//        mediaPanel.add(mediaControls, BorderLayout.CENTER);
-//        mediaPanel.revalidate();
-//        mediaPanel.doLayout();
-//        bottomPanel.doLayout();
-//        c.doLayout();
-    }
+//    public static void main(String [] args)
+//    {
+//        final RandomJuke app = new RandomJuke(args);
+//    }
 
     /**
      * this method will loop until it finds a song that has not played before
      */
     public void playNextSong()
     {
+        if (mediaPlayer != null)
+        {
+            mediaPlayer.dispose();
+        }
+        
         String[] songNames = null;
         int rs = -1;
         boolean loopingAgain;
@@ -698,24 +652,4 @@ public class RandomJuke extends JukeClient
             JOptionPane.showMessageDialog(guiWindow, settingPanel);
         }
     }
-    
-//    private class SongsControllerListener implements ControllerListener
-//    {
-//        @Override
-//        public void controllerUpdate(ControllerEvent ce)
-//        {            
-//            if (ce instanceof RealizeCompleteEvent)
-//            {
-//                mediaPlayer.prefetch();            
-//                updateMediaControls();
-//            } 
-//            else if (ce instanceof PrefetchCompleteEvent)
-//            {
-//                mediaPlayer.setMediaTime(new Time(0));
-//                mediaPlayer.start();
-//            } 
-//            else if (ce instanceof EndOfMediaEvent)
-//            {
-//                playNextSong();
-//            }
 }

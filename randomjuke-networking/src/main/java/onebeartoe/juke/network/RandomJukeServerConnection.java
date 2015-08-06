@@ -51,7 +51,9 @@ public class RandomJukeServerConnection extends ServerConnection
             boolean next = currentSongService.next(currentSongTitle, clientAddress);
             if (next)
             {
-                nextSongButton.doClick();
+                app.playNextSong();
+                
+//                nextSongButton.doClick();
             }
         } 
         catch (Exception e)
