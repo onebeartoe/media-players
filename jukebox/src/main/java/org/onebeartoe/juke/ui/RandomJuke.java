@@ -4,7 +4,6 @@ package org.onebeartoe.juke.ui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
-import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
@@ -14,7 +13,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -68,15 +66,15 @@ public class RandomJuke extends JukeClient
     private LookAndFeelButton lookButton;
 
     private JPanel ControlPanel;
-
+    
     // the current song playing
-    private static JLabel currentSongLabel;
+//    private static JLabel currentSongLabel;
 
     private static int duplicateThreshold;
 
     private ThreadedServer nextSongServer;
 
-    private JLabel ipLabel;
+  //  private JLabel ipLabel;
 
     private JPanel mediaPanel;
 
@@ -326,10 +324,10 @@ public class RandomJuke extends JukeClient
         lookPanel.add(lookButton);
         lookPanel.setBorder(GUITools.factoryLineBorder(title, color));
 
-        ipLabel = new JLabel();
+//        ipLabel = new JLabel();
         title = "Remote Control URL:";
         JPanel ipPanel = new JPanel();
-        ipPanel.add(ipLabel);
+//        ipPanel.add(ipLabel);
 
         ChangePathButtonHandler changeSongListUrlsListeners = new ChangePathButtonHandler();
 
@@ -352,8 +350,8 @@ public class RandomJuke extends JukeClient
 
 
         // bottom panel
-        currentSongLabel = new JLabel();
-        currentSongLabel.setFont(new Font("TimesRoman", Font.PLAIN, 15));
+//        currentSongLabel = new JLabel();
+//        currentSongLabel.setFont(new Font("TimesRoman", Font.PLAIN, 15));
 
         mediaPanel = new JPanel();
 
@@ -361,7 +359,7 @@ public class RandomJuke extends JukeClient
         LayoutManager bottomPanelLayout = new BorderLayout();
         bottomPanel.setLayout(bottomPanelLayout);
         bottomPanel.add(mediaPanel);
-        bottomPanel.add(currentSongLabel, BorderLayout.NORTH);
+  //      bottomPanel.add(currentSongLabel, BorderLayout.NORTH);
 
         // place the comonents onto JFrame
         c.add(ControlPanel, BorderLayout.NORTH);
@@ -511,11 +509,11 @@ public class RandomJuke extends JukeClient
             label = "";
         }
 
-        if(mode == ApplicationMode.GUI)
-        {
-            // update the JLabel that shows the name of the current song.
-            currentSongLabel.setText(label);
-        }
+//        if(mode == ApplicationMode.GUI)
+//        {
+//            // update the JLabel that shows the name of the current song.
+//            currentSongLabel.setText(label);
+//        }
     }
 
     /**
@@ -548,7 +546,7 @@ public class RandomJuke extends JukeClient
         public void actionPerformed(ActionEvent e)
         {
             String ipLabelText = "http://" + nextSongServer.ip + ":" + nextSongServer.port;
-            ipLabel.setText(ipLabelText);
+  //          ipLabel.setText(ipLabelText);
         }
     }
 }
