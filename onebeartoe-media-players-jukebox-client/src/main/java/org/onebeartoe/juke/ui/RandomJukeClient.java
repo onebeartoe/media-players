@@ -27,14 +27,10 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import onebeartoe.juke.network.JukeClient;
 
 import onebeartoe.juke.network.RandomJukeServerConnection;
 import onebeartoe.juke.ui.eck.KaleidaAnimate;
 
-//import org.onebeartoe.application.ApplicationMode;
 import org.onebeartoe.application.ui.GUITools;
 import org.onebeartoe.application.ui.GraphicalUserInterfaceServices;
 import org.onebeartoe.application.ui.LookAndFeelButton;
@@ -57,7 +53,7 @@ import org.onebeartoe.pixel.PixelEnvironment;
 import org.onebeartoe.pixel.hardware.Pixel;
 import org.onebeartoe.pixel.sound.meter.SoundReading;
 
-public class RandomJukeClient extends JukeClient
+public class RandomJukeClient
 {
     private static final long serialVersionUID = 178947923L;
 
@@ -165,11 +161,11 @@ public class RandomJukeClient extends JukeClient
             {
                 public void actionPerformed(ActionEvent e)
                 {
-                    if (mediaPlayer != null)
-                    {
-                        mediaPlayer.stop();
-                        mediaPlayer.dispose();
-                    }
+//                    if (mediaPlayer != null)
+//                    {
+//                        mediaPlayer.stop();
+//                        mediaPlayer.dispose();
+//                    }
                     playNextSong();
                 }
             }
@@ -239,7 +235,7 @@ public class RandomJukeClient extends JukeClient
         RandomJukeServerConnection randomJukeServerConnection = new RandomJukeServerConnection();
         randomJukeServerConnection.setNextSongButton(nextSongButton);
         randomJukeServerConnection.setCurrentSongService(currentSongSerice);
-        randomJukeServerConnection.setApp(this);
+//        randomJukeServerConnection.setApp(this);
         nextSongServer = new ThreadedServer();
         nextSongServer.setConnection(randomJukeServerConnection);
         nextSongServer.start();
@@ -299,10 +295,10 @@ public class RandomJukeClient extends JukeClient
 
             // Create an instance of a mediaPlayer for this media url
             
-            if (mediaPlayer != null)
-            {
-                mediaPlayer.stop();            
-            }
+//            if (mediaPlayer != null)
+//            {
+//                mediaPlayer.stop();            
+//            }
             
             String source = url.toString();
                                             
@@ -312,36 +308,36 @@ public class RandomJukeClient extends JukeClient
 
             System.out.println("uri: " + source);                            
             
-            final Media media = new Media(source);
 
-            mediaPlayer = new MediaPlayer(media);
-            mediaPlayer.setAutoPlay(true);
-            mediaPlayer.setOnError(new Runnable()
-            {
-                @Override
-                public void run()
-                {
-                    System.out.println("mediaPlayer.getError() = " + mediaPlayer.getError());
-                }
-            });
-            mediaPlayer.setOnEndOfMedia( new Runnable()
-            {
 
-                @Override
-                public void run()
-                {
-                    playNextSong();
-                }
-            });
-            mediaPlayer.setOnReady( new Runnable()
-            {
-
-                @Override
-                public void run()
-                {
-                    updateMediaControls();
-                }
-            });
+//            mediaPlayer = new MediaPlayer(media);
+//            mediaPlayer.setAutoPlay(true);
+//            mediaPlayer.setOnError(new Runnable()
+//            {
+//                @Override
+//                public void run()
+//                {
+//                    System.out.println("mediaPlayer.getError() = " + mediaPlayer.getError());
+//                }
+//            });
+//            mediaPlayer.setOnEndOfMedia( new Runnable()
+//            {
+//
+//                @Override
+//                public void run()
+//                {
+//                    playNextSong();
+//                }
+//            });
+//            mediaPlayer.setOnReady( new Runnable()
+//            {
+//
+//                @Override
+//                public void run()
+//                {
+//                    updateMediaControls();
+//                }
+//            });
             
             try
             {
