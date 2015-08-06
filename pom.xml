@@ -18,8 +18,8 @@
             <module>randomjuke-networking</module>
             <module>sound-recorder</module>
             <module>sound-visualizer</module>
-    <module>get-debug-working</module>
-  </modules>
+	 <module>onebeartoe-media-players-jukebox-client</module>
+	</modules>
 
     <repositories>
 	<repository>
