@@ -32,7 +32,6 @@ import javafx.scene.media.MediaPlayer;
 import onebeartoe.juke.network.JukeClient;
 
 import onebeartoe.juke.network.RandomJukeServerConnection;
-import onebeartoe.juke.ui.eck.KaleidaAnimate;
 
 import org.onebeartoe.application.ApplicationMode;
 import org.onebeartoe.application.ui.GUITools;
@@ -86,9 +85,6 @@ public class RandomJuke extends JukeClient
     private static JButton nextSongButton;
 
     private JPanel ControlPanel;
-
-    // the visual effect
-    static KaleidaAnimate visual;
 
     // the current song playing
     private static JLabel currentSongLabel;
@@ -443,10 +439,6 @@ public class RandomJuke extends JukeClient
         ControlPanel.add(nextSongButton);
         ControlPanel.add(settingsButton);
 
-        // set up the visal panel
-        visual = new KaleidaAnimate();
-        visual.init();
-
         // bottom panel
         currentSongLabel = new JLabel();
         currentSongLabel.setFont(new Font("TimesRoman", Font.PLAIN, 15));
@@ -462,7 +454,7 @@ public class RandomJuke extends JukeClient
         // place the comonents onto JFrame
         c = guiWindow.getContentPane();
         c.add(ControlPanel, BorderLayout.NORTH);
-        c.add(visual, BorderLayout.CENTER);
+
         c.add(bottomPanel, BorderLayout.SOUTH);
 
         guiWindow.addWindowListener(
@@ -491,8 +483,6 @@ public class RandomJuke extends JukeClient
         guiWindow.setLocation(320, 105);
         guiWindow.setSize(475, 375);
         guiWindow.setVisible(true);
-        
-        visual.start();
     }            
 
     private static void loadSongLists()
