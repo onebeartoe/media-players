@@ -16,8 +16,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 
-//import javax.swing.JButton;
-import javax.swing.JFrame;
+//import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -106,7 +105,7 @@ public class RandomJuke extends JukeClient
     
     private static Pixel pixel;
     
-    private static JFrame guiWindow;
+//    private static JFrame guiWindow;
     
     private static volatile List<SoundReading> microphoneValues;
     
@@ -250,7 +249,8 @@ public class RandomJuke extends JukeClient
         {
             songsPathURL = new URL(songsListUrl);
             songListManager.discoverSongLists(songsPathURL);
-        } catch (MalformedURLException e)
+        } 
+        catch (MalformedURLException e)
         {
             String msg = "couldn't add song list source: " + encodedUrl;
             System.out.println(msg);
@@ -362,10 +362,10 @@ public class RandomJuke extends JukeClient
     
     private void setupSwingUi()
     {
-        guiWindow = new JFrame("onebeartoe RandomJuke 3.3 - You Know It Edition");
+//        guiWindow = new JFrame("onebeartoe RandomJuke 3.3 - You Know It Edition");
         songListPathPanel = new SwingSongListPathPanel();
 
-        lookButton = new LookAndFeelButton("Change", guiWindow);
+//        lookButton = new LookAndFeelButton("Change", guiWindow);
         String title = "Look and Feel";
         Color color = Color.BLUE;
         JPanel lookPanel = new JPanel();
@@ -426,37 +426,37 @@ public class RandomJuke extends JukeClient
         bottomPanel.add(currentSongLabel, BorderLayout.NORTH);
 
         // place the comonents onto JFrame
-        c = guiWindow.getContentPane();
+//        c = guiWindow.getContentPane();
         c.add(ControlPanel, BorderLayout.NORTH);
 
         c.add(bottomPanel, BorderLayout.SOUTH);
 
-        guiWindow.addWindowListener(
-            new WindowAdapter()
-            {
-                public void windowClosing(WindowEvent e)
-                {
-                    Object o = RandomJuke.configuration;
-                    File outfile = RandomJuke.configurationFile;
-                    boolean saved = ObjectSaver.encodeObject(o, outfile);
-                    System.out.println("configuration saved: " + saved);
-
-                    try
-                    {
-                        songsPlayedService.storeSongsPlayed();
-                    } catch (Exception e1)
-                    {
-                        e1.printStackTrace();
-                    }
-
-                    System.exit(0);
-                }
-            }
-        );
-        
-        guiWindow.setLocation(320, 105);
-        guiWindow.setSize(475, 375);
-        guiWindow.setVisible(true);
+//        guiWindow.addWindowListener(
+//            new WindowAdapter()
+//            {
+//                public void windowClosing(WindowEvent e)
+//                {
+//                    Object o = RandomJuke.configuration;
+//                    File outfile = RandomJuke.configurationFile;
+//                    boolean saved = ObjectSaver.encodeObject(o, outfile);
+//                    System.out.println("configuration saved: " + saved);
+//
+//                    try
+//                    {
+//                        songsPlayedService.storeSongsPlayed();
+//                    } catch (Exception e1)
+//                    {
+//                        e1.printStackTrace();
+//                    }
+//
+//                    System.exit(0);
+//                }
+//            }
+//        );
+//        
+//        guiWindow.setLocation(320, 105);
+//        guiWindow.setSize(475, 375);
+//        guiWindow.setVisible(true);
     }            
 
     private static void loadSongLists()
@@ -614,11 +614,16 @@ public class RandomJuke extends JukeClient
         }
     }
 
+    /**
+     * we need to get the logic for the song list paths out of the GUI and 
+     * ready for server side extraction.
+     */
     private class ChangePathButtonHandler implements ActionListener
     {
         public void actionPerformed(ActionEvent e)
         {
-            int result = JOptionPane.showConfirmDialog(guiWindow, songListPathPanel);
+            int result = JOptionPane.showConfirmDialog(null, songListPathPanel);
+//            int result = JOptionPane.showConfirmDialog(guiWindow, songListPathPanel);
 
             if (result == JOptionPane.OK_OPTION)
             {
@@ -631,15 +636,7 @@ public class RandomJuke extends JukeClient
     
     private static void Fatal(String s)
     {
-        if(mode == ApplicationMode.GUI)
-        {
-            SwingServices ss = new SwingServices();
-            ss.infoMessage(s, "JMF Error");
-        }
-        else
-        {
-            System.err.println(s);
-        }
+        System.err.println(s);
     }
     
     private class SettingsButtonHandler implements ActionListener
@@ -649,7 +646,7 @@ public class RandomJuke extends JukeClient
             String ipLabelText = "http://" + nextSongServer.ip + ":" + nextSongServer.port;
             ipLabel.setText(ipLabelText);
 
-            JOptionPane.showMessageDialog(guiWindow, settingPanel);
+//            JOptionPane.showMessageDialog(guiWindow, settingPanel);
         }
     }
 }
