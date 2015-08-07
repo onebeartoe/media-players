@@ -109,16 +109,7 @@ public class RandomJuke extends JukeClient
             Logger.getLogger(RandomJuke.class.getName()).log(Level.SEVERE, null, ex);
         }        
         
-        mode = ApplicationMode.COMMAND_LINE;
-
-        if(args.length > 0)
-        {
-            String arg = args[0];
-            if( arg.equals("--gui") )
-            {
-                mode = ApplicationMode.GUI;               
-            }
-        }        
+        mode = ApplicationMode.COMMAND_LINE;        
         
         if (configurationFile.exists())
         {
