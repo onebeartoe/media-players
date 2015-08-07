@@ -12,6 +12,7 @@ public class JukeMain extends Application
     {
         String [] args = {};
         RandomJuke juke = new RandomJuke(args);
+        juke.printStartDescription();
     }
 
     /**

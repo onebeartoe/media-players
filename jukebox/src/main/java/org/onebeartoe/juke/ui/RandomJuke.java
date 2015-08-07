@@ -9,37 +9,47 @@ import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+
 import java.util.List;
+import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import java.util.Random;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import onebeartoe.juke.network.JukeClient;
-
 import onebeartoe.juke.network.RandomJukeServerConnection;
+import onebeartoe.juke.network.ThreadedServer;
 
 import org.onebeartoe.application.ApplicationMode;
 import org.onebeartoe.application.ui.GUITools;
 import org.onebeartoe.application.ui.GraphicalUserInterfaceServices;
 import org.onebeartoe.application.ui.LookAndFeelButton;
 import org.onebeartoe.application.ui.SwingServices;
+
 import org.onebeartoe.io.ObjectRetriever;
+
 import org.onebeartoe.multimedia.juke.JukeConfig;
 import org.onebeartoe.multimedia.juke.SongList;
+
 import org.onebeartoe.multimedia.juke.gui.SwingSongListPathPanel;
+
 import org.onebeartoe.multimedia.juke.services.CurrentSongService;
 import org.onebeartoe.multimedia.juke.services.NoPersistenceSongsPlayedService;
 import org.onebeartoe.multimedia.juke.services.RegularCurrentSongService;
 import org.onebeartoe.multimedia.juke.services.SongsPlayedService;
+
 import org.onebeartoe.multimedia.juke.songs.JavaxNetworkSearchingSongManager;
 import org.onebeartoe.multimedia.juke.songs.NetworkAndFilesystemSearchingSongManager;
 import org.onebeartoe.multimedia.juke.songs.SongListManager;
-import onebeartoe.juke.network.ThreadedServer;
 
 public class RandomJuke extends JukeClient
 {
@@ -66,15 +76,10 @@ public class RandomJuke extends JukeClient
     private LookAndFeelButton lookButton;
 
     private JPanel ControlPanel;
-    
-    // the current song playing
-//    private static JLabel currentSongLabel;
 
     private static int duplicateThreshold;
 
     private ThreadedServer nextSongServer;
-
-  //  private JLabel ipLabel;
 
     private JPanel mediaPanel;
 
@@ -82,6 +87,7 @@ public class RandomJuke extends JukeClient
 
     private Container c;
     
+// get rid fo this, the app will always be in command line mode    
     private static ApplicationMode mode;
     
     private static int SAMPLE_BUFFER_SIZE = 50;
@@ -100,6 +106,7 @@ public class RandomJuke extends JukeClient
         System.out.println("it begins");
         songListManager = new NetworkAndFilesystemSearchingSongManager();
         ((NetworkAndFilesystemSearchingSongManager) songListManager).setNetworkSongManager(new JavaxNetworkSearchingSongManager());
+        
         final String configurationFilename = "RandomJukeConfig.xml";
 
         configurationFile = new File(configurationFilename);
@@ -108,7 +115,20 @@ public class RandomJuke extends JukeClient
 
         // start off with a blank config
         configuration = new JukeConfig();
-                
+
+        try
+        {
+            String initialMusicSource = "file:///c:/home/world/music/";
+            URL url = new URL(initialMusicSource);
+            List<String> songListUrls = new ArrayList();
+            songListUrls.add(initialMusicSource);
+            setSongListUrls(songListUrls);
+        }
+        catch (MalformedURLException ex)
+        {
+            Logger.getLogger(RandomJuke.class.getName()).log(Level.SEVERE, null, ex);
+        }        
+        
         mode = ApplicationMode.COMMAND_LINE;
 
         if(args.length > 0)
@@ -301,6 +321,11 @@ public class RandomJuke extends JukeClient
         {
             Fatal("Error:" + e);
         }
+    }
+    
+    public void printStartDescription()
+    {
+        System.out.println("start description");
     }
 
     public void setSongListUrls(List<String> songListUrls)
