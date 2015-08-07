@@ -1,13 +1,8 @@
 
 package org.onebeartoe.juke.ui;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
-import java.awt.GridLayout;
-import java.awt.LayoutManager;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 
 import java.net.MalformedURLException;
@@ -22,9 +17,6 @@ import java.util.logging.Logger;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-
 import onebeartoe.juke.network.JukeClient;
 import onebeartoe.juke.network.RandomJukeServerConnection;
 import onebeartoe.juke.network.ThreadedServer;
@@ -33,14 +25,12 @@ import org.onebeartoe.application.ApplicationMode;
 import org.onebeartoe.application.ui.GUITools;
 import org.onebeartoe.application.ui.GraphicalUserInterfaceServices;
 import org.onebeartoe.application.ui.LookAndFeelButton;
-import org.onebeartoe.application.ui.SwingServices;
 
 import org.onebeartoe.io.ObjectRetriever;
 
 import org.onebeartoe.multimedia.juke.JukeConfig;
 import org.onebeartoe.multimedia.juke.SongList;
 
-import org.onebeartoe.multimedia.juke.gui.SwingSongListPathPanel;
 
 import org.onebeartoe.multimedia.juke.services.CurrentSongService;
 import org.onebeartoe.multimedia.juke.services.NoPersistenceSongsPlayedService;
@@ -65,25 +55,15 @@ public class RandomJuke extends JukeClient
 
     private static File configurationFile;
 
-    private static SwingSongListPathPanel songListPathPanel;
-
-    private JPanel settingPanel;
-
     private static GraphicalUserInterfaceServices uiService;
 
     private static URL currentSong;
 
     private LookAndFeelButton lookButton;
 
-    private JPanel ControlPanel;
-
     private static int duplicateThreshold;
 
     private ThreadedServer nextSongServer;
-
-    private JPanel mediaPanel;
-
-    private JPanel bottomPanel;
 
     private Container c;
     
@@ -169,8 +149,6 @@ public class RandomJuke extends JukeClient
         songsPlayedService = new NoPersistenceSongsPlayedService();
 
         currentSongSerice = new RegularCurrentSongService();
-
-        uiService = new SwingServices();
 
         duplicateThreshold = 100;
           
@@ -341,54 +319,12 @@ public class RandomJuke extends JukeClient
     
     private void setupSwingUi()
     {
-        songListPathPanel = new SwingSongListPathPanel();
-
         String title = "Look and Feel";
         Color color = Color.BLUE;
-        JPanel lookPanel = new JPanel();
-        lookPanel.add(lookButton);
-        lookPanel.setBorder(GUITools.factoryLineBorder(title, color));
 
-//        ipLabel = new JLabel();
         title = "Remote Control URL:";
-        JPanel ipPanel = new JPanel();
-//        ipPanel.add(ipLabel);
-
-        ChangePathButtonHandler changeSongListUrlsListeners = new ChangePathButtonHandler();
 
         title = "Song Paths";
-        JPanel pathOptionsPanel = new JPanel();
-
-        pathOptionsPanel.setBorder(GUITools.factoryLineBorder(title, color));
-
-        settingPanel = new JPanel();
-        settingPanel.setLayout(new GridLayout(3, 1));
-        settingPanel.add(pathOptionsPanel);
-        settingPanel.add(ipPanel);
-        settingPanel.add(lookPanel);
-
-
-
-        // Setup the Control Panel.
-        ControlPanel = new JPanel();
-        ControlPanel.setLayout(new GridLayout(1, 10));
-
-
-        // bottom panel
-//        currentSongLabel = new JLabel();
-//        currentSongLabel.setFont(new Font("TimesRoman", Font.PLAIN, 15));
-
-        mediaPanel = new JPanel();
-
-        bottomPanel = new JPanel();
-        LayoutManager bottomPanelLayout = new BorderLayout();
-        bottomPanel.setLayout(bottomPanelLayout);
-        bottomPanel.add(mediaPanel);
-  //      bottomPanel.add(currentSongLabel, BorderLayout.NORTH);
-
-        // place the comonents onto JFrame
-        c.add(ControlPanel, BorderLayout.NORTH);
-        c.add(bottomPanel, BorderLayout.SOUTH);
     }            
 
     private static void loadSongLists()
@@ -403,7 +339,7 @@ public class RandomJuke extends JukeClient
                 songListManager.discoverSongLists(url);
                 if(mode == ApplicationMode.GUI)
                 {
-                    songListPathPanel.addSongListPath(url.toString());   
+//                    songListPathPanel.addSongListPath(url.toString());   
                 }
             } 
             catch (MalformedURLException e1)
@@ -533,45 +469,10 @@ public class RandomJuke extends JukeClient
         {
             label = "";
         }
-
-//        if(mode == ApplicationMode.GUI)
-//        {
-//            // update the JLabel that shows the name of the current song.
-//            currentSongLabel.setText(label);
-//        }
     }
-
-    /**
-     * we need to get the logic for the song list paths out of the GUI and 
-     * ready for server side extraction.
-     */
-    private class ChangePathButtonHandler implements ActionListener
-    {
-        public void actionPerformed(ActionEvent e)
-        {
-            int result = JOptionPane.showConfirmDialog(null, songListPathPanel);
-//            int result = JOptionPane.showConfirmDialog(guiWindow, songListPathPanel);
-
-            if (result == JOptionPane.OK_OPTION)
-            {
-                List<String> songListUrls = songListPathPanel.getSongListPaths();
-
-                setSongListUrls(songListUrls);
-            }
-        }
-    }
-    
+   
     private static void Fatal(String s)
     {
         System.err.println(s);
-    }
-    
-    private class SettingsButtonHandler implements ActionListener
-    {
-        public void actionPerformed(ActionEvent e)
-        {
-            String ipLabelText = "http://" + nextSongServer.ip + ":" + nextSongServer.port;
-  //          ipLabel.setText(ipLabelText);
-        }
     }
 }
