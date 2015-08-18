@@ -11,8 +11,6 @@ import java.util.ArrayList;
 
 import java.util.List;
 import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -41,6 +39,11 @@ import org.onebeartoe.multimedia.juke.songs.JavaxNetworkSearchingSongManager;
 import org.onebeartoe.multimedia.juke.songs.NetworkAndFilesystemSearchingSongManager;
 import org.onebeartoe.multimedia.juke.songs.SongListManager;
 
+/**
+ * This is the server class from onebeartoe jukebox applications.
+ * 
+ * @author Roberto Marquez
+ */
 public class RandomJuke extends JukeClient
 {
     private static final long serialVersionUID = 178947923L;
@@ -96,18 +99,18 @@ public class RandomJuke extends JukeClient
         // start off with a blank config
         configuration = new JukeConfig();
 
-        try
+//        try
         {
             String initialMusicSource = "file:///c:/home/world/music/";
-            URL url = new URL(initialMusicSource);
+//            URL url = new URL(initialMusicSource);
             List<String> songListUrls = new ArrayList();
             songListUrls.add(initialMusicSource);
             setSongListUrls(songListUrls);
         }
-        catch (MalformedURLException ex)
-        {
-            Logger.getLogger(RandomJuke.class.getName()).log(Level.SEVERE, null, ex);
-        }        
+//        catch (MalformedURLException ex)
+//        {
+//            Logger.getLogger(RandomJuke.class.getName()).log(Level.SEVERE, null, ex);
+//        }        
         
         mode = ApplicationMode.COMMAND_LINE;        
         

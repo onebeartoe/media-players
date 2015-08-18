@@ -1,4 +1,6 @@
 
+// MAKE THIS A SWING APPLICATION THAT USES THE CURRENT RandomJuke server CLASS
+
 package org.onebeartoe.juke.ui;
 
 import java.awt.BorderLayout;
@@ -129,6 +131,8 @@ public class RandomJukeClient
         songListManager = new NetworkAndFilesystemSearchingSongManager();
         ((NetworkAndFilesystemSearchingSongManager) songListManager).setNetworkSongManager(new JavaxNetworkSearchingSongManager());
         final String configurationFilename = "RandomJukeConfig.xml";
+        
+
 
         configurationFile = new File(configurationFilename);
         System.out.println("loading configuration from: " + configurationFile.getAbsolutePath());
@@ -136,6 +140,12 @@ public class RandomJukeClient
 
         // start off with a blank config
         configuration = new JukeConfig();
+
+        
+        String initialMusicSource = "file:///c:/home/world/music/";
+        List<String> songListUrls = new ArrayList();
+        songListUrls.add(initialMusicSource);
+        setSongListUrls(songListUrls);        
         
         nextSongButton = new JButton("Next Song");
 
