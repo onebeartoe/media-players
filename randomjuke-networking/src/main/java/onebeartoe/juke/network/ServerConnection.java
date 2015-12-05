@@ -188,7 +188,7 @@ public abstract class ServerConnection implements Runnable, Cloneable
                     String text = "Quit request received";
                     sendPlainTextResponse(text);
 
-                    System.exit(1);
+                    System.exit(0);
                 }
                 else
                 {

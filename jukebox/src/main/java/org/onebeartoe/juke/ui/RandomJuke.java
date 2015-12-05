@@ -29,7 +29,6 @@ import org.onebeartoe.io.ObjectRetriever;
 import org.onebeartoe.multimedia.juke.JukeConfig;
 import org.onebeartoe.multimedia.juke.SongList;
 
-
 import org.onebeartoe.multimedia.juke.services.CurrentSongService;
 import org.onebeartoe.multimedia.juke.services.NoPersistenceSongsPlayedService;
 import org.onebeartoe.multimedia.juke.services.RegularCurrentSongService;
@@ -62,7 +61,7 @@ public class RandomJuke extends JukeClient
 
     private static URL currentSong;
 
-    private LookAndFeelButton lookButton;
+//    private LookAndFeelButton lookButton;
 
     private static int duplicateThreshold;
 
@@ -87,6 +86,7 @@ public class RandomJuke extends JukeClient
     public RandomJuke(String [] args)
     {
         System.out.println("it begins");
+        
         songListManager = new NetworkAndFilesystemSearchingSongManager();
         ((NetworkAndFilesystemSearchingSongManager) songListManager).setNetworkSongManager(new JavaxNetworkSearchingSongManager());
         
