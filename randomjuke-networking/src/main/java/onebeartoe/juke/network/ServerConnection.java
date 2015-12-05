@@ -20,7 +20,6 @@ import org.onebeartoe.io.TextFileReader;
 import org.onebeartoe.multimedia.BasicMultimediaController;
 import org.onebeartoe.multimedia.MultimediaController;
 import org.onebeartoe.pixel.PixelClient;
-import org.onebeartoe.pixel.sound.meter.SoundMeterModes;
 
 /**
  * @author Roberto Marquez
