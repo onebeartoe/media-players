@@ -1,7 +1,6 @@
 
 package org.onebeartoe.juke.ui;
 
-import java.awt.Color;
 import java.awt.Container;
 import java.io.File;
 
@@ -22,7 +21,6 @@ import onebeartoe.juke.network.ThreadedServer;
 import org.onebeartoe.application.ApplicationMode;
 import org.onebeartoe.application.ui.GUITools;
 import org.onebeartoe.application.ui.GraphicalUserInterfaceServices;
-import org.onebeartoe.application.ui.LookAndFeelButton;
 
 import org.onebeartoe.io.ObjectRetriever;
 
@@ -61,8 +59,6 @@ public class RandomJuke extends JukeClient
 
     private static URL currentSong;
 
-//    private LookAndFeelButton lookButton;
-
     private static int duplicateThreshold;
 
     private ThreadedServer nextSongServer;
@@ -99,18 +95,21 @@ public class RandomJuke extends JukeClient
         // start off with a blank config
         configuration = new JukeConfig();
 
-//        try
+        String initialMusicSource = "file:///c:/home/world/music/";
+
+
+        
+        List<String> songListUrls = new ArrayList();        
+        songListUrls.add(initialMusicSource);
+        
+        if(args.length > 0)
         {
-            String initialMusicSource = "file:///c:/home/world/music/";
-//            URL url = new URL(initialMusicSource);
-            List<String> songListUrls = new ArrayList();
-            songListUrls.add(initialMusicSource);
-            setSongListUrls(songListUrls);
+            System.out.println("adding command line source");
+            String commandLineSource = args[0];
+            songListUrls.add(commandLineSource);
         }
-//        catch (MalformedURLException ex)
-//        {
-//            Logger.getLogger(RandomJuke.class.getName()).log(Level.SEVERE, null, ex);
-//        }        
+        
+        setSongListUrls(songListUrls);
         
         mode = ApplicationMode.COMMAND_LINE;        
         
@@ -148,7 +147,6 @@ public class RandomJuke extends JukeClient
           
         random = new Random();
 
-
         try
         {
             songsPlayedService.retrieveSongsPlayed();
@@ -162,7 +160,6 @@ public class RandomJuke extends JukeClient
         {
             case GUI:
             {
-                setupSwingUi();
                 break;
             }
             default:
@@ -305,21 +302,11 @@ public class RandomJuke extends JukeClient
         songListManager.clearSongLists();
         configuration.clearSongTitlePaths();
 
-        for (String url : songListUrls)
+        for(String url : songListUrls)
         {
             addSongListUrl(url);
         }
     }
-    
-    private void setupSwingUi()
-    {
-        String title = "Look and Feel";
-        Color color = Color.BLUE;
-
-        title = "Remote Control URL:";
-
-        title = "Song Paths";
-    }            
 
     private static void loadSongLists()
     {
@@ -331,10 +318,6 @@ public class RandomJuke extends JukeClient
             {
                 url = new URL(uri);
                 songListManager.discoverSongLists(url);
-                if(mode == ApplicationMode.GUI)
-                {
-//                    songListPathPanel.addSongListPath(url.toString());   
-                }
             } 
             catch (MalformedURLException e1)
             {
