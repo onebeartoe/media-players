@@ -11,7 +11,9 @@ Related videos:
 
 [![Sparkfun Tutorial - Music Visualizer](http://img.youtube.com/vi/IyH7Rpe7xtI/0.jpg)](https://www.youtube.com/watch?v=IyH7Rpe7xtI "Sparkfun Tutorial - Music Visualizer")
 
-More from the author (me):
+[![onebeartoe Goes to Sparkfun - Makes LED Matrix Belt Buckle!](http://img.youtube.com/vi/FKOkERZpfo4/0.jpg)](https://www.youtube.com/watch?v=FKOkERZpfo4 "onebeartoe Goes to Sparkfun - Makes LED Matrix Belt Buckle!")
+
+More from the author:
 
 https://plus.google.com/u/0/104101484714566033177
 
