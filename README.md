@@ -14,5 +14,7 @@ Related videos:
 More from the author (me):
 
 https://plus.google.com/u/0/104101484714566033177
+
 https://twitter.com/onebeartoe
+
 https://www.youtube.com/user/onebeartoe/videos
