@@ -84,9 +84,9 @@
         </dependency>
 
         <dependency>
-            <groupId>org.onebeartoe.media.players.randomjuke</groupId>
+            <groupId>org.onebeartoe.media.players.parent</groupId>
             <artifactId>randomjuke-networking</artifactId>
-            <version>0.1-SNAPSHOT</version>
+            <version>0.0.1-SNAPSHOT</version>
         </dependency>        
                         
         <dependency>

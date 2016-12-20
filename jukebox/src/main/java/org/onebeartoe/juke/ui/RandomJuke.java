@@ -95,10 +95,8 @@ public class RandomJuke extends JukeClient
         // start off with a blank config
         configuration = new JukeConfig();
 
-        String initialMusicSource = "file:///c:/home/world/music/";
+        String initialMusicSource = "file:///c:/world/world-distribute/music/";
 
-
-        
         List<String> songListUrls = new ArrayList();        
         songListUrls.add(initialMusicSource);
         
