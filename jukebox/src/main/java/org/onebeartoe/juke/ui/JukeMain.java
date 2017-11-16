@@ -13,7 +13,7 @@ public class JukeMain extends Application
     {
         Parameters parameters = getParameters();
         List<String> raw = parameters.getRaw();
-        String [] args = (String []) raw.toArray();
+        String [] args = raw.toArray( new String[0] );
         
         RandomJuke juke = new RandomJuke(args);
         juke.printStartDescription();
