@@ -22,6 +22,7 @@
 	</modules>
 
     <repositories>
+<!--        
 	<repository>
             <id>oss-snapshots-repo</id>
             <name>Sonatype OSS Maven Repository</name>
@@ -31,6 +32,7 @@
                 <updatePolicy>always</updatePolicy>
             </snapshots>
 	</repository>
+-->        
     </repositories> 
 
  <build>

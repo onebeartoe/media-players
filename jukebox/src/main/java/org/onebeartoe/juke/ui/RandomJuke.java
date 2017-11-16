@@ -97,8 +97,9 @@ public class RandomJuke extends JukeClient
 
         String initialMusicSource = "file:///c:/home/world/music/";
 
+        initialMusicSource = "file:///Users/lando/World/Music/";
+        initialMusicSource = "file:///Users/lando/World-distribute/Music/";
 
-        
         List<String> songListUrls = new ArrayList();        
         songListUrls.add(initialMusicSource);
         
@@ -261,6 +262,7 @@ public class RandomJuke extends JukeClient
                 @Override
                 public void run()
                 {
+                    System.err.println("calling playNextSong()..."); 
                     playNextSong();
                 }
             });
@@ -271,6 +273,7 @@ public class RandomJuke extends JukeClient
                 public void run()
                 {
                     // do we need to update anything here?
+                    System.err.println("in on ready for media player..."); 
                 }
             });
             

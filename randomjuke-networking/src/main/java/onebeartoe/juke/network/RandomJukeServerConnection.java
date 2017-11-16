@@ -49,6 +49,8 @@ public class RandomJukeServerConnection extends ServerConnection
         try
         {
             boolean next = currentSongService.next(currentSongTitle, clientAddress);
+            // ?????? the code would not update with the JAR for some reason
+            next = true;
             if (next)
             {
                 app.playNextSong();
