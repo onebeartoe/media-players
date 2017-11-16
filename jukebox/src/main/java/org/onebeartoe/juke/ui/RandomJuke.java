@@ -111,6 +111,10 @@ public class RandomJuke extends JukeClient
             String commandLineSource = args[0];
             songListUrls.add(commandLineSource);
         }
+        else
+        {
+            System.out.println("No command line arguments were found.");
+        }
         
         setSongListUrls(songListUrls);
         

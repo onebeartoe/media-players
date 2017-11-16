@@ -1,6 +1,7 @@
 
 package org.onebeartoe.juke.ui;
 
+import java.util.List;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.stage.Stage;
@@ -10,7 +11,9 @@ public class JukeMain extends Application
     @Override
     public void start(Stage stage) throws Exception 
     {
-        String [] args = {};
+        Parameters parameters = getParameters();
+        List<String> raw = parameters.getRaw();
+        String [] args = (String []) raw.toArray();
         
         RandomJuke juke = new RandomJuke(args);
         juke.printStartDescription();
