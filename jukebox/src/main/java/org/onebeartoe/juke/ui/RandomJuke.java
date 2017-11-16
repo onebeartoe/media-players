@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+// some parts of the JavaFX application were inspired by this media player:
+//      http://fxexperience.com/2012/01/fun-javafx-2-0-audio-player/
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
@@ -95,7 +97,7 @@ public class RandomJuke extends JukeClient
         // start off with a blank config
         configuration = new JukeConfig();
 
-        String initialMusicSource = "file:///c:/home/world/music/";
+        String initialMusicSource = "file:///c:/world/world-distribute/music/";
 
         initialMusicSource = "file:///Users/lando/World/Music/";
         initialMusicSource = "file:///Users/lando/World-distribute/Music/";
