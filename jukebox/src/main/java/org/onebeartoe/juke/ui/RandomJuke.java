@@ -97,13 +97,7 @@ public class RandomJuke extends JukeClient
         // start off with a blank config
         configuration = new JukeConfig();
 
-        String initialMusicSource = "file:///c:/world/world-distribute/music/";
-
-        initialMusicSource = "file:///Users/lando/World/Music/";
-        initialMusicSource = "file:///Users/lando/World-distribute/Music/";
-
-        List<String> songListUrls = new ArrayList();        
-        songListUrls.add(initialMusicSource);
+        List<String> songListUrls = new ArrayList();
         
         if(args.length > 0)
         {
@@ -114,6 +108,11 @@ public class RandomJuke extends JukeClient
         else
         {
             System.out.println("No command line arguments were found.");
+            
+            String initialMusicSource = "file:///Users/lando/World-distribute/Music/";
+            
+            System.out.println("Adding built-in source: " + initialMusicSource);
+            songListUrls.add(initialMusicSource);
         }
         
         setSongListUrls(songListUrls);
