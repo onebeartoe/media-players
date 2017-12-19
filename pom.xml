@@ -12,13 +12,13 @@
 	<name>onebeartoe-media-players</name>
 
 	<modules>
-            <module>jukebox</module>
-            <module>pi-ezo</module>
             <module>configuration</module>
+            <module>jukebox</module>
+            <module>jukebox-client</module>
             <module>jukebox-networking</module>
+            <module>pi-ezo</module>
             <module>sound-recorder</module>
             <module>sound-visualizer</module>
-            <module>jukebox-client</module>
 	</modules>
 
     <repositories>
