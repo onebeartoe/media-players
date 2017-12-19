@@ -1,51 +1,37 @@
 
 
+//move
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//TODO: THE CLASS NAMED MainApp HAS THE WORKING CODE!!!
-package org.onebeartoe.juke.javafx.demo;
+package org.onebeartoe.javafx.demo;
 
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
-import java.io.IOException;
 import java.net.InetSocketAddress;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javafx.application.Application;
+import static javafx.application.Application.launch;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.stage.Stage;
 import org.onebeartoe.network.ClasspathResourceHttpHandler;
 
-/**
- * @author Roberto Marquez
- */
-public class Jukebox
+
+public class JavaFxAudioDemo extends Application 
 {
     private static MediaPlayer mediaPlayer;
     
     private HttpServer server;
 
-    
-    public Jukebox(String [] args) throws IOException
+    @Override
+    public void start(Stage stage) throws Exception 
     {
         final String audio2 = "file:///C:/home/world/sounds/Field-cricket-species-Spanish.mp3";
-        final String audio1 = "file:///C:/home/world/sounds/Price-Is-Right-loser-sound.mp3";
+//        final String audio1 = "file:///C:/home/world/sounds/Price-Is-Right-loser-sound.mp3";
+        
+        final String audio1 = "file:///c:/home/world/music/Bartle-Beats-Frequency/bartlebeats-frequency-02-Carpeter.mp3";
         
         System.out.println("Input songs:\n" + audio1 + "\n" + audio2 + "\n");
-        
+     
         InetSocketAddress anyhost = new InetSocketAddress(2110);        
         server = HttpServer.create(anyhost, 0);
 
@@ -86,28 +72,34 @@ public class Jukebox
                     public void run() 
                     {
                         System.out.println("end of second audio fiile reached");
+                        mediaPlayer.stop();
+//                        System.exit(0);
                     }
                 });
             }
         });
     }
-    
-    public static void main(String [] args) //throws IOException
+
+    /**
+     * The main() method is ignored in correctly deployed JavaFX application.
+     * main() serves only as fallback in case the application can not be
+     * launched through deployment artifacts, e.g., in IDEs with limited FX
+     * support. NetBeans ignores main().
+     *
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) 
     {
-        try        
-        {
-            Jukebox app = new Jukebox(args);
-//        app.startServer();
-        }
-        catch (IOException ex)
-        {
-            Logger.getLogger(Jukebox.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        System.out.println("launching...");
+        
+        launch(args);
+        
+        System.out.println("launched!");
     }
     
     public void startServer()
     {
-        System.out.println("starting juke server...");
+        System.out.println("starting juke server.");
         server.start();
         System.out.println("juke server started");
     }
