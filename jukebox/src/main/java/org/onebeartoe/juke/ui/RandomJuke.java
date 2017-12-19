@@ -11,8 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-// some parts of the JavaFX application were inspired by this media player:
-//      http://fxexperience.com/2012/01/fun-javafx-2-0-audio-player/
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
@@ -40,6 +38,10 @@ import org.onebeartoe.multimedia.juke.songs.SongListManager;
 
 /**
  * This is the server class from onebeartoe jukebox applications.
+ * 
+ * Some parts of the JavaFX application were inspired by this media player:
+ *      
+ *      http://fxexperience.com/2012/01/fun-javafx-2-0-audio-player/
  * 
  * @author Roberto Marquez
  */
