@@ -14,11 +14,11 @@
 	<modules>
             <module>jukebox</module>
             <module>pi-ezo</module>
-            <module>randomjuke</module>
+            <module>configuration</module>
             <module>randomjuke-networking</module>
             <module>sound-recorder</module>
             <module>sound-visualizer</module>
-	 <module>onebeartoe-media-players-jukebox-client</module>
+            <module>jukebox-client</module>
 	</modules>
 
     <repositories>
