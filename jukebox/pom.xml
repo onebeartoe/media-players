@@ -31,13 +31,32 @@
             <artifactId>onebeartoe-application</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
-        
+
+        <dependency>
+            <groupId>org.onebeartoe.media.players</groupId>
+        <artifactId>jukebox-networking</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    
+    
+    
+        </dependency>
+
+<!--              
+
+        <dependency>
+            <groupId>org.onebeartoe</groupId>
+            <artifactId>multimedia</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    
         <dependency>
             <groupId>org.onebeartoe.media.players</groupId>
             <artifactId>randomjuke-networking</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+-->
                 
+                                                
         <dependency>
             <groupId>org.onebeartoe.network</groupId>
             <artifactId>network</artifactId>
@@ -106,6 +125,7 @@
                     </execution>
                 </executions>  
             </plugin>
+            
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -118,6 +138,7 @@
                     </compilerArguments>
                 </configuration>
             </plugin>
+            
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -130,5 +151,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>

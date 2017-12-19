@@ -40,12 +40,6 @@
             <artifactId>multimedia</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
-                
-        <dependency>
-            <groupId>org.onebeartoe.media.players</groupId>
-            <artifactId>randomjuke-networking</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
         
         <dependency>
             <groupId>org.onebeartoe.pixel</groupId>  

@@ -26,13 +26,7 @@
         <name>Your Organisation</name>
     </organization>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.onebeartoe.media.players</groupId>
-            <artifactId>randomjuke-networking</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-                
+    <dependencies>                
         <dependency>
             <groupId>org.onebeartoe.network</groupId>
             <artifactId>network</artifactId>
