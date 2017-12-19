@@ -11,11 +11,11 @@
 	<version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>randomjuke</artifactId>
+    <artifactId>configuration</artifactId>
   
     <packaging>jar</packaging>
 
-    <name>onebeartoe-media-players-randomjuke</name>
+    <name>onebeartoe-media-players-configuration</name>
     
     <url>http://maven.apache.org</url>
 
