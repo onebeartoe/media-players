@@ -5,16 +5,14 @@
     <modelVersion>4.0.0</modelVersion>
     
     <parent>
-        <groupId>org.onebeartoe.media.players.parent</groupId>
-        <artifactId>media-players-parent</artifactId>
+        <groupId>org.onebeartoe.media.players</groupId>
+        <artifactId>media-players</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     
     <name>onebeartoe-media-players-sound-visualizer</name>
-    
-    <groupId>org.onebeartoe.sound.visualizer</groupId>
+
     <artifactId>sound-visualizer</artifactId>
-    <version>0.1-SNAPSHOT</version>
     
     <packaging>jar</packaging>
     
@@ -44,9 +42,9 @@
         </dependency>
                 
         <dependency>
-            <groupId>org.onebeartoe.media.players.randomjuke</groupId>
+            <groupId>org.onebeartoe.media.players</groupId>
             <artifactId>randomjuke-networking</artifactId>
-            <version>0.1-SNAPSHOT</version>
+            <version>0.0.1-SNAPSHOT</version>
         </dependency>
         
         <dependency>

@@ -5,16 +5,14 @@
     <modelVersion>4.0.0</modelVersion>
     
     <parent>
-        <groupId>org.onebeartoe.media.players.parent</groupId>
-		<artifactId>media-players-parent</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
+        <groupId>org.onebeartoe.media.players</groupId>
+        <artifactId>media-players</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
     </parent>
 
     <name>onebeartoe-media-players-pi-ezo</name>
-        
-    <groupId>org.onebeartoe.media.pisoundo</groupId>
+
     <artifactId>pisoundo</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
     
     <packaging>jar</packaging>
     

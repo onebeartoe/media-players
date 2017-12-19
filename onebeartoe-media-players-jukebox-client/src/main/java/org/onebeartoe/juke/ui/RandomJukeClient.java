@@ -512,9 +512,7 @@ public class RandomJukeClient
     }
 
     public static void main(String [] args)
-    {
-
-        
+    {        
         final RandomJukeClient app = new RandomJukeClient(args);
         
     }

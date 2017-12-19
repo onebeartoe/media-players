@@ -4,14 +4,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.onebeartoe.media.players.parent</groupId>
-		<artifactId>media-players-parent</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
+        <groupId>org.onebeartoe.media.players</groupId>
+        <artifactId>media-players</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
     </parent>
-	
-    <groupId>org.onebeartoe.juke</groupId>
+
     <artifactId>onebeartoe-jukebox</artifactId>
-    <version>1.0-SNAPSHOT</version>
 	
     <packaging>jar</packaging>
 
@@ -29,9 +27,9 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.onebeartoe.media.players.randomjuke</groupId>
+            <groupId>org.onebeartoe.media.players</groupId>
             <artifactId>randomjuke-networking</artifactId>
-            <version>0.1-SNAPSHOT</version>
+            <version>0.0.1-SNAPSHOT</version>
         </dependency>
                 
         <dependency>
