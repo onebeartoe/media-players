@@ -145,7 +145,7 @@ public class SoundVisualizer extends JukeClient
     @Override
     public void playNextSong()
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     private static class PixelIntegration extends IOIOConsoleApp

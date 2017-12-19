@@ -21,7 +21,7 @@ public class PiEzo
     
     public PiEzo() throws IOException
     {        
-        InetSocketAddress anyhost = new InetSocketAddress(2110);        
+        InetSocketAddress anyhost = new InetSocketAddress(2111);        
         server = HttpServer.create(anyhost, 0);
         
         HttpHandler userInterfaceHttpHander = new ClasspathResourceHttpHandler();

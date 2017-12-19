@@ -19,8 +19,7 @@ import java.util.regex.Pattern;
 import org.onebeartoe.io.TextFileReader;
 import org.onebeartoe.multimedia.BasicMultimediaController;
 import org.onebeartoe.multimedia.MultimediaController;
-import org.onebeartoe.pixel.PixelClient;
-import org.onebeartoe.pixel.sound.meter.SoundMeterModes;
+//import org.onebeartoe.pixel.PixelClient;
 
 /**
  * @author Roberto Marquez
@@ -188,7 +187,7 @@ public abstract class ServerConnection implements Runnable, Cloneable
                     String text = "Quit request received";
                     sendPlainTextResponse(text);
 
-                    System.exit(1);
+                    System.exit(0);
                 }
                 else
                 {
@@ -210,7 +209,8 @@ public abstract class ServerConnection implements Runnable, Cloneable
                             
                             if (nameValues[0].equals("action"))
                             {
-                                String currentSongTitle = PixelClient.currentSongTitle;
+                                String currentSongTitle = "needed to get rid of PixelClient reference";
+//                                String currentSongTitle = PixelClient.currentSongTitle;
                                 if (nameValues[1].equals("next"))
                                 {
                                     nextAction(currentSongTitle, clientAddress);
@@ -271,10 +271,10 @@ public abstract class ServerConnection implements Runnable, Cloneable
                         InputStream instream = getClass().getResourceAsStream(uiHtmlath);
                         String html = TextFileReader.readText(instream);
 
-                        if(PixelClient.currentSongTitle != null)
+//                        if(PixelClient.currentSongTitle != null)
                         {
-                            String currentSong = URLDecoder.decode(PixelClient.currentSongTitle);
-                            html = html.replace("CURRENT_SONG", currentSong);
+//                            String currentSong = URLDecoder.decode(PixelClient.currentSongTitle);
+//                            html = html.replace("CURRENT_SONG", currentSong);
                         }
 
                         int volume = systemMediaControler.currentVolume();

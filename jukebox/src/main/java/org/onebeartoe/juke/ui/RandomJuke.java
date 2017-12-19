@@ -1,7 +1,6 @@
 
 package org.onebeartoe.juke.ui;
 
-import java.awt.Color;
 import java.awt.Container;
 import java.io.File;
 
@@ -12,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+// some parts of the JavaFX application were inspired by this media player:
+//      http://fxexperience.com/2012/01/fun-javafx-2-0-audio-player/
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
@@ -22,13 +23,11 @@ import onebeartoe.juke.network.ThreadedServer;
 import org.onebeartoe.application.ApplicationMode;
 import org.onebeartoe.application.ui.GUITools;
 import org.onebeartoe.application.ui.GraphicalUserInterfaceServices;
-import org.onebeartoe.application.ui.LookAndFeelButton;
 
 import org.onebeartoe.io.ObjectRetriever;
 
 import org.onebeartoe.multimedia.juke.JukeConfig;
 import org.onebeartoe.multimedia.juke.SongList;
-
 
 import org.onebeartoe.multimedia.juke.services.CurrentSongService;
 import org.onebeartoe.multimedia.juke.services.NoPersistenceSongsPlayedService;
@@ -62,8 +61,6 @@ public class RandomJuke extends JukeClient
 
     private static URL currentSong;
 
-    private LookAndFeelButton lookButton;
-
     private static int duplicateThreshold;
 
     private ThreadedServer nextSongServer;
@@ -87,6 +84,7 @@ public class RandomJuke extends JukeClient
     public RandomJuke(String [] args)
     {
         System.out.println("it begins");
+        
         songListManager = new NetworkAndFilesystemSearchingSongManager();
         ((NetworkAndFilesystemSearchingSongManager) songListManager).setNetworkSongManager(new JavaxNetworkSearchingSongManager());
         
@@ -99,18 +97,25 @@ public class RandomJuke extends JukeClient
         // start off with a blank config
         configuration = new JukeConfig();
 
-//        try
+        List<String> songListUrls = new ArrayList();
+        
+        if(args.length > 0)
         {
-            String initialMusicSource = "file:///c:/home/world/music/";
-//            URL url = new URL(initialMusicSource);
-            List<String> songListUrls = new ArrayList();
-            songListUrls.add(initialMusicSource);
-            setSongListUrls(songListUrls);
+            System.out.println("adding command line source");
+            String commandLineSource = args[0];
+            songListUrls.add(commandLineSource);
         }
-//        catch (MalformedURLException ex)
-//        {
-//            Logger.getLogger(RandomJuke.class.getName()).log(Level.SEVERE, null, ex);
-//        }        
+        else
+        {
+            System.out.println("No command line arguments were found.");
+            
+            String initialMusicSource = "file:///Users/lando/World-distribute/Music/";
+            
+            System.out.println("Adding built-in source: " + initialMusicSource);
+            songListUrls.add(initialMusicSource);
+        }
+        
+        setSongListUrls(songListUrls);
         
         mode = ApplicationMode.COMMAND_LINE;        
         
@@ -148,7 +153,6 @@ public class RandomJuke extends JukeClient
           
         random = new Random();
 
-
         try
         {
             songsPlayedService.retrieveSongsPlayed();
@@ -162,7 +166,6 @@ public class RandomJuke extends JukeClient
         {
             case GUI:
             {
-                setupSwingUi();
                 break;
             }
             default:
@@ -264,6 +267,7 @@ public class RandomJuke extends JukeClient
                 @Override
                 public void run()
                 {
+                    System.err.println("calling playNextSong()..."); 
                     playNextSong();
                 }
             });
@@ -274,6 +278,7 @@ public class RandomJuke extends JukeClient
                 public void run()
                 {
                     // do we need to update anything here?
+                    System.err.println("in on ready for media player..."); 
                 }
             });
             
@@ -305,21 +310,11 @@ public class RandomJuke extends JukeClient
         songListManager.clearSongLists();
         configuration.clearSongTitlePaths();
 
-        for (String url : songListUrls)
+        for(String url : songListUrls)
         {
             addSongListUrl(url);
         }
     }
-    
-    private void setupSwingUi()
-    {
-        String title = "Look and Feel";
-        Color color = Color.BLUE;
-
-        title = "Remote Control URL:";
-
-        title = "Song Paths";
-    }            
 
     private static void loadSongLists()
     {
@@ -331,10 +326,6 @@ public class RandomJuke extends JukeClient
             {
                 url = new URL(uri);
                 songListManager.discoverSongLists(url);
-                if(mode == ApplicationMode.GUI)
-                {
-//                    songListPathPanel.addSongListPath(url.toString());   
-                }
             } 
             catch (MalformedURLException e1)
             {

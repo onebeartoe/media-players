@@ -10,7 +10,7 @@
             </goals>
             
             <properties>
-                <runfx.args>-jar "${project.build.directory}\${project.build.finalName}.jar"</runfx.args>
+                <runfx.args>-jar "${project.build.directory}/${project.build.finalName}.jar"</runfx.args>
                 <exec.args>-classpath %classpath org.onebeartoe.juke.ui.JukeMain</exec.args>
                 <exec.executable>java</exec.executable>
             </properties>
