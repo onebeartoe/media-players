@@ -15,7 +15,7 @@
             <module>jukebox</module>
             <module>pi-ezo</module>
             <module>configuration</module>
-            <module>randomjuke-networking</module>
+            <module>jukebox-networking</module>
             <module>sound-recorder</module>
             <module>sound-visualizer</module>
             <module>jukebox-client</module>
