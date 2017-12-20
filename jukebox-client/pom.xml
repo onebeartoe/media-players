@@ -23,10 +23,16 @@
 
     <organization>
         <!-- Used as the 'Vendor' for JNLP generation -->
-        <name>Your Organisation</name>
+        <name>onebeartoe.com</name>
     </organization>
 
-    <dependencies>                
+    <dependencies>
+        <dependency>
+            <groupId>org.onebeartoe.media.players</groupId>
+            <artifactId>jukebox-networking</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        
         <dependency>
             <groupId>org.onebeartoe.network</groupId>
             <artifactId>network</artifactId>
