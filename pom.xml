@@ -3,22 +3,22 @@
     
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>org.onebeartoe.media.players.parent</groupId>
-	<artifactId>media-players-parent</artifactId>
+	<groupId>org.onebeartoe.media.players</groupId>
+	<artifactId>media-players</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
 	<packaging>pom</packaging>
 
-	<name>onebeartoe-media-players-parent</name>
+	<name>onebeartoe-media-players</name>
 
 	<modules>
+            <module>configuration</module>
             <module>jukebox</module>
+            <module>jukebox-client</module>
+            <module>jukebox-networking</module>
             <module>pi-ezo</module>
-            <module>randomjuke</module>
-            <module>randomjuke-networking</module>
             <module>sound-recorder</module>
             <module>sound-visualizer</module>
-	 <module>onebeartoe-media-players-jukebox-client</module>
 	</modules>
 
     <repositories>
