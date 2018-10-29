@@ -50,10 +50,6 @@ import org.onebeartoe.multimedia.juke.songs.JavaxNetworkSearchingSongManager;
 import org.onebeartoe.multimedia.juke.songs.NetworkAndFilesystemSearchingSongManager;
 import org.onebeartoe.multimedia.juke.songs.SongListManager;
 import onebeartoe.juke.network.ThreadedServer;
-//import static org.onebeartoe.pixel.PixelClient.currentSongTitle;
-//import org.onebeartoe.pixel.PixelEnvironment;
-//import org.onebeartoe.pixel.hardware.Pixel;
-//import org.onebeartoe.pixel.sound.meter.SoundReading;
 
 public class RandomJukeClient
 {
@@ -105,16 +101,8 @@ public class RandomJukeClient
 
     private Container c;
     
-//    private static ApplicationMode mode;
-
-//    private static PixelEnvironment pixelEnvironment;
-//    
-//    private static Pixel pixel;
-    
     private static JFrame guiWindow;
-    
-//    private static volatile List<SoundReading> microphoneValues;
-    
+        
     private static int SAMPLE_BUFFER_SIZE = 50;
     
     private static Random random;
