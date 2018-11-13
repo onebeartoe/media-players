@@ -12,7 +12,8 @@ script:
   - rm $HOME/.m2/repository/org/onebeartoe/multimedia/1.0/multimedia-1.0.jar
   - rm $HOME/.m2/repository/org/onebeartoe/multimedia/1.0/multimedia-1.0.pom
 
-  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar -Dsonar.cfamily.build-wrapper-output.bypass=true -Dsonar.cfamily.build-wrapper-output=pi-ezo/target
+  - mvn -Dsonar.cfamily.build-wrapper-output.bypass=true clean org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar
+#  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar -Dsonar.cfamily.build-wrapper-output.bypass=true -Dsonar.cfamily.build-wrapper-output=pi-ezo/target
   
 cache:
   directories:
