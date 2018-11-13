@@ -26,7 +26,7 @@ public class SoundVisualizerServerConnection extends ServerConnection
     }
 
     @Override
-    public void nextAction(String currentSongTitle, String clientAddress)
+    public String nextAction(String currentSongTitle, String clientAddress)
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
