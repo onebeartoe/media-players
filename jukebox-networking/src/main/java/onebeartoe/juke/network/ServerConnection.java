@@ -133,7 +133,7 @@ public abstract class ServerConnection implements Runnable, Cloneable
     
     public abstract void like(String currentSongTitle, String clientAddress);
     
-    public abstract void nextAction(String currentSongTitle, String clientAddress);
+    public abstract String nextAction(String currentSongTitle, String clientAddress);
     
     /**
      * This crazy method delegates each HTTP request.
@@ -193,7 +193,7 @@ public abstract class ServerConnection implements Runnable, Cloneable
                     boolean sendPlainText = false;
                     String plainText = "--plain text not set---";
                     
-                    
+                    String currentSong = "current-song-not-set";
                     
                     String[] parameters = request.split("&");
                     for (String param : parameters)
@@ -209,10 +209,10 @@ public abstract class ServerConnection implements Runnable, Cloneable
                             if (nameValues[0].equals("action"))
                             {
                                 String currentSongTitle = "needed to get rid of PixelClient reference";
-//                                String currentSongTitle = PixelClient.currentSongTitle;
+
                                 if (nameValues[1].equals("next"))
                                 {
-                                    nextAction(currentSongTitle, clientAddress);
+                                    currentSong = nextAction(currentSongTitle, clientAddress);
                                 } 
                                 else if (nameValues[1].equals("unpause"))
                                 {
@@ -265,17 +265,12 @@ public abstract class ServerConnection implements Runnable, Cloneable
 
                         String uiHtmlath = path + getControlsResourcePath();
                         
-//                        System.out.println("loading: " + uiHtmlath);
-                        
                         InputStream instream = getClass().getResourceAsStream(uiHtmlath);
                         String html = TextFileReader.readText(instream);
 
-//                        if(PixelClient.currentSongTitle != null)
-                        {
-//                            String currentSong = URLDecoder.decode(PixelClient.currentSongTitle);
-//                            html = html.replace("CURRENT_SONG", currentSong);
-                        }
-
+                        //replace the token for the current song                        
+                        html = html.replace("CURRENT_SONG", currentSong);
+                        
                         int volume = systemMediaControler.currentVolume();
                         html = html.replace(SERVER_VOLUME, "" + volume);
 
@@ -283,8 +278,6 @@ public abstract class ServerConnection implements Runnable, Cloneable
                     }
                 }
             }
-
-//            System.out.println("message sent for request: " + request);
         } 
         catch (IOException e)
         {

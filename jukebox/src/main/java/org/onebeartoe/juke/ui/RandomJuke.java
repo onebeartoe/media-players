@@ -1,7 +1,6 @@
 
 package org.onebeartoe.juke.ui;
 
-import java.awt.Container;
 import java.io.File;
 
 import java.net.MalformedURLException;
@@ -67,9 +66,9 @@ public class RandomJuke extends JukeClient
 
     private ThreadedServer nextSongServer;
 
-    private Container c;
+//    private Container c;
     
-// get rid fo this, the app will always be in command line mode    
+//TODO: get rid fo this, the app will always be in command line mode    
     private static ApplicationMode mode;
     
     private static int SAMPLE_BUFFER_SIZE = 50;
@@ -339,6 +338,7 @@ public class RandomJuke extends JukeClient
     /**
      * this method will loop until it finds a song that has not played before
      */
+    @Override
     public void playNextSong()
     {
         if (mediaPlayer != null)
@@ -438,6 +438,7 @@ public class RandomJuke extends JukeClient
             // take note of the song that has been taken out of the selection pool
             try
             {
+                // this is where the current song title is set                
                 currentSongSerice.next(currentSongTitle, "localhost");
                 currentSongSerice.setCurrentSong(currentSongTitle);
                 songsPlayedService.addPlayedSong(currentSongTitle);

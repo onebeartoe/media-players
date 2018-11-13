@@ -44,7 +44,7 @@ public class RandomJukeServerConnection extends ServerConnection
     }
     
     @Override
-    public void nextAction(String currentSongTitle, String clientAddress)
+    public String nextAction(String currentSongTitle, String clientAddress)
     {
         try
         {
@@ -54,14 +54,14 @@ public class RandomJukeServerConnection extends ServerConnection
             if (next)
             {
                 app.playNextSong();
-                
-//                nextSongButton.doClick();
             }
         } 
         catch (Exception e)
         {
             e.printStackTrace();
-        }        
+        }
+
+        return currentSongService.getCurrentSong();
     }
 
     public void setNextSongButton(JButton nextSongButton)

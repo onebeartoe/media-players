@@ -92,6 +92,26 @@
         <br/>
         
         <center >
+            <span style="font-size:1.875em;">
+                Sound Meter Mode:
+            </span>
+            
+            <select name="sound-meter-mode" 
+                    onchange="soundMeterModeChanged(this.value);"
+                    style="width: 50%; height: 2em; font-size: 3em;">
+                <option value="off">Off</option>
+                <option value="blob">Blob</option>
+                <option value="bottom-up">Bottom Up</option>
+                <option value="circle">Circle</option>
+                <option value="rectangle">Rectangle</option>                            
+                <option value="wave-graph">Wave Graph</option>
+                <option value="color-mapping">Color Mapping</option>
+                <option value="horizontal-mirroring">Horizontal Mirroring</option>
+                <option value="color-mapping">Color Mapping</option>                
+            </select>
+        </center>        
+        
+        <center >
             
             
             <form method="POST" action="quit">
