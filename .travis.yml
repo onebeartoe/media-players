@@ -7,6 +7,10 @@ addons:
     token: $SONAR_TOKEN
 
 script:
+# Remove the old dependency JARs, since they were stale for some reason.
+  - rm $HOME/.m2/repository/org/onebeartoe/multimedia/1.0/multimedia-1.0.jar
+  - rm $HOME/.m2/repository/org/onebeartoe/multimedia/1.0/multimedia-1.0.pom
+
   - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar
   
 cache:
