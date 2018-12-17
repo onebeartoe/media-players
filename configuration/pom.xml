@@ -53,7 +53,7 @@
         <dependency>
             <groupId>org.onebeartoe.network</groupId>
             <artifactId>network</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>1.0</version>
         </dependency>
         
         <dependency>
@@ -159,6 +159,5 @@
                 </configuration>
             </plugin>
         </plugins>
-    </build>    
-  
+    </build>
 </project>
