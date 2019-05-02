@@ -44,17 +44,17 @@
             <version>1.0</version>
         </dependency>    
     
-        <dependency>
+        <!--dependency>
             <groupId>org.onebeartoe</groupId>
             <artifactId>multimedia</artifactId>
             <version>0.0.1-SNAPSHOT</version>            
-        </dependency>
+        </dependency-->
     
-        <dependency>
+        <!--dependency>
             <groupId>org.onebeartoe.network</groupId>
             <artifactId>network</artifactId>
             <version>1.0</version>
-        </dependency>
+        </dependency-->
         
         <dependency>
             <groupId>org.onebeartoe</groupId>  
