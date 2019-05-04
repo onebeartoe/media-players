@@ -17,7 +17,8 @@
 
     <modules>
         <module>configuration</module>
-        <module>jukebox</module>
+        <module>jukebox-ee</module>
+        <module>jukebox-se</module>
         <module>jukebox-client</module>
         <module>jukebox-networking</module>
         <module>pi-ezo</module>
@@ -36,8 +37,8 @@
                 <checksumPolicy>warn</checksumPolicy>
             </releases>
         </repository>
-    </repositories> 
-    
+    </repositories>
+
     <build>
         <!-- To define the plugin version in your parent POM -->
         <pluginManagement>
@@ -66,10 +67,10 @@
             <groupId>org.codehaus.mojo</groupId>
             <artifactId>findbugs-maven-plugin</artifactId>
             <version>3.0.1</version>
-          </plugin>      
+          </plugin>
         </plugins>
     </build>
-  
+
   <!-- To use the report goals in your POM or parent POM -->
     <reporting>
         <plugins>
