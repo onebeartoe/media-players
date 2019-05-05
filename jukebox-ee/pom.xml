@@ -18,7 +18,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <mainClass>org.onebeartoe.juke.JukeFxMain</mainClass>
+        <mainClass>org.onebeartoe.juke.JukeEeMain</mainClass>
     </properties>
 
     <organization>
