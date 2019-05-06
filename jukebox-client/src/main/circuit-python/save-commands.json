@@ -1,11 +1,13 @@
 
-from:
-
-        https://atom.io/packages/save-commands
-
 {
 	"commands": [
-		"*.coffee : coffee -c {relFullPath}",
+		"from : https://atom.io/packages/save-commands",
+
+
+		"*.py : cppp {relPath}{filename} /media/roberto/CIRCUITPY/{relPathNoRoot}",
+
+
+
 		"src/**/*.coffee : coffee -c -o dist{relPathNoRoot} {relFullPath}",
 		"src/**/client/**/*.coffee : gulp browserify",
 		"src/client/**/*.jade   : jade -P {relPath}{filename} -o dist{relPathNoRoot}",
