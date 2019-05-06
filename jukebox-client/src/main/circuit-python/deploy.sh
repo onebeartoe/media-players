@@ -6,5 +6,6 @@ CIRCUITPY_PATH=/media/roberto/CIRCUITPY/
 rsync --exclude 'lib/' \
 	  --exclude 'deploy.sh' \
 	  --exclude 'secrets.py' \
-	  --delete --recursive --verbose \
+	  --verbose \
+	  --delete --recursive \
 	  . $CIRCUITPY_PATH
