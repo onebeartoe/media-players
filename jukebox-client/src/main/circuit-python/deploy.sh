@@ -7,5 +7,6 @@ rsync --exclude 'lib/' \
 	  --exclude 'deploy.sh' \
 	  --exclude 'secrets.py' \
 	  --verbose \
-	  --delete --recursive \
+	  --delete \
+	  --recursive \
 	  . $CIRCUITPY_PATH
