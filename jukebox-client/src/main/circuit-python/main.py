@@ -92,13 +92,13 @@ low_light = False
 # Load the fonts
 
 time_font = bitmap_font.load_font('/fonts/Anton-Regular-104.bdf')
-time_font.load_glyphs(b'0123456789:') # pre-load glyphs for fast printing
+time_font.load_glyphs(b'0123456789:Next') # pre-load glyphs for fast printing
 
 alarm_font = bitmap_font.load_font('/fonts/Helvetica-Bold-36.bdf')
 alarm_font.load_glyphs(b'0123456789:')
 
 temperature_font = bitmap_font.load_font('/fonts/Arial-16.bdf')
-temperature_font.load_glyphs(b'0123456789CFabcdefghijklmnopqrstuvwxyz')
+temperature_font.load_glyphs(b'0123456789CFabcdefghijklmnopqrstuvwxyz:')
 
 ####################
 # Set up logging
@@ -445,7 +445,7 @@ class Alarm_State(State):
         alarm_armed = bool(snooze_time)
 
 
-class Setting_State(State):
+class Alarm_Setting_State(State):
     """This state lets the user enable/disable the alarm and set its time.
     Swiping up/down adjusts the hours & miniutes separately."""
 
@@ -570,29 +570,6 @@ class Menu_State(State):
             elif touch_in_button(t, self.buttons[4]):   # randomjuke
                 logger.debug('randomjuke touched')
                 change_to_state('randomjuke')
-#			elif alarm_enabled:
-#                if not self.previous_touch:
-#                    self.previous_touch = t
-#                else:
-#                    if touch_in_button(t, self.buttons[3]):   # HOURS
-#                        logger.debug('HOURS touched')
-#                        if t[1] < (self.previous_touch[1] - 5):   # moving up
-#                            alarm_hour = (alarm_hour + 1) % 24
-#                            logger.debug('Alarm hour now: %d', alarm_hour)
-#                        elif t[1] > (self.previous_touch[1] + 5): # moving down
-#                            alarm_hour = (alarm_hour - 1) % 24
-#                            logger.debug('Alarm hour now: %d', alarm_hour)
-#                        self.text_areas[0].text = '%02d:%02d' % (alarm_hour, alarm_minute)
-#                    elif touch_in_button(t, self.buttons[4]): # MINUTES
-#                        logger.debug('MINUTES touched')
-#                        if t[1] < (self.previous_touch[1] - 5):   # moving up
-#                            alarm_minute = (alarm_minute + 1) % 60
-#                            logger.debug('Alarm minute now: %d', alarm_minute)
-#                        elif t[1] > (self.previous_touch[1] + 5): # moving down
-#                            alarm_minute = (alarm_minute - 1) % 60
-#                            logger.debug('Alarm minute now: %d', alarm_minute)
-#                        self.text_areas[0].text = '%02d:%02d' % (alarm_hour, alarm_minute)
-#                    self.previous_touch = t
             board.DISPLAY.refresh_soon()
             board.DISPLAY.wait_for_frame()
         else:
@@ -607,10 +584,9 @@ class Menu_State(State):
         pyportal.set_background(self.background)
         for ta in self.text_areas:
             pyportal.splash.append(ta)
-        if alarm_enabled:
-            self.text_areas[0].text = '%02d:%02d' % (alarm_hour, alarm_minute) # set time textarea
-        else:
-            self.text_areas[0].text = '     '
+
+        self.text_areas[0].text = '%02d:%02d' % (alarm_hour, alarm_minute) # set time textarea
+
         self.text_areas[1].text = 'randomjuke'
 
 
@@ -627,13 +603,9 @@ class Randomjuke_State(State):
         self.refresh_time = None
         self.update_time = None
         self.weather_refresh = None
-        text_area_configs = [dict(x=88, y=170, size=5, color=0xFFFFFF, font=time_font),
-                             dict(x=210, y=50, size=5, color=0xFF0000, font=alarm_font),
-                             dict(x=88, y=90, size=6, color=0xFFFFFF, font=temperature_font)]
+        text_area_configs = [dict(x=110, y=120, size=16, color=0xFFFFFF, font=time_font)]
         self.text_areas = create_text_areas(text_area_configs)
-        self.weather_icon = displayio.Group()
-        self.weather_icon.x = 88
-        self.weather_icon.y = 20
+
         self.icon_file = None
 
         self.snooze_icon = displayio.Group()
@@ -643,7 +615,8 @@ class Randomjuke_State(State):
 
         # each button has it's edges as well as the state to transition to when touched
         self.buttons = [dict(left=0, top=50, right=80, bottom=120, next_state='settings'),
-                        dict(left=0, top=155, right=80, bottom=220, next_state='menu')]
+                        dict(left=0, top=155, right=80, bottom=220, next_state='menu'),
+                        dict(left=88, top=120, right=320, bottom=220)]
 
 
     @property
@@ -651,155 +624,29 @@ class Randomjuke_State(State):
         return 'randomjuke'
 
 
-    def adjust_backlight_based_on_light(self, force=False):
-        """Check light level. Adjust the backlight and background image if it's dark."""
-        global low_light
-        if light.value <= 1000 and (force or not low_light):
-            pyportal.set_backlight(0.01)
-            pyportal.set_background(self.background_night)
-            low_light = True
-        elif force or (light.value >= 2000 and low_light):
-            pyportal.set_backlight(1.00)
-            pyportal.set_background(self.background_day)
-            low_light = False
-
-
     def tick(self, now):
-        global alarm_armed, snooze_time, update_time, current_time
-
-        # is the snooze button pushed? Cancel the snooze if so.
-        if not snooze_button.value:
-            if snooze_time:
-                self.snooze_icon.pop()
-            snooze_time = None
-            alarm_armed = False
-
-        # is snooze active and the snooze time has passed? Transition to alram is so.
-        if snooze_time and ((now - snooze_time) >= snooze_interval):
-            change_to_state('alarm')
-            return
-
-        # check light level and adjust background & backlight
-        #self.adjust_backlight_based_on_light()
-
-        # only query the online time once per hour (and on first run)
-        if (not self.refresh_time) or ((now - self.refresh_time) > 3600):
-            logger.debug('Fetching time')
-            try:
-                pyportal.get_local_time(location=secrets['timezone'])
-                self.refresh_time = now
-            except RuntimeError as e:
-                self.refresh_time = now - 3000   # delay 10 minutes before retrying
-                logger.error('Some error occured, retrying! - %s', str(e))
-
-        # only query the weather every 10 minutes (and on first run)
-        if (not self.weather_refresh) or (now - self.weather_refresh) > 600:
-            logger.debug('Fetching weather')
-            try:
-                value = pyportal.fetch()
-                weather = json.loads(value)
-
-                # set the icon/background
-
-                try:
-                	weather_icon_name = weather['weather'][0]['icon']
-                except KeyError:
-                    weather_icon_name = "zzz"
-
-                try:
-                    self.weather_icon.pop()
-                except IndexError:
-                    pass
-                filename = "/icons/"+weather_icon_name+".bmp"
-                if filename:
-                    if self.icon_file:
-                        self.icon_file.close()
-                    self.icon_file = open(filename, "rb")
-                    icon = displayio.OnDiskBitmap(self.icon_file)
-                    try:
-                        icon_sprite = displayio.TileGrid(icon,
-                                                         pixel_shader=displayio.ColorConverter(),
-                                                         x=0, y=0)
-                    except TypeError:
-                        icon_sprite = displayio.TileGrid(icon,
-                                                         pixel_shader=displayio.ColorConverter(),
-                                                         position=(0, 0))
-
-
-                    self.weather_icon.append(icon_sprite)
-
-                try:
-                    temperature = weather['main']['temp'] - 273.15 # its...in kelvin
-                except KeyError:
-					temperature = -100
-
-                if celcius:
-                    temperature_text = '%3d C' % round(temperature)
-                else:
-                    temperature_text = '%3d F' % round(((temperature * 9 / 5) + 32))
-                self.text_areas[2].text = temperature_text
-                self.weather_refresh = now
-                board.DISPLAY.refresh_soon()
-                board.DISPLAY.wait_for_frame()
-
-            except RuntimeError as e:
-                self.weather_refresh = now - 540   # delay a minute before retrying
-                logger.error("Some error occured, retrying! - %s", str(e))
-
-        if (not update_time) or ((now - update_time) > 30):
-            # Update the time
-            update_time = now
-            current_time = time.localtime()
-            time_string = '%02d:%02d' % (current_time.tm_hour,current_time.tm_min)
-            self.text_areas[0].text = time_string
-            board.DISPLAY.refresh_soon()
-            board.DISPLAY.wait_for_frame()
-
-            # Check if alarm should sound
-        if current_time is not None and not snooze_time:
-            minutes_now = current_time.tm_hour * 60 + current_time.tm_min
-            minutes_alarm = alarm_hour * 60 + alarm_minute
-            if minutes_now == minutes_alarm:
-                if alarm_armed:
-                    change_to_state('alarm')
-            else:
-                alarm_armed = alarm_enabled
+        logger.debug('rando tick')
 
 
     def touch(self, t, touched):
         if t and not touched:             # only process the initial touch
-            for button_index in range(len(self.buttons)):
+            max = len(self.buttons) - 1  # only do state stuff with the first two buttons
+            for button_index in range(max):
                 b = self.buttons[button_index]
                 if touch_in_button(t, b):
                     change_to_state(b['next_state'])
                     break
+            if touch_in_button(t, self.buttons[2]): # next button
+                logger.debug('NEXT song touched')
+                value = pyportal.wget('http://192.168.1.80:1978/?action=next', '/randomjuke-response.text', chunk_size=1200)
+                logger.debug(value)
         return bool(t)
 
 
     def enter(self):
-        self.adjust_backlight_based_on_light(force=True)
         for ta in self.text_areas:
             pyportal.splash.append(ta)
-        pyportal.splash.append(self.weather_icon)
-        if snooze_time:
-            if self.snooze_file:
-                self.snooze_file.close()
-            self.snooze_file = open('/icons/zzz.bmp', "rb")
-            icon = displayio.OnDiskBitmap(self.snooze_file)
-            try:
-                icon_sprite = displayio.TileGrid(icon,
-                                                 pixel_shader=displayio.ColorConverter(),
-                                                 x=0, y=0)
-            except TypeError:
-                icon_sprite = displayio.TileGrid(icon,
-                                                 pixel_shader=displayio.ColorConverter(),
-                                                 position=(0, 0))
-            self.snooze_icon.append(icon_sprite)
-            pyportal.splash.append(self.snooze_icon)
-        if alarm_enabled:
-            self.text_areas[1].text = '%2d:%02d' % (alarm_hour, alarm_minute)
-        else:
-            self.text_areas[1].text = '     '
+        self.text_areas[0].text = 'Next'
         board.DISPLAY.refresh_soon()
         board.DISPLAY.wait_for_frame()
 
@@ -819,7 +666,7 @@ class Randomjuke_State(State):
 states = {'time': Time_State(),
           'mugsy': Mugsy_State(),
           'alarm': Alarm_State(),
-          'settings': Setting_State(),
+          'settings': Alarm_Setting_State(),
 		  'menu' : Menu_State(),
           'randomjuke' : Randomjuke_State()}
 
