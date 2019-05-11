@@ -3,10 +3,4 @@ cd ~/Versioning/owner/github/onebeartoe/media-players/jukebox-client/src/main/ci
 
 CIRCUITPY_PATH=/media/roberto/CIRCUITPY/
 
-rsync --exclude 'lib/' \
-	  --exclude 'deploy.sh' \
-	  --exclude 'secrets.py' \
-	  --verbose \
-	  --delete \
-	  --recursive \
-	  . $CIRCUITPY_PATH
+cp main.py $CIRCUITPY_PATH
