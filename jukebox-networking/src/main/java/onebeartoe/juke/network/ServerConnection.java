@@ -28,7 +28,7 @@ public abstract class ServerConnection implements Runnable, Cloneable
     protected Socket client;
 
     protected String path = "/";
-    
+
     /**
      * @param client the client to set
      */
@@ -36,7 +36,7 @@ public abstract class ServerConnection implements Runnable, Cloneable
     {
         this.client = client;
     }
-    
+
     private String VOLUME_UP = "volume-up";
 
     private String VOLUME_DOWN = "volume-down";
@@ -59,11 +59,11 @@ public abstract class ServerConnection implements Runnable, Cloneable
 //        {
 //            modeChangeResult += "Mode NOT chagned to " + meterMode + " (" + mode + ")";
 //        }
-//        
+//
 //        return modeChangeResult;
 //    }
-    
-// TODO: test to see if the method can be removed    
+
+// TODO: test to see if the method can be removed
     @Override
     public Object clone()
     {
@@ -71,7 +71,7 @@ public abstract class ServerConnection implements Runnable, Cloneable
         try
         {
             obj = super.clone();
-        } 
+        }
         catch (CloneNotSupportedException e)
         {
             e.printStackTrace();
@@ -81,9 +81,11 @@ public abstract class ServerConnection implements Runnable, Cloneable
 
     protected void sendHttpResponse(String html, boolean includeHeaders) throws IOException
     {
-        String headers = "HTTP/1.1 200 OK\r\n" + "Content-Type: text/html\r\n";
-        headers += "\r\n";
-        
+        String headers = "HTTP/1.1 200 OK" + "\r\n"
+                         + "Content-Type: text/html" + "\r\n"
+                         + "Content-Length: " + html.length() + "\r\n"
+                         + "\r\n";
+
         OutputStream outs = client.getOutputStream();
         PrintWriter out = new PrintWriter(new OutputStreamWriter(outs, "UTF-8"), true);
         if (includeHeaders)
@@ -98,7 +100,7 @@ public abstract class ServerConnection implements Runnable, Cloneable
     /**
      * Sends the static contents of a file on the classpath
      * @param resourcePath - the path to the resource, on the classpath
-     * @throws IOException 
+     * @throws IOException
      */
     protected void sendClasspathResource(String resourcePath) throws IOException
     {
@@ -107,20 +109,20 @@ public abstract class ServerConnection implements Runnable, Cloneable
         boolean includeHeader = false;
         sendHttpResponse(html, includeHeader);
     }
-    
+
     protected void sendPlainTextResponse(String text) throws IOException
     {
         boolean includeHeader = false;
         sendHttpResponse(text, includeHeader);
     }
-    
+
     public void setApp(JukeClient app)
     {
         this.app = app;
     }
 
     public abstract String getControlsResourcePath();
-    
+
     protected String invalidRequest(String request)
     {
         StringBuilder out = new StringBuilder();
@@ -130,11 +132,11 @@ public abstract class ServerConnection implements Runnable, Cloneable
 
         return out.toString();
     }
-    
+
     public abstract void like(String currentSongTitle, String clientAddress);
-    
+
     public abstract String nextAction(String currentSongTitle, String clientAddress);
-    
+
     /**
      * This crazy method delegates each HTTP request.
      */
@@ -152,7 +154,7 @@ public abstract class ServerConnection implements Runnable, Cloneable
             String request = in.readLine();
 
 //            System.out.println("Request: " + request);
-            
+
             boolean quitRequested = false;
 
             Pattern pattern = Pattern.compile("(GET|POST) /?(\\S*).*");
@@ -161,7 +163,7 @@ public abstract class ServerConnection implements Runnable, Cloneable
             if (!httpRequestMatcher.matches())
             {
                 invalidRequest(request);
-            } 
+            }
             else
             {
                 MultimediaController systemMediaControler = new BasicMultimediaController();
@@ -171,7 +173,7 @@ public abstract class ServerConnection implements Runnable, Cloneable
                 if (request.equals("style.css"))
                 {
                     sendClasspathResource(request);
-                } 
+                }
                 else if (request.equals("layout.css"))
                 {
                     sendClasspathResource(request);
@@ -192,9 +194,9 @@ public abstract class ServerConnection implements Runnable, Cloneable
                 {
                     boolean sendPlainText = false;
                     String plainText = "--plain text not set---";
-                    
+
                     String currentSong = "current-song-not-set";
-                    
+
                     String[] parameters = request.split("&");
                     for (String param : parameters)
                     {
@@ -205,7 +207,7 @@ public abstract class ServerConnection implements Runnable, Cloneable
                             {
                                 nameValues[0] = nameValues[0].substring(1);
                             }
-                            
+
                             if (nameValues[0].equals("action"))
                             {
                                 String currentSongTitle = "needed to get rid of PixelClient reference";
@@ -213,19 +215,19 @@ public abstract class ServerConnection implements Runnable, Cloneable
                                 if (nameValues[1].equals("next"))
                                 {
                                     currentSong = nextAction(currentSongTitle, clientAddress);
-                                } 
+                                }
                                 else if (nameValues[1].equals("unpause"))
                                 {
                                     app.unpausePlayer();
-                                } 
+                                }
                                 else if (nameValues[1].equals("pause"))
                                 {
                                     app.pausePlayer();
-                                } 
+                                }
                                 else if (nameValues[1].equals("like"))
                                 {
-                                    like(currentSongTitle, clientAddress);                                    
-                                } 
+                                    like(currentSongTitle, clientAddress);
+                                }
                                 else if (nameValues[1].equals(VOLUME_UP) )
                                 {
                                     System.out.println("volume up requested, current level: " + systemMediaControler.currentVolume());
@@ -234,7 +236,7 @@ public abstract class ServerConnection implements Runnable, Cloneable
                                     System.out.println("proposed new volume level: " + volume);
                                     systemMediaControler.setVolume(volume);
                                     System.out.println("after processing the UP request, current volume level is " + systemMediaControler.currentVolume());
-                                } 
+                                }
                                 else if (nameValues[1].equals(VOLUME_DOWN) )
                                 {
                                     System.out.println("volume DOWN requested, current level: " + systemMediaControler.currentVolume());
@@ -252,7 +254,7 @@ public abstract class ServerConnection implements Runnable, Cloneable
                             }
                         }
                     }
-                    
+
                     // send a response
                     if(sendPlainText)
                     {
@@ -264,13 +266,13 @@ public abstract class ServerConnection implements Runnable, Cloneable
                         boolean includeHeader = true;
 
                         String uiHtmlath = path + getControlsResourcePath();
-                        
+
                         InputStream instream = getClass().getResourceAsStream(uiHtmlath);
                         String html = TextFileReader.readText(instream);
 
-                        //replace the token for the current song                        
+                        //replace the token for the current song
                         html = html.replace("CURRENT_SONG", currentSong);
-                        
+
                         int volume = systemMediaControler.currentVolume();
                         html = html.replace(SERVER_VOLUME, "" + volume);
 
@@ -278,15 +280,15 @@ public abstract class ServerConnection implements Runnable, Cloneable
                     }
                 }
             }
-        } 
+        }
         catch (IOException e)
         {
             System.out.println("I/O error " + e);
-        } 
+        }
         catch (SecurityException se)
         {
             System.out.println("Security error: " + se);
         }
-    }    
+    }
 
 }
