@@ -27,6 +27,7 @@ from digitalio import DigitalInOut, Direction, Pull
 import analogio
 import displayio
 import adafruit_logging as logging
+import adafruit_esp32spi.adafruit_esp32spi_requests as requests
 
 # Set up where we'll be fetching data from
 DATA_SOURCE = 'http://api.openweathermap.org/data/2.5/weather?id='+secrets['city_zip']
@@ -40,9 +41,10 @@ DATA_LOCATION = []
 ####################
 # setup hardware
 
-pyportal = PyPortal(url=DATA_SOURCE,
-                    json_path=DATA_LOCATION,
-                    status_neopixel=board.NEOPIXEL)
+pyportal = PyPortal(url = DATA_SOURCE,
+                    json_path = DATA_LOCATION,
+                    status_neopixel = board.NEOPIXEL,
+					debug = True)
 
 light = analogio.AnalogIn(board.LIGHT)
 
@@ -52,6 +54,23 @@ snooze_button.pull = Pull.UP
 
 ####################
 # variables
+
+
+# HTTP objects
+#esp32_cs = DigitalInOut(board.ESP_CS)
+#esp32_ready = DigitalInOut(board.ESP_BUSY)
+#esp32_reset = DigitalInOut(board.ESP_RESET)
+
+# If you have an externally connected ESP32:
+# esp32_cs = DigitalInOut(board.D9)
+# esp32_ready = DigitalInOut(board.D10)
+# esp32_reset = DigitalInOut(board.D5)
+
+#spi = busio.SPI(board.SCK, board.MOSI, board.MISO)
+#esp = adafruit_esp32spi.ESP_SPIcontrol(spi, esp32_cs, esp32_ready, esp32_reset)
+
+#requests.set_interface(esp)
+
 
 # alarm support
 
@@ -260,7 +279,6 @@ class Time_State(State):
                 	weather_icon_name = weather['weather'][0]['icon']
                 except KeyError:
                     weather_icon_name = "zzz"
-
                 try:
                     self.weather_icon.pop()
                 except IndexError:
@@ -638,7 +656,9 @@ class Randomjuke_State(State):
                     break
             if touch_in_button(t, self.buttons[2]): # next button
                 logger.debug('NEXT song touched')
-                value = pyportal.wget('http://192.168.1.80:1978/?action=next', '/randomjuke-response.text', chunk_size=1200)
+                value = requests.get('http://192.168.1.80:1978/?action=next')
+#                value = pyportal.fetch('http://192.168.1.80:1978/?action=next')
+#                value = pyportal.wget('http://192.168.1.80:1978/?action=next', '/randomjuke-response.text', chunk_size=1200)
                 logger.debug(value)
         return bool(t)
 
