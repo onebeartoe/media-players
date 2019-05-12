@@ -123,7 +123,8 @@ temperature_font.load_glyphs(b'0123456789CFabcdefghijklmnopqrstuvwxyz:')
 # Set up logging
 
 logger = logging.getLogger('alarm_clock')
-logger.setLevel(logging.ERROR)            # change as desired
+logger.setLevel(logging.DEBUG)
+#logger.setLevel(logging.ERROR)            # change as desired
 
 ####################
 # Functions
