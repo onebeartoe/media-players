@@ -644,7 +644,8 @@ class Randomjuke_State(State):
 
 
     def tick(self, now):
-        logger.debug('rando tick')
+        """Handle a tick: one pass through the main loop"""
+        pass
 
 
     def touch(self, t, touched):
@@ -657,10 +658,15 @@ class Randomjuke_State(State):
                     break
             if touch_in_button(t, self.buttons[2]): # next button
                 logger.debug('NEXT song touched')
-                value = requests.get('http://192.168.1.80:1978/?action=next')
+
+#TODO: Make this a call to requests.post()
+#      Docs: https://circuitpython.readthedocs.io/projects/esp32spi/en/latest/api.html#adafruit_esp32spi.adafruit_esp32spi_requests.post
+                response = requests.get('http://192.168.1.80:1978/?action=next')
+#                response = requests.get('http://192.168.1.80:8080/continuous/')
 #                value = pyportal.fetch('http://192.168.1.80:1978/?action=next')
 #                value = pyportal.wget('http://192.168.1.80:1978/?action=next', '/randomjuke-response.text', chunk_size=1200)
-                logger.debug(value)
+                print(response)
+#                logger.debug(response)
         return bool(t)
 
 
