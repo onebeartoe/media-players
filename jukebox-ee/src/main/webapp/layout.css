@@ -1,0 +1,13 @@
+
+.contentBox
+{
+    margin:0px auto; 
+    width:70%;
+}
+
+.oneThirdColumn
+{
+    float:left; 
+    margin:0;
+    width:33%;
+}

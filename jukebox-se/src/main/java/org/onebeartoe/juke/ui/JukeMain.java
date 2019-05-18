@@ -35,4 +35,11 @@ public class JukeMain extends Application
         
         System.out.println("launched!");
     }
+
+    public static void shutdown()
+    {
+//TODO: is there anything to do here?
+
+//        controller.stopThreads();
+    }        
 }
