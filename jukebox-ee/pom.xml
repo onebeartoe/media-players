@@ -34,6 +34,12 @@
         </dependency>
 
         <dependency>
+            <groupId>org.onebeartoe</groupId>
+            <artifactId>onebeartoe-web</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.onebeartoe.media.players</groupId>
             <artifactId>jukebox-networking</artifactId>
             <version>0.0.1-SNAPSHOT</version>
@@ -65,7 +71,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.3.2</version>
+                <version>2.4</version>
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>

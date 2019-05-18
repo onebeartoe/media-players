@@ -6,8 +6,17 @@ import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.stage.Stage;
 
+/**
+ * This class provides an entry point for the JavaFX media APIs.
+ * 
+ * The static methods wrap calls to the actual RandomJuke object.
+ * 
+ * @author Robert Marquez
+ */
 public class JukeMain extends Application 
 {
+    private static RandomJuke randomJuke;
+    
     @Override
     public void start(Stage stage) throws Exception 
     {
@@ -15,8 +24,9 @@ public class JukeMain extends Application
         List<String> raw = parameters.getRaw();
         String [] args = raw.toArray( new String[0] );
         
-        RandomJuke juke = new RandomJuke(args);
-        juke.printStartDescription();
+        randomJuke = new RandomJuke(args);
+        
+        randomJuke.printStartDescription();
     }
 
     /**
@@ -34,6 +44,13 @@ public class JukeMain extends Application
         launch(args);
         
         System.out.println("launched!");
+    }
+    
+    public static String nextSong()
+    {
+        randomJuke.playNextSong();
+        
+        return randomJuke.currentSongTitle;
     }
 
     public static void shutdown()

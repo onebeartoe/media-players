@@ -36,9 +36,11 @@ public class RandomJukeFrameBufferServlet extends HttpServlet
         
         logger = Logger.getLogger( getClass().getName() );
    
-        logger.log(Level.INFO, "loading the scoreboard");
+        logger.log(Level.INFO, "loading the randomjuke serverside");
 
         Application.launch(JukeMain.class);
+        
+        logger.log(Level.INFO, "task compleste: load the randomjuke serverside");        
     }
     
     @Override

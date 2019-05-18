@@ -83,9 +83,7 @@ public class RandomJuke extends JukeClient
      * Setup the application.
      */
     public RandomJuke(String [] args)
-    {
-        System.out.println("it begins");
-        
+    {        
         songListManager = new NetworkAndFilesystemSearchingSongManager();
         ((NetworkAndFilesystemSearchingSongManager) songListManager).setNetworkSongManager(new JavaxNetworkSearchingSongManager());
         
@@ -184,6 +182,8 @@ public class RandomJuke extends JukeClient
         nextSongServer = new ThreadedServer();
         nextSongServer.setConnection(randomJukeServerConnection);
         nextSongServer.start();
+        
+        System.out.println("RandomJuke initialized");
     }
 
     public void addSongListUrl(String songsListUrl)
@@ -229,7 +229,7 @@ public class RandomJuke extends JukeClient
      * These methods play the media. The ControllerUpdate() is listens for a
      * song to finish then plays the next song in Vector PlayList
      */
-    public void playSong()
+    private void playSong()
     {
         String filename = currentSongTitle;
 
@@ -303,7 +303,7 @@ public class RandomJuke extends JukeClient
     
     public void printStartDescription()
     {
-        System.out.println("start description");
+        System.out.println("start description 2");
     }
 
     public void setSongListUrls(List<String> songListUrls)
