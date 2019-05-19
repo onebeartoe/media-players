@@ -1,4 +1,5 @@
 
+
 .contentBox
 {
     margin:0px auto; 
@@ -11,3 +12,61 @@
     margin:0;
     width:33%;
 }
+
+
+
+
+
+
+
+/**
+ * the pulse button CSS is from this example:
+ *
+ *      https://codepen.io/wifeo/pen/KwdXwV
+ */
+.pulse-button-container 
+{
+  width: 200px;
+  height: 100%;
+  margin: 0 auto 0;
+}
+
+.pulse-button 
+{
+  position: relative;
+  width: 200px;
+  height: 100px;
+  border: none;
+  box-shadow: 0 0 0 0 rgba(2, 232, 2, 0.7);
+  border-radius: 0%;
+  background-color: green;
+  background-size:cover;
+  background-repeat: no-repeat;
+  cursor: pointer;
+
+  animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
+/*  
+  -webkit-animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
+  -moz-animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
+  -ms-animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
+  animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
+*/
+}
+.pulse-button:hover 
+{
+    animation: none;
+/*    
+  -webkit-animation: none;
+  -moz-animation: none;
+  -ms-animation: none;
+  animation: none;
+*/  
+}
+
+@keyframes pulse {to {box-shadow: 0 0 0 45px rgba(1, 2, 1, 0);}}
+/*
+@-webkit-keyframes pulse {to {box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);}}
+@-moz-keyframes pulse {to {box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);}}
+@-ms-keyframes pulse {to {box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);}}
+@keyframes pulse {to {box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);}}
+*/

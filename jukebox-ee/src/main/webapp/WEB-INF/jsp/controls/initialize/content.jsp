@@ -1,19 +1,16 @@
     <div class="copyspace">
-        <h3>RandomJuke Controls</h3>
+        <h3>RandomJuke Initialization</h3>
         
         <div class="featuredProject">
-            <input type="submit" value="Next Song" 
-                   style="width: 70%; height: 2em; font-size: 3em;
-                            margin-left: auto; margin-right: auto;"
-                            onclick="nextSong();">
-        </div>
-        <br class="clearingBreak">
-    </div> 
- 
-    <div class="copyspace">
-        <h3>Secondary RandomJuke Controls</h3>
-        <div class="featuredProject">
 
+            The jukebox is not initialized.  Click the button below to initialize it.
+            
+            <div class="pulse-button-container">
+                <button class="pulse-button"
+                        onclick="initializeRandomJuke()">
+                Initialize</button>
+            </div>
+            
             
 <!-- sytling for the contentBox is from: http://stackoverflow.com/questions/9966890/best-way-to-do-columns-in-html-css -->            
         <div id="contentBox" class="contentBox">

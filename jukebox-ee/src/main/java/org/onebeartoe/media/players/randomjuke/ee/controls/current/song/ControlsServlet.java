@@ -25,7 +25,7 @@ public class ControlsServlet extends HttpServlet
     {
         request.setAttribute("att-key", "sring-value");
 
-        String dispatchLocation = "/WEB-INF/jsp/controls/uninitialized/index.jsp";
+        String dispatchLocation = "/WEB-INF/jsp/controls/initialize/index.jsp";
         
         if( JukeMain.isInitiiaized() )
         {

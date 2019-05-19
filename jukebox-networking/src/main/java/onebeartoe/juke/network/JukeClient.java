@@ -19,7 +19,7 @@ public abstract class JukeClient
         }
     }
     
-    public abstract void playNextSong();
+    public abstract void playNextSong() throws EmptyMediaListException;
     
     public void unpausePlayer()
     {

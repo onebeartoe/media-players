@@ -15,7 +15,9 @@
             <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/layout.css" />
             <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/style.css" />
             
-            <script src="<%= request.getContextPath() %>/controls/scoreboard.js"></script>
+
+            
+            <script src="<%= request.getContextPath() %>/randomjuke.js"></script>
 
             <title><%= title %></title>	
 	</head>

@@ -1,6 +1,7 @@
 
 package org.onebeartoe.juke.ui;
 
+import onebeartoe.juke.network.EmptyMediaListException;
 import java.io.File;
 
 import java.net.MalformedURLException;
@@ -9,6 +10,8 @@ import java.util.ArrayList;
 
 import java.util.List;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -104,16 +107,7 @@ public class RandomJuke extends JukeClient
             String commandLineSource = args[0];
             songListUrls.add(commandLineSource);
         }
-        else
-        {
-            System.out.println("No command line arguments were found.");
-            
-            String initialMusicSource = "file:///Users/lando/World-distribute/Music/";
-            
-            System.out.println("Adding built-in source: " + initialMusicSource);
-            songListUrls.add(initialMusicSource);
-        }
-        
+
         setSongListUrls(songListUrls);
         
         mode = ApplicationMode.COMMAND_LINE;        
@@ -268,8 +262,16 @@ public class RandomJuke extends JukeClient
                 @Override
                 public void run()
                 {
-                    System.err.println("calling playNextSong()..."); 
-                    playNextSong();
+                    System.out.println("calling playNextSong()..."); 
+                    try 
+                    {
+                        playNextSong();
+                    } 
+                    catch (EmptyMediaListException ex) 
+                    {
+                        
+                        Logger.getLogger(RandomJuke.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
             });
             mediaPlayer.setOnReady( new Runnable()
@@ -337,9 +339,10 @@ public class RandomJuke extends JukeClient
 
     /**
      * this method will loop until it finds a song that has not played before
+     * @throws org.onebeartoe.juke.ui.EmptyMediaListException
      */
     @Override
-    public void playNextSong()
+    public void playNextSong() throws EmptyMediaListException
     {
         if (mediaPlayer != null)
         {
@@ -357,6 +360,12 @@ public class RandomJuke extends JukeClient
 
             // get random into the artist list
             int artistNamesLimit = songListManager.getSongListTitles().size();
+            
+            if(artistNamesLimit == 0)
+            {
+                throw new EmptyMediaListException();
+            }
+            
             Random random = new Random();            
             int ra = random.nextInt(artistNamesLimit);
 

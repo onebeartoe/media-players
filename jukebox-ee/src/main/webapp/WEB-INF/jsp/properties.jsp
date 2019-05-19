@@ -12,11 +12,11 @@
 
 	boolean showAd = false;
 		
-	String title = "Basketball Scoreboard!";
+	String title = "RandomJuke!";
 	
 	String metatags = "metatags_generic.htmlf";
 	
 	String metatagsDescription = "This is Java-powered scoreboard.";
 	
-	String keywords = "Java, basketball, scoreboard";
+	String keywords = "Java-powered Media Player";
 %>

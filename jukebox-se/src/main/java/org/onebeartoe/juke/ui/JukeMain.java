@@ -1,10 +1,14 @@
 
 package org.onebeartoe.juke.ui;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.stage.Stage;
+import onebeartoe.juke.network.EmptyMediaListException;
 
 /**
  * This class provides an entry point for the JavaFX media APIs.
@@ -23,6 +27,27 @@ public class JukeMain extends Application
         // is considered initialized
         
         return randomJuke != null;
+    }
+
+    public static String discoverSongLists() 
+    {
+        String result;
+        
+        if(randomJuke == null)
+        {
+            result = "cannot discover media lists while randomJuke is null";
+        }
+        else
+        {
+            List<String> songListUrls = new ArrayList();
+            songListUrls.add("file:///Users/lando/Versioning/world/betoland-world/music/Unorganized/");
+            
+            randomJuke.setSongListUrls(songListUrls);
+            
+            result = "song lists discovered";
+        }
+        
+        return result;
     }
     
     @Override
@@ -56,9 +81,22 @@ public class JukeMain extends Application
     
     public static String nextSong()
     {
-        randomJuke.playNextSong();
+        String message;
         
-        return randomJuke.currentSongTitle;
+        try 
+        {
+            randomJuke.playNextSong();
+            
+            message = randomJuke.currentSongTitle;
+        } 
+        catch (EmptyMediaListException ex) 
+        {
+            Logger.getLogger(JukeMain.class.getName()).log(Level.SEVERE, null, ex);
+            
+            message = "ERROR-21720: " + ex.getClass().getSimpleName() + " - " + ex.getMessage();
+        }
+        
+        return message;
     }
 
     public static void shutdown()
