@@ -8,7 +8,7 @@ import javax.servlet.annotation.WebFilter;
  * 
  * @author Roberto Marquez
  */
-@WebFilter
+//@WebFilter
 public class ControlsAccessFilter
 {
     

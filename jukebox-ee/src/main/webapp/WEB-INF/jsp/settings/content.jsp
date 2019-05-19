@@ -4,7 +4,7 @@ hi
  
  
   
- here are the contorles!
+ here are the SETTINGS!
  
  
  

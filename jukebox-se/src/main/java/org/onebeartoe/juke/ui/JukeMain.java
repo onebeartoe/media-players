@@ -16,6 +16,14 @@ import javafx.stage.Stage;
 public class JukeMain extends Application 
 {
     private static RandomJuke randomJuke;
+
+    public static boolean isInitiiaized() 
+    {
+        // at this point, so long as the randomjuke object is not null, then it 
+        // is considered initialized
+        
+        return randomJuke != null;
+    }
     
     @Override
     public void start(Stage stage) throws Exception 
