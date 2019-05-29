@@ -18,9 +18,18 @@ public class NextSongServlet extends PlainTextResponseServlet
     @Override
     protected String buildText(HttpServletRequest request, HttpServletResponse response)
     {
-        return JukeMain.nextSong();
+        String message;
+        
+        try
+        {
+            message = JukeMain.nextSong();
+        }
+        catch(Exception e)
+        {
+            message = "an error occured: " + e.getMessage();
+        }
+        
+        return message;
     }
 }
-
-
 

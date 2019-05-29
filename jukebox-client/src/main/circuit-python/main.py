@@ -622,7 +622,8 @@ class Randomjuke_State(State):
         self.refresh_time = None
         self.update_time = None
         self.weather_refresh = None
-        text_area_configs = [dict(x=110, y=120, size=16, color=0xFFFFFF, font=time_font)]
+        text_area_configs = [dict(x=110, y=100, size=16, color=0xFFFFFF, font=time_font),   # Next lable
+                             dict(x=110, y=140, size=16, color=0xFFFFFF, font=temperature_font)]  # response lable
         self.text_areas = create_text_areas(text_area_configs)
 
         self.icon_file = None
@@ -635,7 +636,7 @@ class Randomjuke_State(State):
         # each button has it's edges as well as the state to transition to when touched
         self.buttons = [dict(left=0, top=50, right=80, bottom=120, next_state='settings'),
                         dict(left=0, top=155, right=80, bottom=220, next_state='menu'),
-                        dict(left=88, top=120, right=320, bottom=220)]
+                        dict(left=88, top=120, right=320, bottom=220)]  # Next button
 
 
     @property
@@ -661,11 +662,13 @@ class Randomjuke_State(State):
 
 #TODO: Make this a call to requests.post()
 #      Docs: https://circuitpython.readthedocs.io/projects/esp32spi/en/latest/api.html#adafruit_esp32spi.adafruit_esp32spi_requests.post
-                response = requests.get('http://192.168.1.80:1978/?action=next')
+                response = requests.get('http://192.168.1.82:8080/onebeartoe-jukebox-ee/controls/song/next')
+#                response = requests.get('http://192.168.1.80:1978/?action=next')
 #                response = requests.get('http://192.168.1.80:8080/continuous/')
-#                value = pyportal.fetch('http://192.168.1.80:1978/?action=next')
-#                value = pyportal.wget('http://192.168.1.80:1978/?action=next', '/randomjuke-response.text', chunk_size=1200)
+                self.text_areas[1].text = 'ploop'
+                print('lalal')
                 print(response)
+                print('lalal')
 #                logger.debug(response)
         return bool(t)
 
@@ -674,6 +677,7 @@ class Randomjuke_State(State):
         for ta in self.text_areas:
             pyportal.splash.append(ta)
         self.text_areas[0].text = 'Next'
+        self.text_areas[1].text = '::::'
         board.DISPLAY.refresh_soon()
         board.DISPLAY.wait_for_frame()
 

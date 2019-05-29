@@ -40,7 +40,8 @@ public class JukeMain extends Application
         else
         {
             List<String> songListUrls = new ArrayList();
-            songListUrls.add("file:///Users/lando/Versioning/world/betoland-world/music/Unorganized/");
+            songListUrls.add("file:///home/roberto/Versioning/world/betoland/music/Unorganized/");
+//            songListUrls.add("file:///Users/lando/Versioning/world/betoland-world/music/Unorganized/");
             
             randomJuke.setSongListUrls(songListUrls);
             
