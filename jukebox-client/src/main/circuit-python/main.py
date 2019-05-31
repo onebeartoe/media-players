@@ -703,7 +703,6 @@ states = {'time': Time_State(),
 
 current_state = None
 
-
 def change_to_state(state_name):
     global current_state
     if current_state:
