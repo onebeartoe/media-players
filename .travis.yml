@@ -8,15 +8,14 @@ addons:
 
 script:
 # Remove the old dependency JARs, since they were stale for some reason.
-  - ls -ltr $HOME/.m2/repository/org/onebeartoe/multimedia/1.0/multimedia-1.0.jar
-  - rm $HOME/.m2/repository/org/onebeartoe/multimedia/1.0/multimedia-1.0.jar
-  - rm $HOME/.m2/repository/org/onebeartoe/multimedia/1.0/multimedia-1.0.pom
+#  - ls -ltr $HOME/.m2/repository/org/onebeartoe/multimedia/1.0/multimedia-1.0.jar
+#  - rm $HOME/.m2/repository/org/onebeartoe/multimedia/1.0/multimedia-1.0.jar
+#  - rm $HOME/.m2/repository/org/onebeartoe/multimedia/1.0/multimedia-1.0.pom
 
-  - build-wrapper-linux-x86-64 --out-dir pi-ezo/target make all
+#  - build-wrapper-linux-x86-64 --out-dir pi-ezo/target make all
   - mvn -Dsonar.language=java clean org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar
 #  - mvn -Dsonar.language=java -Dsonar.cfamily.build-wrapper-output.bypass=true -Dsonar.cfamily.build-wrapper-output=pi-ezo/target clean org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar
 #  - mvn -Dsonar.cfamily.build-wrapper-output.bypass=true clean org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar
-
   
 cache:
   directories:
