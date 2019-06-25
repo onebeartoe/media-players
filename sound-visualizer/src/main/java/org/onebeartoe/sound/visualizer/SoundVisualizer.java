@@ -250,10 +250,10 @@ public class SoundVisualizer extends JukeClient
                     int pixleType = 3;
                     pixelEnvironment = new PixelEnvironment(pixleType);
                     
-                    offscreenImageHeight = pixelEnvironment.KIND.height * 2;
-                    offscreenImageWidth = pixelEnvironment.KIND.width * 2;
-                    RgbLedMatrix ledMatrix = ioio_.openRgbLedMatrix(pixelEnvironment.KIND);                    
-                    pixel = new Pixel(pixelEnvironment.KIND, pixelEnvironment.currentResolution);
+                    offscreenImageHeight = pixelEnvironment.LED_MATRIX.height * 2;
+                    offscreenImageWidth = pixelEnvironment.LED_MATRIX.width * 2;
+                    RgbLedMatrix ledMatrix = ioio_.openRgbLedMatrix(pixelEnvironment.LED_MATRIX);                    
+                    pixel = new Pixel(pixelEnvironment.LED_MATRIX, pixelEnvironment.currentResolution);
                     pixel.matrix = ledMatrix;
                     pixel.ioiO = ioio_;
                     microphoneSensor = Pixel.getAnalogInput1();
