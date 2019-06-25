@@ -13,6 +13,9 @@
 
     <properties>
         <sonar.cfamily.build-wrapper-output.bypass>true</sonar.cfamily.build-wrapper-output.bypass>
+    
+        <sonar.coverage.exclusions>**/*.c</sonar.coverage.exclusions>
+        <sonar.exclusions>**/*.c</sonar.exclusions>
     </properties>
 
     <modules>
